@@ -10,7 +10,7 @@
 
 ## 環境需求
 
-- Node.js 20 以上
+- Node.js 24 以上（建議執行 `nvm use`，版本由 `.nvmrc` 指定）
 - Corepack
 - Python 3.12 以上
 - Rust stable
