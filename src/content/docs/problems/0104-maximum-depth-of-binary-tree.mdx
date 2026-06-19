@@ -1,0 +1,51 @@
+---
+title: 104. Maximum Depth of Binary Tree
+description: 由子樹定義推導深度優先搜尋。
+problemNumber: 104
+difficulty: Easy
+topics: [Tree, Depth-First Search, Recursion]
+leetcodeUrl: https://leetcode.com/problems/maximum-depth-of-binary-tree/
+order: 5
+sidebar:
+  order: 5
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import jsCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/javascript.js?raw';
+import pyCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/python.py?raw';
+import rsCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/rust.rs?raw';
+
+## 題意摘要
+
+二元樹的最大深度，是從根節點到最遠葉節點所包含的節點數。計算給定樹的最大深度。[查看 LeetCode 原題](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+
+## 核心觀念
+
+問題本身具有遞迴結構：空樹深度為 `0`；非空樹深度為左右子樹最大深度加 `1`。這個定義直接形成後序深度優先搜尋。
+
+### 正確性
+
+以樹高歸納。空樹回傳 `0`，符合定義。假設演算法能正確求出左右子樹深度，根到最遠葉節點必定先進入其中一棵子樹，因此取兩者最大值再加根節點的 `1`，就是整棵樹的最大深度。
+
+<Aside type="caution" title="遞迴堆疊">
+  極度偏斜的樹會有 $O(n)$ 遞迴深度。題目限制若可能超過語言的呼叫堆疊，應改採明確的堆疊或廣度優先搜尋。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$；每個節點恰好走訪一次。
+- 額外空間：$O(h)$；`h` 是樹高，來自遞迴呼叫堆疊。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [MIT OpenCourseWare：Binary Trees](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-4-binary-search-trees/)：二元樹結構與樹高的課程背景。
+- [Python：Recursion](https://docs.python.org/3/tutorial/introduction.html#first-steps-towards-programming)：Python 函式遞迴的基本語意。
+- [Rust：Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) 與 [RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html)：LeetCode 樹節點型別採用的共享所有權與內部可變性。

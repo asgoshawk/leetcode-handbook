@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+__pycache__/
+*.py[cod]
+playwright-report/
+test-results/
+tests/rust/target/
+.DS_Store

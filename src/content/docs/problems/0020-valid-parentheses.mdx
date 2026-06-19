@@ -1,0 +1,52 @@
+---
+title: 20. Valid Parentheses
+description: 用堆疊驗證括號的巢狀順序。
+problemNumber: 20
+difficulty: Easy
+topics: [String, Stack]
+leetcodeUrl: https://leetcode.com/problems/valid-parentheses/
+order: 2
+sidebar:
+  order: 2
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import jsCode from '../../../../solutions/0020-valid-parentheses/javascript.js?raw';
+import pyCode from '../../../../solutions/0020-valid-parentheses/python.py?raw';
+import rsCode from '../../../../solutions/0020-valid-parentheses/rust.rs?raw';
+
+## 題意摘要
+
+字串只含三種左右括號。判斷每個右括號是否以正確種類與順序關閉最近尚未配對的左括號。[查看 LeetCode 原題](https://leetcode.com/problems/valid-parentheses/)
+
+## 核心觀念
+
+括號具有後開先關的結構，正好符合堆疊的後進先出（LIFO）。遇到左括號時，把預期的右括號推入堆疊；遇到右括號時，它必須等於堆疊頂端。
+
+### 不變量與正確性
+
+走訪每個字元前，堆疊由底至頂保存所有尚未關閉括號所期待的右括號，頂端就是下一個合法的關閉符號。任何不相符或空堆疊都證明順序無效；走訪結束時堆疊為空，則每個左括號都恰好被關閉。
+
+<Aside type="tip" title="儲存預期結果">
+  保存右括號而不是左括號，能讓比對步驟只需要一次相等判斷。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(n)$，例如全部都是左括號時。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [Open Data Structures：Stacks](https://opendatastructures.org/ods-python/2_1_ArrayStack_Fast_Stack_O.html)：堆疊操作及其成本。
+- [MDN：Array.pop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)：JavaScript 陣列尾端移除操作。
+- [Python：list](https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks)：官方文件中的堆疊用法。
+- [Rust：Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)：`Vec` 的 `push` 與 `pop` 介面。

@@ -1,0 +1,131 @@
+---
+import 'reveal.js/reveal.css';
+
+const handbookUrl = `${import.meta.env.BASE_URL}learning-path/`;
+---
+
+<!doctype html>
+<html lang="zh-TW" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="LeetCode 自學手冊的學習路線簡報" />
+    <title>學習路線｜LeetCode 自學手冊</title>
+  </head>
+  <body>
+    <a class="back" href={handbookUrl} aria-label="返回手冊學習路線">← 返回手冊</a>
+    <main class="reveal" aria-label="LeetCode 學習路線簡報">
+      <div class="slides">
+        <section>
+          <p class="eyebrow">LeetCode 自學手冊</p>
+          <h1>從解題到建立可重複運用的能力</h1>
+          <p>五個主題、三種語言、一套可驗證的學習流程</p>
+          <small>使用方向鍵或滑動換頁</small>
+        </section>
+        <section>
+          <h2>每一題都走四個階段</h2>
+          <ol>
+            <li><strong>理解</strong>：輸入、輸出、限制、邊界</li>
+            <li><strong>設計</strong>：暴力解、重複工作、資料結構</li>
+            <li><strong>驗證</strong>：不變量、正確性、複雜度</li>
+            <li><strong>複習</strong>：隔天重寫、一週後跨語言</li>
+          </ol>
+        </section>
+        <section>
+          <h2>1 · 雜湊表</h2>
+          <h3>Two Sum</h3>
+          <p>把「檢查每一對」改寫成「是否看過互補值」。</p>
+          <p class="key">模式：用空間換取較快的查找</p>
+        </section>
+        <section>
+          <h2>2 · 堆疊</h2>
+          <h3>Valid Parentheses</h3>
+          <p>後開的括號必須先關閉，對應後進先出。</p>
+          <p class="key">模式：保存下一個預期結果</p>
+        </section>
+        <section>
+          <h2>3 · 二分搜尋</h2>
+          <h3>Binary Search</h3>
+          <p>先定義搜尋區間，再讓每次更新都維持不變量。</p>
+          <p class="key">模式：用排序性排除一半候選</p>
+        </section>
+        <section>
+          <h2>4 · 鏈結串列</h2>
+          <h3>Reverse Linked List</h3>
+          <p>改寫連結前先保存下一個節點，避免遺失未處理部分。</p>
+          <p class="key">模式：明確追蹤狀態轉移順序</p>
+        </section>
+        <section>
+          <h2>5 · 二元樹</h2>
+          <h3>Maximum Depth of Binary Tree</h3>
+          <p>從子問題定義直接推導遞迴式與深度優先搜尋。</p>
+          <p class="key">模式：空樹基準加上子樹結果</p>
+        </section>
+        <section>
+          <h2>三種語言，三個觀察角度</h2>
+          <ul>
+            <li><strong>JavaScript</strong>：專注資料流與內建集合</li>
+            <li><strong>Python</strong>：用簡潔語法驗證想法</li>
+            <li><strong>Rust</strong>：看見型別、所有權與成本</li>
+          </ul>
+          <p>演算法不變，實作限制會改變。</p>
+        </section>
+        <section>
+          <h2>複雜度不是背答案</h2>
+          <p>先數每個元素被處理幾次，再計算資料結構操作的成本。</p>
+          <p>空間分析要分清輸出、額外資料結構與呼叫堆疊。</p>
+        </section>
+        <section>
+          <p class="eyebrow">下一步</p>
+          <h2>從 Two Sum 開始</h2>
+          <p>先自己寫出暴力解，再閱讀雜湊表版本。</p>
+          <a class="cta" href={`${import.meta.env.BASE_URL}problems/0001-two-sum/`}>開啟第一篇題解</a>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      import Reveal from 'reveal.js';
+
+      const deck = new Reveal({
+        controls: true,
+        progress: true,
+        slideNumber: 'c/t',
+        hash: true,
+        history: true,
+        keyboard: true,
+        touch: true,
+        transition: 'fade',
+        backgroundTransition: 'fade',
+        width: 1200,
+        height: 700,
+        margin: 0.08,
+      });
+      deck.initialize();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #111318; color: #e6e9ef; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  .back { position: fixed; z-index: 20; top: 1rem; left: 1rem; min-height: 44px; padding: 0 1rem; display: inline-flex; align-items: center; color: #aeb6c2; background: #181b22e8; border: 1px solid #303640; border-radius: .6rem; text-decoration: none; }
+  .back:hover, .back:focus-visible { color: #e6e9ef; border-color: #8ab4f8; }
+  .back:focus-visible, .reveal a:focus-visible { outline: 3px solid #8ab4f8; outline-offset: 3px; }
+  .reveal { color: #e6e9ef; font-size: 38px; }
+  .reveal .slides { text-align: left; }
+  .reveal h1, .reveal h2, .reveal h3 { color: #e6e9ef; text-transform: none; letter-spacing: -.025em; }
+  .reveal h1 { font-size: 2.3em; max-width: 16ch; }
+  .reveal h2 { color: #8ab4f8; font-size: 1.65em; }
+  .reveal h3 { font-size: 1.3em; }
+  .reveal p, .reveal li { line-height: 1.55; }
+  .reveal strong { color: #d6e6ff; }
+  .reveal .eyebrow { color: #8ab4f8; font-size: .72em; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .reveal .key { margin-top: 1.5em; padding: .6em .8em; background: #20242d; border-left: .2em solid #8ab4f8; border-radius: .25em; }
+  .reveal .cta { display: inline-flex; align-items: center; min-height: 44px; margin-top: 1em; padding: .2em .8em; color: #111318; background: #8ab4f8; border-radius: .35em; font-weight: 700; text-decoration: none; }
+  .reveal .controls { color: #8ab4f8; }
+  .reveal .progress { color: #8ab4f8; height: 5px; }
+  .reveal .slide-number { color: #e6e9ef; background: #181b22; font-size: 16px; }
+  @media (max-width: 600px) { .back { top: .5rem; left: .5rem; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+</style>

@@ -1,0 +1,40 @@
+{
+  "name": "leetcode-handbook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && corepack pnpm lint:language",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "lint:language": "node scripts/lint-language.mjs",
+    "test:js": "node --test tests/javascript/*.test.js",
+    "test:python": "python3 -m unittest discover -s tests/python -p 'test_*.py'",
+    "test:rust": "cargo test --manifest-path tests/rust/Cargo.toml",
+    "test:solutions": "corepack pnpm test:js && corepack pnpm test:python && corepack pnpm test:rust",
+    "test:e2e": "playwright test",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "corepack pnpm exec commitlint --edit $1"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.36.2",
+    "astro": "5.16.6",
+    "reveal.js": "6.0.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@playwright/test": "1.61.0",
+    "simple-git-hooks": "2.13.1",
+    "typescript": "5.9.3"
+  }
+}

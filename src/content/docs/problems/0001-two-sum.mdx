@@ -1,0 +1,52 @@
+---
+title: 1. Two Sum
+description: 用雜湊表在一次走訪中找出互補值。
+problemNumber: 1
+difficulty: Easy
+topics: [Array, Hash Table]
+leetcodeUrl: https://leetcode.com/problems/two-sum/
+order: 1
+sidebar:
+  order: 1
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import jsCode from '../../../../solutions/0001-two-sum/javascript.js?raw';
+import pyCode from '../../../../solutions/0001-two-sum/python.py?raw';
+import rsCode from '../../../../solutions/0001-two-sum/rust.rs?raw';
+
+## 題意摘要
+
+給定整數陣列 `nums` 和目標值 `target`，找出兩個不同位置，使其數值總和等於目標。題目保證恰有一組答案。[查看 LeetCode 原題](https://leetcode.com/problems/two-sum/)
+
+## 核心觀念
+
+暴力解會檢查每一對位置，時間是 $O(n^2)$。對目前數值 `x` 而言，我們真正想問的是：先前是否看過 `target - x`？雜湊表能以平均 $O(1)$ 時間回答這個查找問題，因此可用 $O(n)$ 額外空間換取一次走訪。
+
+### 不變量與正確性
+
+處理索引 `i` 前，表中只保存索引小於 `i` 的數值及位置。若表中已有互補值，兩個索引一定不同且總和正確；若沒有，就保存目前數值，讓後續元素可以配對。既然答案中的較後位置終究會被走訪，演算法一定會在那一步找到答案。
+
+<Aside type="caution" title="先查找，再寫入">
+  若先把目前元素放入表中，當 `target` 是目前數值的兩倍時，可能錯誤地讓同一個位置與自己配對。
+</Aside>
+
+## 複雜度
+
+- 時間：平均 $O(n)$；每個元素執行一次雜湊查找與寫入。
+- 額外空間：$O(n)$；最差情況下保存所有已走訪元素。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [MIT OpenCourseWare：Hashing](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-8-hashing-with-chaining/)：雜湊表操作與碰撞處理的理論背景。
+- [MDN：Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)：JavaScript `Map` 的鍵值行為。
+- [Python：Mapping Types](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)：Python `dict` 的官方定義。
+- [Rust：HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)：Rust 標準函式庫的雜湊表介面。
