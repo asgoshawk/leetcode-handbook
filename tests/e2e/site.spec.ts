@@ -5,6 +5,8 @@ test('handbook navigation and language tabs work', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '1. Two Sum' })).toBeVisible();
   await page.getByRole('tab', { name: 'Python' }).click();
   await expect(page.getByText('class Solution:')).toBeVisible();
+  await expect(page.locator('a[rel="next"]')).toContainText('下一頁');
+  await expect(page.getByText('下一页', { exact: true })).toHaveCount(0);
 });
 
 test('learning path slides respond to arrow keys', async ({ page }) => {
