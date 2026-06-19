@@ -1,0 +1,54 @@
+---
+title: 42. Trapping Rain Water
+description: 由較低邊界決定可安全結算的積水量。
+problemNumber: 42
+difficulty: Hard
+topics: [Array, Two Pointers, Dynamic Programming, Stack, Monotonic Stack]
+leetcodeUrl: https://leetcode.com/problems/trapping-rain-water/
+order: 8
+sidebar:
+  order: 8
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0042-trapping-rain-water/javascript.js?raw';
+import pyCode from '../../../../solutions/0042-trapping-rain-water/python.py?raw';
+import rsCode from '../../../../solutions/0042-trapping-rain-water/rust.rs?raw';
+
+<ProblemMeta difficulty="Hard" topics={['Array', 'Two Pointers', 'Dynamic Programming', 'Stack', 'Monotonic Stack']} url="https://leetcode.com/problems/trapping-rain-water/" />
+
+## Problem summary
+
+Given the heights of adjacent unit-width bars, return the total amount of rainwater retained between them.
+
+## 核心觀念
+
+位置 `i` 的積水量由 `min(maxLeft, maxRight) - height[i]` 決定。雙指標解法從兩端向內移動：當左側柱不高於右側柱時，右側至少已有一個不低於左柱的邊界，因此左側能否積水只取決於目前的 `leftMax`；另一側則對稱處理。
+
+### 不變量與正確性
+
+每輪開始時，指標外側的位置都已正確結算，`leftMax` 與 `rightMax` 是兩側已看過的最高柱。移動較低的一側時，另一側現有高度足以提供外側邊界，因此該位置的水位可由本側最高柱確定，不需要知道中間尚未處理的細節。每輪結算一個位置，最後總和涵蓋所有位置。
+
+<Aside type="caution" title="為何移動較低的一側？">
+  若先移動較高的一側，另一端可能還沒有足以確定水位的邊界，當下無法安全結算積水量。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$；每個指標最多移動 $n$ 次。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)：官方難度、Topics 與完整題目。
+- [Cornell CS 2112：Loop Invariants](https://www.cs.cornell.edu/courses/cs2112/2022fa/lectures/loopinv/)：用不變量說明迴圈正確性的完整方法。
+- [MDN：Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)、[Python：Sequence Types](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)、[Rust：Slices](https://doc.rust-lang.org/std/primitive.slice.html)：三種語言的連續序列介面。

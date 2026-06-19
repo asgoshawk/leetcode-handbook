@@ -9,14 +9,6 @@ test('handbook navigation and language tabs work', async ({ page }) => {
   await expect(page.getByText('下一页', { exact: true })).toHaveCount(0);
 });
 
-test('learning path slides respond to arrow keys', async ({ page }) => {
-  await page.goto('/leetcode-handbook/slides/learning-path/');
-  await expect(page.getByRole('heading', { name: '從解題到建立可重複運用的能力' })).toBeVisible();
-  await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('heading', { name: '每一題都走四個階段' })).toBeVisible();
-  await expect(page.getByRole('link', { name: '返回手冊學習路線' })).toBeVisible();
-});
-
 test('learning path table uses the full content width', async ({ page }) => {
   await page.goto('/leetcode-handbook/learning-path/');
   const table = page.getByRole('table');
@@ -45,4 +37,18 @@ test('learning path table fits a narrow viewport', async ({ page }) => {
   await page.goto('/leetcode-handbook/learning-path/');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
+});
+
+test('problem catalog groups difficulties and shows topic tags', async ({ page }) => {
+  await page.goto('/leetcode-handbook/problems/');
+  await expect(page.getByRole('heading', { name: 'Easy' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Medium' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Hard' })).toBeVisible();
+  await page.getByRole('link', { name: '3. Longest Substring Without Repeating Characters' }).first().click();
+  await expect(page.getByLabel('題目資訊')).toContainText('Medium');
+  await expect(page.getByLabel('題型標籤')).toContainText('Sliding Window');
+  await expect(page.getByRole('link', { name: /在 LeetCode 開啟原題/ })).toHaveAttribute(
+    'href',
+    'https://leetcode.com/problems/longest-substring-without-repeating-characters/',
+  );
 });

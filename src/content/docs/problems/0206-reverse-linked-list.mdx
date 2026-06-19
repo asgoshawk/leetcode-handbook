@@ -3,7 +3,7 @@ title: 206. Reverse Linked List
 description: 以三個參照安全地反轉單向鏈結串列。
 problemNumber: 206
 difficulty: Easy
-topics: [Linked List]
+topics: [Linked List, Recursion]
 leetcodeUrl: https://leetcode.com/problems/reverse-linked-list/
 order: 4
 sidebar:
@@ -11,13 +11,16 @@ sidebar:
 ---
 
 import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
 import jsCode from '../../../../solutions/0206-reverse-linked-list/javascript.js?raw';
 import pyCode from '../../../../solutions/0206-reverse-linked-list/python.py?raw';
 import rsCode from '../../../../solutions/0206-reverse-linked-list/rust.rs?raw';
 
-## 題意摘要
+<ProblemMeta difficulty="Easy" topics={['Linked List', 'Recursion']} url="https://leetcode.com/problems/reverse-linked-list/" />
 
-給定單向鏈結串列的頭節點，將所有連結方向反轉並回傳新的頭節點。[查看 LeetCode 原題](https://leetcode.com/problems/reverse-linked-list/)
+## Problem summary
+
+Given the head of a singly linked list, reverse the links between its nodes and return the new head.
 
 ## 核心觀念
 

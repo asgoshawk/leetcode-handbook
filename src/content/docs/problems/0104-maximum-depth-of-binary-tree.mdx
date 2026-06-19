@@ -11,13 +11,16 @@ sidebar:
 ---
 
 import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
 import jsCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/javascript.js?raw';
 import pyCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/python.py?raw';
 import rsCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/rust.rs?raw';
 
-## 題意摘要
+<ProblemMeta difficulty="Easy" topics={['Tree', 'Depth-First Search', 'Recursion']} url="https://leetcode.com/problems/maximum-depth-of-binary-tree/" />
 
-二元樹的最大深度，是從根節點到最遠葉節點所包含的節點數。計算給定樹的最大深度。[查看 LeetCode 原題](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+## Problem summary
+
+Given the root of a binary tree, return its maximum depth: the number of nodes on the longest path from the root to a leaf.
 
 ## 核心觀念
 

@@ -1,0 +1,54 @@
+---
+title: 3. Longest Substring Without Repeating Characters
+description: 以滑動視窗維持不含重複字元的最長子字串。
+problemNumber: 3
+difficulty: Medium
+topics: [Hash Table, String, Sliding Window]
+leetcodeUrl: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+order: 6
+sidebar:
+  order: 6
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0003-longest-substring-without-repeating-characters/javascript.js?raw';
+import pyCode from '../../../../solutions/0003-longest-substring-without-repeating-characters/python.py?raw';
+import rsCode from '../../../../solutions/0003-longest-substring-without-repeating-characters/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Hash Table', 'String', 'Sliding Window']} url="https://leetcode.com/problems/longest-substring-without-repeating-characters/" />
+
+## Problem summary
+
+Given a string `s`, return the length of its longest contiguous substring that contains no repeated character.
+
+## 核心觀念
+
+用 `[left, right]` 表示目前沒有重複字元的視窗。雜湊表保存每個字元「上次出現位置的下一格」；再次遇到相同字元時，`left` 可直接向右跳過舊位置，不必逐字移動。
+
+### 不變量與正確性
+
+處理 `right` 後，`left` 是能讓視窗結尾固定在 `right` 且不重複的最小合法位置。`left` 只能向右移，因此已排除的重複字元不會重新進入視窗。每個合法結尾都會被檢查，最大視窗長度就是答案。
+
+<Aside type="caution" title="左界不能倒退">
+  某字元上次出現的位置可能已在視窗外，因此更新時必須取 `max(left, lastSeen)`。
+</Aside>
+
+## 複雜度
+
+- 時間：平均 $O(n)$；每個字元處理一次。
+- 額外空間：$O(k)$；`k` 是不同字元數量。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)：官方難度、Topics 與完整題目。
+- [MIT OpenCourseWare：Hashing](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-8-hashing-with-chaining/)：雜湊查找的理論背景。
+- [MDN：Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)、[Python：Mapping Types](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)、[Rust：HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)：三種語言的鍵值集合介面。

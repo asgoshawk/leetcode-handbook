@@ -55,6 +55,24 @@ class SolutionTests(unittest.TestCase):
         self.assertEqual(solution.maxDepth(None), 0)
         self.assertEqual(solution.maxDepth(TreeNode(1, TreeNode(2))), 2)
 
+    def test_longest_substring(self):
+        solution = load("0003-longest-substring-without-repeating-characters/python.py").Solution()
+        self.assertEqual(solution.lengthOfLongestSubstring("abcabcbb"), 3)
+        self.assertEqual(solution.lengthOfLongestSubstring("abba"), 2)
+        self.assertEqual(solution.lengthOfLongestSubstring(""), 0)
+
+    def test_house_robber(self):
+        solution = load("0198-house-robber/python.py").Solution()
+        self.assertEqual(solution.rob([1, 2, 3, 1]), 4)
+        self.assertEqual(solution.rob([2, 7, 9, 3, 1]), 12)
+        self.assertEqual(solution.rob([]), 0)
+
+    def test_trapping_rain_water(self):
+        solution = load("0042-trapping-rain-water/python.py").Solution()
+        self.assertEqual(solution.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]), 6)
+        self.assertEqual(solution.trap([4, 2, 0, 3, 2, 5]), 9)
+        self.assertEqual(solution.trap([]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

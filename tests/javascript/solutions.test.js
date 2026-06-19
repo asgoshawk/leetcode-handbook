@@ -42,3 +42,27 @@ test('Maximum Depth handles empty and skewed trees', async () => {
   assert.equal(maxDepth(null), 0);
   assert.equal(maxDepth({ left: { left: null, right: null }, right: null }), 2);
 });
+
+test('Longest Substring handles repeated and empty strings', async () => {
+  const lengthOfLongestSubstring = await load(
+    '0003-longest-substring-without-repeating-characters/javascript.js',
+    'lengthOfLongestSubstring',
+  );
+  assert.equal(lengthOfLongestSubstring('abcabcbb'), 3);
+  assert.equal(lengthOfLongestSubstring('abba'), 2);
+  assert.equal(lengthOfLongestSubstring(''), 0);
+});
+
+test('House Robber chooses the best non-adjacent values', async () => {
+  const rob = await load('0198-house-robber/javascript.js', 'rob');
+  assert.equal(rob([1, 2, 3, 1]), 4);
+  assert.equal(rob([2, 7, 9, 3, 1]), 12);
+  assert.equal(rob([]), 0);
+});
+
+test('Trapping Rain Water handles valleys and short inputs', async () => {
+  const trap = await load('0042-trapping-rain-water/javascript.js', 'trap');
+  assert.equal(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]), 6);
+  assert.equal(trap([4, 2, 0, 3, 2, 5]), 9);
+  assert.equal(trap([]), 0);
+});

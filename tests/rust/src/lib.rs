@@ -73,3 +73,39 @@ mod tree_depth {
         assert_eq!(Solution::max_depth(Some(root)), 2);
     }
 }
+
+mod longest_substring {
+    pub struct Solution;
+    include!("../../../solutions/0003-longest-substring-without-repeating-characters/rust.rs");
+
+    #[test]
+    fn handles_repeated_and_empty_strings() {
+        assert_eq!(Solution::length_of_longest_substring("abcabcbb".into()), 3);
+        assert_eq!(Solution::length_of_longest_substring("abba".into()), 2);
+        assert_eq!(Solution::length_of_longest_substring("".into()), 0);
+    }
+}
+
+mod house_robber {
+    pub struct Solution;
+    include!("../../../solutions/0198-house-robber/rust.rs");
+
+    #[test]
+    fn chooses_the_best_non_adjacent_values() {
+        assert_eq!(Solution::rob(vec![1, 2, 3, 1]), 4);
+        assert_eq!(Solution::rob(vec![2, 7, 9, 3, 1]), 12);
+        assert_eq!(Solution::rob(vec![]), 0);
+    }
+}
+
+mod trapping_rain_water {
+    pub struct Solution;
+    include!("../../../solutions/0042-trapping-rain-water/rust.rs");
+
+    #[test]
+    fn handles_valleys_and_short_inputs() {
+        assert_eq!(Solution::trap(vec![0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]), 6);
+        assert_eq!(Solution::trap(vec![4, 2, 0, 3, 2, 5]), 9);
+        assert_eq!(Solution::trap(vec![]), 0);
+    }
+}

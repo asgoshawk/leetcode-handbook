@@ -19,11 +19,12 @@ description: 從分析問題到間隔複習的可重複流程。
 | 3 | Binary Search | 搜尋區間、不變量 |
 | 4 | Reverse Linked List | 指標更新順序 |
 | 5 | Maximum Depth of Binary Tree | 遞迴定義、深度優先搜尋 |
+| 6 | Longest Substring Without Repeating Characters | 滑動視窗、雜湊表 |
+| 7 | House Robber | 動態規劃、狀態壓縮 |
+| 8 | Trapping Rain Water | 雙指標、不變量 |
 
 ## 三種語言的練習方式
 
 - 第一輪用最熟悉的語言建立演算法。
 - 第二輪只看虛擬碼，以另一種語言重寫。
 - 第三輪比較標準函式庫、所有權、型別與錯誤處理；不要把語言差異誤認為演算法差異。
-
-想快速瀏覽完整路線，可以開啟[學習路線簡報](/leetcode-handbook/slides/learning-path/)。

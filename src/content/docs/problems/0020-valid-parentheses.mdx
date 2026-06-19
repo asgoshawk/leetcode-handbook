@@ -11,13 +11,16 @@ sidebar:
 ---
 
 import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
 import jsCode from '../../../../solutions/0020-valid-parentheses/javascript.js?raw';
 import pyCode from '../../../../solutions/0020-valid-parentheses/python.py?raw';
 import rsCode from '../../../../solutions/0020-valid-parentheses/rust.rs?raw';
 
-## 題意摘要
+<ProblemMeta difficulty="Easy" topics={['String', 'Stack']} url="https://leetcode.com/problems/valid-parentheses/" />
 
-字串只含三種左右括號。判斷每個右括號是否以正確種類與順序關閉最近尚未配對的左括號。[查看 LeetCode 原題](https://leetcode.com/problems/valid-parentheses/)
+## Problem summary
+
+Given a string containing three kinds of brackets, determine whether every opening bracket is closed by the same kind of bracket in the correct order.
 
 ## 核心觀念
 

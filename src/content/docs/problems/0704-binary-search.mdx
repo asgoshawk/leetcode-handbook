@@ -11,13 +11,16 @@ sidebar:
 ---
 
 import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
 import jsCode from '../../../../solutions/0704-binary-search/javascript.js?raw';
 import pyCode from '../../../../solutions/0704-binary-search/python.py?raw';
 import rsCode from '../../../../solutions/0704-binary-search/rust.rs?raw';
 
-## 題意摘要
+<ProblemMeta difficulty="Easy" topics={['Array', 'Binary Search']} url="https://leetcode.com/problems/binary-search/" />
 
-在嚴格遞增的整數陣列中尋找 `target`。找到時回傳索引，否則回傳 `-1`。[查看 LeetCode 原題](https://leetcode.com/problems/binary-search/)
+## Problem summary
+
+Given a strictly increasing integer array and a target value, return the target's index or `-1` when it is absent. The algorithm must run in $O(\log n)$ time.
 
 ## 核心觀念
 

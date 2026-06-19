@@ -1,0 +1,54 @@
+---
+title: 198. House Robber
+description: 以一維動態規劃比較選取與略過目前元素。
+problemNumber: 198
+difficulty: Medium
+topics: [Array, Dynamic Programming]
+leetcodeUrl: https://leetcode.com/problems/house-robber/
+order: 7
+sidebar:
+  order: 7
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0198-house-robber/javascript.js?raw';
+import pyCode from '../../../../solutions/0198-house-robber/python.py?raw';
+import rsCode from '../../../../solutions/0198-house-robber/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Dynamic Programming']} url="https://leetcode.com/problems/house-robber/" />
+
+## Problem summary
+
+Given the amount of money in each house along a street, return the largest total obtainable without choosing two adjacent houses.
+
+## 核心觀念
+
+令 `dp[i]` 表示只考慮到第 `i` 間房屋時的最大金額。到達新位置時只有兩種互斥選擇：略過它並保留 `dp[i - 1]`，或選取它並加上 `dp[i - 2]`。因此轉移式為 `dp[i] = max(dp[i - 1], dp[i - 2] + nums[i])`。
+
+### 不變量與正確性
+
+處理每筆金額前，`oneBack` 與 `twoBack` 分別是前一個與前兩個前綴的最佳解。任何最佳解若不含目前房屋，就等於前一個前綴的最佳解；若包含目前房屋，就不能包含相鄰房屋，只能加在前兩個前綴的最佳解之上。兩者取大涵蓋所有可能。
+
+<Aside type="tip" title="壓縮狀態">
+  每次轉移只依賴前兩個狀態，不需要保存完整 `dp` 陣列。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：House Robber](https://leetcode.com/problems/house-robber/)：官方難度、Topics 與完整題目。
+- [MIT OpenCourseWare：Dynamic Programming I](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-19-dynamic-programming-i-fibonacci-shortest-paths/)：子問題、轉移關係與計算順序。
+- [Python Tutorial：Data Structures](https://docs.python.org/3/tutorial/datastructures.html) 與 [Rust：Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)：走訪輸入時使用的官方語言介面。

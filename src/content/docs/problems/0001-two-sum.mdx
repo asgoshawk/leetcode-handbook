@@ -11,13 +11,16 @@ sidebar:
 ---
 
 import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
 import jsCode from '../../../../solutions/0001-two-sum/javascript.js?raw';
 import pyCode from '../../../../solutions/0001-two-sum/python.py?raw';
 import rsCode from '../../../../solutions/0001-two-sum/rust.rs?raw';
 
-## 題意摘要
+<ProblemMeta difficulty="Easy" topics={['Array', 'Hash Table']} url="https://leetcode.com/problems/two-sum/" />
 
-給定整數陣列 `nums` 和目標值 `target`，找出兩個不同位置，使其數值總和等於目標。題目保證恰有一組答案。[查看 LeetCode 原題](https://leetcode.com/problems/two-sum/)
+## Problem summary
+
+Given an integer array `nums` and a target value, return the indices of two distinct elements whose sum equals the target. Exactly one valid pair exists.
 
 ## 核心觀念
 

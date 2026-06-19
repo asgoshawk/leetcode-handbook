@@ -1,0 +1,29 @@
+---
+interface Props {
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  topics: string[];
+  url: string;
+}
+
+const { difficulty, topics, url } = Astro.props;
+---
+
+<div class="problem-meta" aria-label="題目資訊">
+  <span class:list={["difficulty", difficulty.toLowerCase()]}>{difficulty}</span>
+  <ul aria-label="題型標籤">
+    {topics.map((topic) => <li>{topic}</li>)}
+  </ul>
+  <a href={url} target="_blank" rel="noreferrer">在 LeetCode 開啟原題 <span aria-hidden="true">↗</span></a>
+</div>
+
+<style>
+  .problem-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .625rem; margin-block: 1.25rem 2rem; }
+  .problem-meta ul { display: contents; margin: 0; padding: 0; }
+  .problem-meta li, .difficulty { display: inline-flex; align-items: center; min-height: 1.75rem; padding: .2rem .625rem; border: 1px solid var(--sl-color-hairline-light); border-radius: 999px; font-size: .8125rem; font-weight: 650; line-height: 1.2; }
+  .problem-meta li { color: var(--sl-color-gray-2); background: rgb(32 36 45 / 76%); }
+  .difficulty.easy { color: #8bd5a7; border-color: rgb(139 213 167 / 35%); background: rgb(139 213 167 / 10%); }
+  .difficulty.medium { color: #f2cc8f; border-color: rgb(242 204 143 / 35%); background: rgb(242 204 143 / 10%); }
+  .difficulty.hard { color: #f29a9a; border-color: rgb(242 154 154 / 35%); background: rgb(242 154 154 / 10%); }
+  .problem-meta a { margin-inline-start: auto; font-size: .875rem; font-weight: 650; white-space: nowrap; }
+  @media (max-width: 40rem) { .problem-meta a { flex-basis: 100%; margin-block-start: .25rem; margin-inline-start: 0; } }
+</style>
