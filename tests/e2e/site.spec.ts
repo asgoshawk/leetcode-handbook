@@ -17,9 +17,32 @@ test('learning path slides respond to arrow keys', async ({ page }) => {
   await expect(page.getByRole('link', { name: '返回手冊學習路線' })).toBeVisible();
 });
 
+test('learning path table uses the full content width', async ({ page }) => {
+  await page.goto('/leetcode-handbook/learning-path/');
+  const table = page.getByRole('table');
+  await expect(table).toBeVisible();
+
+  const widths = await table.evaluate((element) => {
+    const header = element.querySelector('thead');
+    return {
+      table: element.getBoundingClientRect().width,
+      header: header?.getBoundingClientRect().width ?? 0,
+    };
+  });
+
+  expect(widths.header).toBeGreaterThanOrEqual(widths.table - 2);
+});
+
 test('mobile pages do not overflow horizontally', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto('/leetcode-handbook/problems/0704-binary-search/');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+});
+
+test('learning path table fits a narrow viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto('/leetcode-handbook/learning-path/');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
 });

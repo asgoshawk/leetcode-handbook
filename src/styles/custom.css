@@ -117,9 +117,13 @@ article.card:hover {
 }
 
 .sl-markdown-content table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
   border: 1px solid rgb(174 182 194 / 14%);
   border-radius: var(--ui-radius-md);
   background: rgb(24 27 34 / 56%);
+  overflow: hidden;
 }
 
 .sl-markdown-content th {
@@ -136,12 +140,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   outline: 2px solid #8ab4f8;
 }
 .sl-markdown-content code:not(:where(.not-content *)) { overflow-wrap: anywhere; }
-.sl-markdown-content table { display: block; max-width: 100%; overflow-x: auto; }
 .expressive-code { max-width: 100%; }
 
 @media (max-width: 30rem) {
   :root { --sl-text-5xl: 2rem; }
   .sl-markdown-content { overflow-wrap: anywhere; }
+  .sl-markdown-content table { font-size: .875rem; }
+  .sl-markdown-content :where(th, td) { padding-inline: .625rem; }
   .pagination-links a { min-height: 6.25rem; }
 }
 
