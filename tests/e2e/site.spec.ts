@@ -64,3 +64,9 @@ test('problem catalog groups difficulties and shows topic tags', async ({ page }
     'https://leetcode.com/problems/longest-substring-without-repeating-characters/',
   );
 });
+
+test('complexity formulas render exponents with MathML', async ({ page }) => {
+  await page.goto('/leetcode-handbook/problems/0015-3sum/');
+  await expect(page.locator('.katex')).toContainText('O(n2)');
+  expect(await page.locator('.katex math msup').count()).toBeGreaterThan(0);
+});

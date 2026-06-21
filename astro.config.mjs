@@ -1,9 +1,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
 
 export default defineConfig({
   site: 'https://asgoshawk.github.io',
   base: '/leetcode-handbook',
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
   integrations: [
     starlight({
       title: 'LeetCode 自學手冊',
