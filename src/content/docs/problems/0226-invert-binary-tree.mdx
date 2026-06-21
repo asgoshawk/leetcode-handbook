@@ -1,0 +1,61 @@
+---
+title: 226. Invert Binary Tree
+description: 遞迴交換每個節點的左右子樹。
+problemNumber: 226
+difficulty: Easy
+topics: [Tree, Depth-First Search, Breadth-First Search, Binary Tree]
+leetcodeUrl: https://leetcode.com/problems/invert-binary-tree/
+order: 11
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0226-invert-binary-tree/javascript.js?raw';
+import pyCode from '../../../../solutions/0226-invert-binary-tree/python.py?raw';
+import rsCode from '../../../../solutions/0226-invert-binary-tree/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Tree', 'Depth-First Search', 'Breadth-First Search', 'Binary Tree']} url="https://leetcode.com/problems/invert-binary-tree/" />
+
+## 題目敘述
+
+給定二元樹根節點 `root`，將整棵樹沿垂直中線鏡射：每個節點原本的左子樹變成右子樹，右子樹變成左子樹。回傳反轉後的根節點；空樹仍回傳空值。
+
+```text
+輸入（層序）：[4, 2, 7, 1, 3, 6, 9]
+輸出（層序）：[4, 7, 2, 9, 6, 3, 1]
+```
+
+### 限制
+
+- 節點數介於 `0` 與 `100`。
+- `-100 <= Node.val <= 100`
+
+## 核心觀念
+
+鏡射一棵樹等於交換根的左右子樹，再分別鏡射兩棵子樹。這個定義可直接寫成深度優先遞迴。
+
+### 正確性
+
+以樹高歸納。空樹不需改動。假設左右子樹都能正確反轉，交換兩棵已反轉的子樹後，每個節點相對於根的位置都完成鏡射，因此整棵樹正確反轉。
+
+<Aside type="note" title="原地修改">
+  解答沿用原有節點，只更換左右連結；Rust 以 `take` 明確移出子樹所有權。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(h)$，來自遞迴堆疊。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)：完整原題、限制與 Topics。
+- [Open Data Structures：Binary Trees](https://opendatastructures.org/ods-python/6_1_BinaryTree_Basic_Binary.html)：二元樹表示法與走訪背景。

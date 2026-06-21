@@ -18,9 +18,23 @@ import rsCode from '../../../../solutions/0198-house-robber/rust.rs?raw';
 
 <ProblemMeta difficulty="Medium" topics={['Array', 'Dynamic Programming']} url="https://leetcode.com/problems/house-robber/" />
 
-## Problem summary
+## 題目敘述
 
-Given the amount of money in each house along a street, return the largest total obtainable without choosing two adjacent houses.
+整數陣列 `nums` 記錄一排房屋中的金額。若同一晚選取兩間相鄰房屋就會觸發警報，因此只能選取互不相鄰的位置。請回傳可取得的最大總金額，每間房屋最多選一次。
+
+```text
+輸入：nums = [1, 2, 3, 1]
+輸出：4
+說明：選取金額 1 與 3。
+
+輸入：nums = [2, 7, 9, 3, 1]
+輸出：12
+```
+
+### 限制
+
+- `1 <= nums.length <= 100`
+- `0 <= nums[i] <= 400`
 
 ## 核心觀念
 

@@ -1,0 +1,66 @@
+---
+title: 322. Coin Change
+description: 以金額為狀態求最少硬幣數量。
+problemNumber: 322
+difficulty: Medium
+topics: [Array, Dynamic Programming, Breadth-First Search]
+leetcodeUrl: https://leetcode.com/problems/coin-change/
+order: 17
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0322-coin-change/javascript.js?raw';
+import pyCode from '../../../../solutions/0322-coin-change/python.py?raw';
+import rsCode from '../../../../solutions/0322-coin-change/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Dynamic Programming', 'Breadth-First Search']} url="https://leetcode.com/problems/coin-change/" />
+
+## 題目敘述
+
+給定正整數陣列 `coins`，每個值代表一種硬幣面額，每種硬幣可使用任意多次。另給目標金額 `amount`，請回傳湊出該金額所需的最少硬幣數；若任何組合都無法湊出，回傳 `-1`。金額 `0` 不需要硬幣，因此答案是 `0`。
+
+```text
+輸入：coins = [1, 2, 5], amount = 11
+輸出：3
+說明：可使用 5、5、1。
+
+輸入：coins = [2], amount = 3
+輸出：-1
+```
+
+### 限制
+
+- `1 <= coins.length <= 12`
+- `1 <= coins[i] <= 2147483647`
+- `0 <= amount <= 10000`
+
+## 核心觀念
+
+令 `minimum[x]` 表示湊出金額 `x` 的最少硬幣數。最後一枚若是面額 `coin`，前一個子問題就是 `x - coin`，所以枚舉所有可用面額並取 `minimum[x - coin] + 1` 的最小值。
+
+### 不變量與正確性
+
+依金額由小至大計算。處理 `x` 時，所有較小金額都已是最佳解。任何能湊出 `x` 的最佳組合都有一枚最後硬幣；移除它後得到對應子問題。演算法枚舉每種可能的最後硬幣，因此必定選到全域最少數量。
+
+<Aside type="caution" title="無法組成的狀態">
+  初始值使用 `amount + 1` 作為不可能的上界，避免把尚未可達的狀態誤認為答案。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(amount \times coins.length)$。
+- 額外空間：$O(amount)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Coin Change](https://leetcode.com/problems/coin-change/)：完整原題、限制與 Topics。
+- [MIT OpenCourseWare：Dynamic Programming I](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-19-dynamic-programming-i-fibonacci-shortest-paths/)：子問題、轉移與計算順序。

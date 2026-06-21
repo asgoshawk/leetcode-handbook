@@ -1,0 +1,64 @@
+---
+title: 238. Product of Array Except Self
+description: 結合每個位置左側與右側的乘積。
+problemNumber: 238
+difficulty: Medium
+topics: [Array, Prefix Sum]
+leetcodeUrl: https://leetcode.com/problems/product-of-array-except-self/
+order: 16
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0238-product-of-array-except-self/javascript.js?raw';
+import pyCode from '../../../../solutions/0238-product-of-array-except-self/python.py?raw';
+import rsCode from '../../../../solutions/0238-product-of-array-except-self/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Prefix Sum']} url="https://leetcode.com/problems/product-of-array-except-self/" />
+
+## 題目敘述
+
+給定整數陣列 `nums`，建立同長度陣列 `answer`，其中 `answer[i]` 等於除了 `nums[i]` 以外所有元素的乘積。演算法必須在 $O(n)$ 時間內完成，而且不能使用除法；輸出值保證能放入 32-bit 整數。
+
+```text
+輸入：nums = [1, 2, 3, 4]
+輸出：[24, 12, 8, 6]
+
+輸入：nums = [-1, 1, 0, -3, 3]
+輸出：[0, 0, 9, 0, 0]
+```
+
+### 限制
+
+- `2 <= nums.length <= 100000`
+- `-30 <= nums[i] <= 30`
+
+## 核心觀念
+
+索引 `i` 的答案可拆成左側全部元素乘積乘上右側全部元素乘積。第一趟把 prefix product 寫入答案；第二趟由右向左維持 suffix product 並乘入答案。
+
+### 不變量與正確性
+
+第一趟結束後，`answer[i]` 恰為 `i` 左側的乘積。第二趟處理 `i` 時，`suffix` 恰為 `i` 右側的乘積；兩者相乘便包含除 `nums[i]` 外的所有元素且各一次。
+
+<Aside type="tip" title="額外空間的計算">
+  題目不把輸出陣列計入額外空間，因此除輸出外只用了兩個累積變數，即 $O(1)$ 額外空間。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$，不含輸出。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)：完整原題、限制與 Topics。
+- [MIT OpenCourseWare：Algorithmic Thinking](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：線性走訪與演算法分析的課程背景。

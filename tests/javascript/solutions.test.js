@@ -66,3 +66,67 @@ test('Trapping Rain Water handles valleys and short inputs', async () => {
   assert.equal(trap([4, 2, 0, 3, 2, 5]), 9);
   assert.equal(trap([]), 0);
 });
+
+test('3Sum finds unique triplets', async () => {
+  const threeSum = await load('0015-3sum/javascript.js', 'threeSum');
+  assert.deepEqual(JSON.parse(JSON.stringify(threeSum([-1, 0, 1, 2, -1, -4]))), [[-1, -1, 2], [-1, 0, 1]]);
+  assert.deepEqual(JSON.parse(JSON.stringify(threeSum([0, 0, 0]))), [[0, 0, 0]]);
+});
+
+test('Group Anagrams groups by character multiset', async () => {
+  const groupAnagrams = await load('0049-group-anagrams/javascript.js', 'groupAnagrams');
+  const groups = groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat'])
+    .map((group) => [...group].sort().join(','))
+    .sort();
+  assert.deepEqual(JSON.parse(JSON.stringify(groups)), ['ate,eat,tea', 'bat', 'nat,tan']);
+});
+
+test('Minimum Window handles multiplicity and missing windows', async () => {
+  const minWindow = await load('0076-minimum-window-substring/javascript.js', 'minWindow');
+  assert.equal(minWindow('ADOBECODEBANC', 'ABC'), 'BANC');
+  assert.equal(minWindow('a', 'aa'), '');
+});
+
+test('Best Time to Buy and Sell Stock keeps transaction order', async () => {
+  const maxProfit = await load('0121-best-time-to-buy-and-sell-stock/javascript.js', 'maxProfit');
+  assert.equal(maxProfit([7, 1, 5, 3, 6, 4]), 5);
+  assert.equal(maxProfit([7, 6, 4, 3, 1]), 0);
+});
+
+test('Number of Islands counts four-directional components', async () => {
+  const numIslands = await load('0200-number-of-islands/javascript.js', 'numIslands');
+  assert.equal(numIslands([['1', '1', '0'], ['1', '0', '0'], ['0', '0', '1']]), 2);
+});
+
+test('Contains Duplicate distinguishes unique arrays', async () => {
+  const containsDuplicate = await load('0217-contains-duplicate/javascript.js', 'containsDuplicate');
+  assert.equal(containsDuplicate([1, 2, 3, 1]), true);
+  assert.equal(containsDuplicate([1, 2, 3, 4]), false);
+});
+
+test('Invert Binary Tree swaps every subtree', async () => {
+  const invertTree = await load('0226-invert-binary-tree/javascript.js', 'invertTree');
+  const root = { val: 2, left: { val: 1, left: null, right: null }, right: { val: 3, left: null, right: null } };
+  const inverted = invertTree(root);
+  assert.deepEqual([inverted.val, inverted.left.val, inverted.right.val], [2, 3, 1]);
+  assert.equal(invertTree(null), null);
+});
+
+test('Product Except Self handles zero values', async () => {
+  const productExceptSelf = await load('0238-product-of-array-except-self/javascript.js', 'productExceptSelf');
+  assert.deepEqual(JSON.parse(JSON.stringify(productExceptSelf([1, 2, 3, 4]))), [24, 12, 8, 6]);
+  assert.deepEqual(JSON.parse(JSON.stringify(productExceptSelf([-1, 1, 0, -3, 3]))), [0, 0, 9, 0, 0]);
+});
+
+test('Valid Anagram compares character frequencies', async () => {
+  const isAnagram = await load('0242-valid-anagram/javascript.js', 'isAnagram');
+  assert.equal(isAnagram('anagram', 'nagaram'), true);
+  assert.equal(isAnagram('rat', 'car'), false);
+});
+
+test('Coin Change finds the minimum or reports impossibility', async () => {
+  const coinChange = await load('0322-coin-change/javascript.js', 'coinChange');
+  assert.equal(coinChange([1, 2, 5], 11), 3);
+  assert.equal(coinChange([2], 3), -1);
+  assert.equal(coinChange([1], 0), 0);
+});

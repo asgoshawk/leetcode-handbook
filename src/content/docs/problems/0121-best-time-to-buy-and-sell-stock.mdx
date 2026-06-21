@@ -1,0 +1,67 @@
+---
+title: 121. Best Time to Buy and Sell Stock
+description: 一次走訪維持最低買入價與最佳利潤。
+problemNumber: 121
+difficulty: Easy
+topics: [Array, Dynamic Programming]
+leetcodeUrl: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+order: 9
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0121-best-time-to-buy-and-sell-stock/javascript.js?raw';
+import pyCode from '../../../../solutions/0121-best-time-to-buy-and-sell-stock/python.py?raw';
+import rsCode from '../../../../solutions/0121-best-time-to-buy-and-sell-stock/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Array', 'Dynamic Programming']} url="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" />
+
+## 題目敘述
+
+整數陣列 `prices` 依序記錄每天的股票價格。你最多只能完成一次交易：先在某一天買入一股，再於之後的某一天賣出。請回傳可能取得的最大利潤；若所有合法交易都無法獲利，回傳 `0`。
+
+### 輸入與輸出
+
+- 輸入：代表每日價格的整數陣列 `prices`。
+- 輸出：一次先買後賣交易的最大非負利潤。
+
+```text
+輸入：prices = [7, 1, 5, 3, 6, 4]
+輸出：5
+說明：價格 1 時買入，價格 6 時賣出。
+```
+
+### 限制
+
+- `1 <= prices.length <= 100000`
+- `0 <= prices[i] <= 10000`
+
+## 核心觀念
+
+把每一天當成賣出日，只需知道它之前最低的價格。走訪時維持 `lowest` 與 `best`，先更新最低價，再用目前價格減去最低價更新答案。
+
+### 不變量與正確性
+
+處理完第 `i` 天後，`lowest` 是前 `i` 天的最低價格，`best` 是賣出日不晚於第 `i` 天的最佳利潤。下一天以 `lowest` 計算的候選值涵蓋所有以當天賣出的交易，因此不會漏掉全域最佳解。
+
+<Aside type="caution" title="交易順序">
+  最低價格只來自目前日期以前，因而不會發生先賣後買。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)：完整原題、限制與 Topics。
+- [Cornell CS 2112：Loop Invariants](https://www.cs.cornell.edu/courses/cs2112/2022fa/lectures/loopinv/)：以不變量驗證單次走訪。

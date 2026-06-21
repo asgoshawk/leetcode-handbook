@@ -1,0 +1,58 @@
+---
+title: 49. Group Anagrams
+description: 以排序後的字串作為分組簽章。
+problemNumber: 49
+difficulty: Medium
+topics: [Array, Hash Table, String, Sorting]
+leetcodeUrl: https://leetcode.com/problems/group-anagrams/
+order: 14
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0049-group-anagrams/javascript.js?raw';
+import pyCode from '../../../../solutions/0049-group-anagrams/python.py?raw';
+import rsCode from '../../../../solutions/0049-group-anagrams/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Hash Table', 'String', 'Sorting']} url="https://leetcode.com/problems/group-anagrams/" />
+
+## 題目敘述
+
+給定字串陣列 `strs`，把互為 anagram 的字串放入同一組。兩個字串若包含完全相同的字元及次數，只是排列順序不同，就屬於同組。各組及組內字串可用任意順序回傳，空字串也必須正確分組。
+
+```text
+輸入：strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+輸出：[["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
+```
+
+### 限制
+
+- `1 <= strs.length <= 10000`
+- `0 <= strs[i].length <= 100`
+- 每個字串只含小寫英文字母。
+
+## 核心觀念
+
+互為 anagram 的字串排序後必定相同。把排序結果當成雜湊表鍵，原字串加入該鍵所對應的群組即可。
+
+### 正確性
+
+兩字串排序後相等，等價於它們對每個字元具有相同次數，也就等價於兩者互為 anagram。因此演算法把且只把互為 anagram 的字串分在一起。
+
+## 複雜度
+
+- 時間：$O(nk \log k)$；`k` 是最長字串長度。
+- 額外空間：$O(nk)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Group Anagrams](https://leetcode.com/problems/group-anagrams/)：完整原題、限制與 Topics。
+- [MIT OpenCourseWare：Hashing](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-8-hashing-with-chaining/)：以鍵分組的資料結構背景。

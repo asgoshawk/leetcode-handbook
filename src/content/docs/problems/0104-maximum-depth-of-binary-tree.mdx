@@ -18,9 +18,22 @@ import rsCode from '../../../../solutions/0104-maximum-depth-of-binary-tree/rust
 
 <ProblemMeta difficulty="Easy" topics={['Tree', 'Depth-First Search', 'Recursion']} url="https://leetcode.com/problems/maximum-depth-of-binary-tree/" />
 
-## Problem summary
+## 題目敘述
 
-Given the root of a binary tree, return its maximum depth: the number of nodes on the longest path from the root to a leaf.
+給定二元樹根節點 `root`，回傳這棵樹的最大深度。深度以節點數計算，等於從根節點到最遠葉節點之最長路徑所包含的節點數；空樹深度為 `0`。
+
+```text
+輸入（層序）：[3, 9, 20, null, null, 15, 7]
+輸出：3
+
+輸入：[]
+輸出：0
+```
+
+### 限制
+
+- 節點數介於 `0` 與 `10000`。
+- `-100 <= Node.val <= 100`
 
 ## 核心觀念
 

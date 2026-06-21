@@ -1,5 +1,17 @@
 import { expect, test } from '@playwright/test';
 
+test('home actions open valid handbook pages', async ({ page }) => {
+  await page.goto('/leetcode-handbook/');
+  await page.getByRole('link', { name: '開始學習' }).click();
+  await expect(page).toHaveURL(/\/leetcode-handbook\/learning-path\/$/);
+  await expect(page.getByRole('heading', { name: '學習路線', level: 1 })).toBeVisible();
+
+  await page.goto('/leetcode-handbook/');
+  await page.getByRole('link', { name: '查看第一題' }).click();
+  await expect(page).toHaveURL(/\/leetcode-handbook\/problems\/0001-two-sum\/$/);
+  await expect(page.getByRole('heading', { name: '1. Two Sum', level: 1 })).toBeVisible();
+});
+
 test('handbook navigation and language tabs work', async ({ page }) => {
   await page.goto('/leetcode-handbook/problems/0001-two-sum/');
   await expect(page.getByRole('heading', { name: '1. Two Sum' })).toBeVisible();

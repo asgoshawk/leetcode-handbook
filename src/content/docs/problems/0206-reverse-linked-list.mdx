@@ -18,9 +18,22 @@ import rsCode from '../../../../solutions/0206-reverse-linked-list/rust.rs?raw';
 
 <ProblemMeta difficulty="Easy" topics={['Linked List', 'Recursion']} url="https://leetcode.com/problems/reverse-linked-list/" />
 
-## Problem summary
+## 題目敘述
 
-Given the head of a singly linked list, reverse the links between its nodes and return the new head.
+給定單向鏈結串列的頭節點 `head`，反轉每個節點之間的連結方向，並回傳反轉後的新頭節點。節點的數值與節點本身不需重新建立；空串列仍回傳空值。
+
+```text
+輸入：head = [1, 2, 3, 4, 5]
+輸出：[5, 4, 3, 2, 1]
+
+輸入：head = []
+輸出：[]
+```
+
+### 限制
+
+- 節點數介於 `0` 與 `5000`。
+- `-5000 <= Node.val <= 5000`
 
 ## 核心觀念
 

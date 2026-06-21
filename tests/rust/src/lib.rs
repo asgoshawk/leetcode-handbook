@@ -109,3 +109,133 @@ mod trapping_rain_water {
         assert_eq!(Solution::trap(vec![]), 0);
     }
 }
+
+mod three_sum {
+    pub struct Solution;
+    include!("../../../solutions/0015-3sum/rust.rs");
+
+    #[test]
+    fn finds_unique_triplets() {
+        assert_eq!(Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]), vec![vec![-1, -1, 2], vec![-1, 0, 1]]);
+        assert_eq!(Solution::three_sum(vec![0, 0, 0]), vec![vec![0, 0, 0]]);
+    }
+}
+
+mod group_anagrams {
+    pub struct Solution;
+    include!("../../../solutions/0049-group-anagrams/rust.rs");
+
+    #[test]
+    fn groups_by_character_multiset() {
+        let words = ["eat", "tea", "tan", "ate", "nat", "bat"].map(String::from).to_vec();
+        let mut groups: Vec<String> = Solution::group_anagrams(words).into_iter().map(|mut group| {
+            group.sort();
+            group.join(",")
+        }).collect();
+        groups.sort();
+        assert_eq!(groups, vec!["ate,eat,tea", "bat", "nat,tan"]);
+    }
+}
+
+mod minimum_window {
+    pub struct Solution;
+    include!("../../../solutions/0076-minimum-window-substring/rust.rs");
+
+    #[test]
+    fn handles_multiplicity_and_missing_windows() {
+        assert_eq!(Solution::min_window("ADOBECODEBANC".into(), "ABC".into()), "BANC");
+        assert_eq!(Solution::min_window("a".into(), "aa".into()), "");
+    }
+}
+
+mod stock_profit {
+    pub struct Solution;
+    include!("../../../solutions/0121-best-time-to-buy-and-sell-stock/rust.rs");
+
+    #[test]
+    fn keeps_transaction_order() {
+        assert_eq!(Solution::max_profit(vec![7, 1, 5, 3, 6, 4]), 5);
+        assert_eq!(Solution::max_profit(vec![7, 6, 4, 3, 1]), 0);
+    }
+}
+
+mod number_of_islands {
+    pub struct Solution;
+    include!("../../../solutions/0200-number-of-islands/rust.rs");
+
+    #[test]
+    fn counts_four_directional_components() {
+        let grid = vec![vec!['1', '1', '0'], vec!['1', '0', '0'], vec!['0', '0', '1']];
+        assert_eq!(Solution::num_islands(grid), 2);
+    }
+}
+
+mod contains_duplicate {
+    pub struct Solution;
+    include!("../../../solutions/0217-contains-duplicate/rust.rs");
+
+    #[test]
+    fn distinguishes_unique_arrays() {
+        assert!(Solution::contains_duplicate(vec![1, 2, 3, 1]));
+        assert!(!Solution::contains_duplicate(vec![1, 2, 3, 4]));
+    }
+}
+
+mod invert_tree {
+    use std::cell::RefCell;
+    use std::rc::Rc;
+
+    #[derive(Debug, PartialEq, Eq)]
+    pub struct TreeNode {
+        pub val: i32,
+        pub left: Option<Rc<RefCell<TreeNode>>>,
+        pub right: Option<Rc<RefCell<TreeNode>>>,
+    }
+    pub struct Solution;
+    include!("../../../solutions/0226-invert-binary-tree/rust.rs");
+
+    #[test]
+    fn swaps_every_subtree() {
+        let left = Rc::new(RefCell::new(TreeNode { val: 1, left: None, right: None }));
+        let right = Rc::new(RefCell::new(TreeNode { val: 3, left: None, right: None }));
+        let root = Rc::new(RefCell::new(TreeNode { val: 2, left: Some(left), right: Some(right) }));
+        let inverted = Solution::invert_tree(Some(root)).unwrap();
+        let node = inverted.borrow();
+        assert_eq!(node.left.as_ref().unwrap().borrow().val, 3);
+        assert_eq!(node.right.as_ref().unwrap().borrow().val, 1);
+    }
+}
+
+mod product_except_self {
+    pub struct Solution;
+    include!("../../../solutions/0238-product-of-array-except-self/rust.rs");
+
+    #[test]
+    fn handles_zero_values() {
+        assert_eq!(Solution::product_except_self(vec![1, 2, 3, 4]), vec![24, 12, 8, 6]);
+        assert_eq!(Solution::product_except_self(vec![-1, 1, 0, -3, 3]), vec![0, 0, 9, 0, 0]);
+    }
+}
+
+mod valid_anagram {
+    pub struct Solution;
+    include!("../../../solutions/0242-valid-anagram/rust.rs");
+
+    #[test]
+    fn compares_character_frequencies() {
+        assert!(Solution::is_anagram("anagram".into(), "nagaram".into()));
+        assert!(!Solution::is_anagram("rat".into(), "car".into()));
+    }
+}
+
+mod coin_change {
+    pub struct Solution;
+    include!("../../../solutions/0322-coin-change/rust.rs");
+
+    #[test]
+    fn finds_minimum_or_reports_impossibility() {
+        assert_eq!(Solution::coin_change(vec![1, 2, 5], 11), 3);
+        assert_eq!(Solution::coin_change(vec![2], 3), -1);
+        assert_eq!(Solution::coin_change(vec![1], 0), 0);
+    }
+}

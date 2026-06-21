@@ -1,0 +1,65 @@
+---
+title: 76. Minimum Window Substring
+description: 以滑動視窗找出涵蓋指定字元頻率的最短子字串。
+problemNumber: 76
+difficulty: Hard
+topics: [Hash Table, String, Sliding Window]
+leetcodeUrl: https://leetcode.com/problems/minimum-window-substring/
+order: 18
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0076-minimum-window-substring/javascript.js?raw';
+import pyCode from '../../../../solutions/0076-minimum-window-substring/python.py?raw';
+import rsCode from '../../../../solutions/0076-minimum-window-substring/rust.rs?raw';
+
+<ProblemMeta difficulty="Hard" topics={['Hash Table', 'String', 'Sliding Window']} url="https://leetcode.com/problems/minimum-window-substring/" />
+
+## 題目敘述
+
+給定英文字母字串 `s` 與 `t`，在 `s` 中找出最短的連續子字串，使它包含 `t` 的全部字元及其重複次數。若不存在符合條件的視窗，回傳空字串；測試資料保證最短答案若存在則唯一。
+
+```text
+輸入：s = "ADOBECODEBANC", t = "ABC"
+輸出："BANC"
+
+輸入：s = "a", t = "aa"
+輸出：""
+```
+
+### 限制
+
+- `1 <= s.length, t.length <= 100000`
+- 兩字串只含大寫與小寫英文字母。
+
+## 核心觀念
+
+`need[c]` 表示目前視窗仍缺少多少個字元 `c`，`missing` 是所有缺少數量的總和。右界擴張直到 `missing` 為零，再持續右移左界以取得當下最短合法視窗；移除必要字元後，視窗重新變為不合法並繼續擴張。
+
+### 不變量與正確性
+
+每次右界前進後，計數精確描述目前視窗。當視窗合法時，內層迴圈會依序檢查所有具有該右界的合法左界，直到再縮一步便不合法，因此記錄了該右界的最短合法視窗。所有右界皆被處理，全域最短答案必在候選之中。
+
+<Aside type="caution" title="重複字元也要計數">
+  只記錄字元是否出現並不足夠；例如 `t = "AA"` 必須在視窗中找到兩個 `A`。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(|s| + |t|)$；每個位置至多被左右指標各走訪一次。
+- 額外空間：$O(k)$；`k` 是字母表大小。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)：完整原題、限制與 Topics。
+- [MIT OpenCourseWare：Hashing](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-8-hashing-with-chaining/)：頻率表所用鍵值結構的背景。
+- [Cornell CS 2112：Loop Invariants](https://www.cs.cornell.edu/courses/cs2112/2022fa/lectures/loopinv/)：雙層指標迴圈的正確性推理。

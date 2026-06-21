@@ -1,0 +1,64 @@
+---
+title: 217. Contains Duplicate
+description: 用集合在走訪時辨認重複值。
+problemNumber: 217
+difficulty: Easy
+topics: [Array, Hash Table, Sorting]
+leetcodeUrl: https://leetcode.com/problems/contains-duplicate/
+order: 10
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0217-contains-duplicate/javascript.js?raw';
+import pyCode from '../../../../solutions/0217-contains-duplicate/python.py?raw';
+import rsCode from '../../../../solutions/0217-contains-duplicate/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Array', 'Hash Table', 'Sorting']} url="https://leetcode.com/problems/contains-duplicate/" />
+
+## 題目敘述
+
+給定整數陣列 `nums`，判斷其中是否存在至少一個重複值。只要某個數值出現在兩個或更多不同位置就回傳 `true`；若所有元素皆不相同，回傳 `false`。
+
+```text
+輸入：nums = [1, 2, 3, 1]
+輸出：true
+
+輸入：nums = [1, 2, 3, 4]
+輸出：false
+```
+
+### 限制
+
+- `1 <= nums.length <= 100000`
+- `-1000000000 <= nums[i] <= 1000000000`
+
+## 核心觀念
+
+集合只保存「是否看過」而不保存位置。遇到已存在於集合的值便可立即回傳 `true`；走訪結束仍未發現重複值，答案就是 `false`。
+
+### 不變量與正確性
+
+處理每個元素前，集合恰好包含所有先前元素。集合命中代表目前位置與某個先前位置具有相同數值；未命中時加入目前值，讓不變量在下一輪繼續成立。
+
+<Aside type="note" title="另一種做法">
+  排序後比較相鄰元素只需 $O(1)$ 額外空間，但會改變輸入且需 $O(n \log n)$ 時間。
+</Aside>
+
+## 複雜度
+
+- 時間：平均 $O(n)$。
+- 額外空間：$O(n)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)：完整原題、限制與 Topics。
+- [MIT OpenCourseWare：Hashing](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-8-hashing-with-chaining/)：集合背後的雜湊查找概念。

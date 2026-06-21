@@ -18,9 +18,23 @@ import rsCode from '../../../../solutions/0003-longest-substring-without-repeati
 
 <ProblemMeta difficulty="Medium" topics={['Hash Table', 'String', 'Sliding Window']} url="https://leetcode.com/problems/longest-substring-without-repeating-characters/" />
 
-## Problem summary
+## 題目敘述
 
-Given a string `s`, return the length of its longest contiguous substring that contains no repeated character.
+給定字串 `s`，找出其中不含任何重複字元的最長連續子字串，並回傳其長度。子字串必須是原字串中的連續區段，不是可以跳過字元的 subsequence。
+
+```text
+輸入：s = "abcabcbb"
+輸出：3
+說明："abc"、"bca" 或 "cab" 都是長度 3 的合法子字串。
+
+輸入：s = "bbbbb"
+輸出：1
+```
+
+### 限制
+
+- `0 <= s.length <= 50000`
+- `s` 可包含英文字母、數字、符號與空白。
 
 ## 核心觀念
 

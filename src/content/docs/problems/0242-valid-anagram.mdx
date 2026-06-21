@@ -1,0 +1,64 @@
+---
+title: 242. Valid Anagram
+description: 比較兩個字串的字元頻率。
+problemNumber: 242
+difficulty: Easy
+topics: [Hash Table, String, Sorting]
+leetcodeUrl: https://leetcode.com/problems/valid-anagram/
+order: 12
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0242-valid-anagram/javascript.js?raw';
+import pyCode from '../../../../solutions/0242-valid-anagram/python.py?raw';
+import rsCode from '../../../../solutions/0242-valid-anagram/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Hash Table', 'String', 'Sorting']} url="https://leetcode.com/problems/valid-anagram/" />
+
+## 題目敘述
+
+給定兩個只含小寫英文字母的字串 `s` 與 `t`。若能重新排列 `s` 的全部字元而恰好得到 `t`，回傳 `true`，否則回傳 `false`。每個字元出現的次數必須完全相同，不能新增或遺漏字元。
+
+```text
+輸入：s = "anagram", t = "nagaram"
+輸出：true
+
+輸入：s = "rat", t = "car"
+輸出：false
+```
+
+### 限制
+
+- `1 <= s.length, t.length <= 50000`
+- 兩個字串只包含 `a` 到 `z`。
+
+## 核心觀念
+
+字元順序不重要，頻率才是 anagram 的完整特徵。先統計 `s`，再用 `t` 抵銷計數；長度不同或任一字元不足都可立即判定失敗。
+
+### 正確性
+
+若解答回傳 `true`，每個字元在兩字串的計數皆相同，所以存在一個排列能把 `s` 變成 `t`。反之，任何 anagram 的每個字元計數必定相同，因此演算法也一定回傳 `true`。
+
+<Aside type="tip" title="固定字母表">
+  Rust 利用題目只含 26 個小寫字母，以固定長度陣列取代雜湊表。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(k)$；`k` 是字母表大小。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Valid Anagram](https://leetcode.com/problems/valid-anagram/)：完整原題、限制與 Topics。
+- [Python：Counter](https://docs.python.org/3/library/collections.html#collections.Counter)：多重集合計數的官方介面。

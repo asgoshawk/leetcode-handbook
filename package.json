@@ -11,7 +11,7 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && corepack pnpm lint:language",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/lint-language.mjs --generated",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/lint-language.mjs --generated && node scripts/check-links.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "lint:language": "node scripts/lint-language.mjs",
     "test:js": "node --test tests/javascript/*.test.js",

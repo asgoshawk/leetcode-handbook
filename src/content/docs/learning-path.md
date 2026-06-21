@@ -22,6 +22,16 @@ description: 從分析問題到間隔複習的可重複流程。
 | 6 | Longest Substring Without Repeating Characters | 滑動視窗、雜湊表 |
 | 7 | House Robber | 動態規劃、狀態壓縮 |
 | 8 | Trapping Rain Water | 雙指標、不變量 |
+| 9 | Best Time to Buy and Sell Stock | 前綴最佳值、單次走訪 |
+| 10 | Contains Duplicate | 集合、提早結束 |
+| 11 | Invert Binary Tree | 遞迴、樹的轉換 |
+| 12 | Valid Anagram | 字元頻率、多重集合 |
+| 13 | 3Sum | 排序、雙指標、去除重複項 |
+| 14 | Group Anagrams | 標準化簽章、分組 |
+| 15 | Number of Islands | 圖走訪、connected component |
+| 16 | Product of Array Except Self | prefix product、suffix product |
+| 17 | Coin Change | 動態規劃、最小化 |
+| 18 | Minimum Window Substring | 滑動視窗、頻率限制 |
 
 ## 三種語言的練習方式
 

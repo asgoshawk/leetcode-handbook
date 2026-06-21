@@ -1,0 +1,66 @@
+---
+title: 200. Number of Islands
+description: 將網格視為圖並計算相連區塊。
+problemNumber: 200
+difficulty: Medium
+topics: [Array, Depth-First Search, Breadth-First Search, Union Find, Matrix]
+leetcodeUrl: https://leetcode.com/problems/number-of-islands/
+order: 15
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0200-number-of-islands/javascript.js?raw';
+import pyCode from '../../../../solutions/0200-number-of-islands/python.py?raw';
+import rsCode from '../../../../solutions/0200-number-of-islands/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Depth-First Search', 'Breadth-First Search', 'Union Find', 'Matrix']} url="https://leetcode.com/problems/number-of-islands/" />
+
+## 題目敘述
+
+`grid` 是由字元 `'1'`（陸地）與 `'0'`（水域）組成的矩形網格。上下或左右相鄰的陸地屬於同一座島，斜角接觸不算相連；網格外圍視為水域。請回傳互不相連的島嶼數量。
+
+```text
+輸入：
+[
+  ["1", "1", "0", "0"],
+  ["1", "0", "0", "1"],
+  ["0", "0", "1", "1"]
+]
+輸出：2
+```
+
+### 限制
+
+- `1 <= grid.length, grid[i].length <= 300`
+- 每格只會是 `'0'` 或 `'1'`。
+
+## 核心觀念
+
+把每格陸地視為圖的節點，相鄰陸地之間有邊。一座島就是一個 connected component。掃描到尚未處理的陸地時，島嶼數加一，再用明確堆疊走訪並標記整個區塊。
+
+### 不變量與正確性
+
+每次開始新走訪時，該陸地不屬於任何已計數的島。走訪會且只會抵達與它四向相連的全部陸地並標記為水，因此同一座島不會再次計數，而每座島第一次被掃描時一定會計數一次。
+
+<Aside type="caution" title="會修改輸入">
+  此版本直接把已走訪陸地改成水。若呼叫端需要保留網格，應另建 `visited` 集合。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(mn)$。
+- 額外空間：最差 $O(mn)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Number of Islands](https://leetcode.com/problems/number-of-islands/)：完整原題、限制與 Topics。
+- [Open Data Structures：Graph Traversal](https://opendatastructures.org/ods-python/12_3_Graph_Traversal.html)：DFS、BFS 與可達性。

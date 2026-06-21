@@ -1,0 +1,64 @@
+---
+title: 15. 3Sum
+description: 排序後固定一值，再用雙指標找出另外兩值。
+problemNumber: 15
+difficulty: Medium
+topics: [Array, Two Pointers, Sorting]
+leetcodeUrl: https://leetcode.com/problems/3sum/
+order: 13
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0015-3sum/javascript.js?raw';
+import pyCode from '../../../../solutions/0015-3sum/python.py?raw';
+import rsCode from '../../../../solutions/0015-3sum/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Two Pointers', 'Sorting']} url="https://leetcode.com/problems/3sum/" />
+
+## 題目敘述
+
+給定整數陣列 `nums`，找出所有由三個不同索引選出的三元組，使三個數值總和為 `0`。答案中不得出現數值完全相同的重複三元組；三元組內部與答案集合的順序皆不影響正確性。
+
+```text
+輸入：nums = [-1, 0, 1, 2, -1, -4]
+輸出：[[-1, -1, 2], [-1, 0, 1]]
+
+輸入：nums = [0, 0, 0]
+輸出：[[0, 0, 0]]
+```
+
+### 限制
+
+- `3 <= nums.length <= 3000`
+- `-100000 <= nums[i] <= 100000`
+
+## 核心觀念
+
+排序後固定第一個值，問題便化為在其右側找出總和等於相反數的兩值。若三數總和過小就右移 `left`，過大就左移 `right`；命中後跳過重複值。
+
+### 不變量與正確性
+
+對固定的 `i`，所有尚未排除的候選對都位於 `[left, right]`。總和過小時，任何搭配目前 `left` 與更小右值的組合都不可能成功，因此可安全右移；總和過大時對稱成立。每個固定值及命中值都跳過重複項，所以答案完整且不重複。
+
+<Aside type="caution" title="去除重複答案">
+  必須同時跳過重複的固定值，以及每次命中後左右兩側的重複值。
+</Aside>
+
+## 複雜度
+
+- 時間：$O(n^2)$。
+- 額外空間：視語言排序實作而定；答案空間不計入。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：3Sum](https://leetcode.com/problems/3sum/)：完整原題、限制與 Topics。
+- [MIT OpenCourseWare：Sorting](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-3-insertion-sort-merge-sort/)：排序與比較模型背景。

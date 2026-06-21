@@ -18,9 +18,20 @@ import rsCode from '../../../../solutions/0001-two-sum/rust.rs?raw';
 
 <ProblemMeta difficulty="Easy" topics={['Array', 'Hash Table']} url="https://leetcode.com/problems/two-sum/" />
 
-## Problem summary
+## 題目敘述
 
-Given an integer array `nums` and a target value, return the indices of two distinct elements whose sum equals the target. Exactly one valid pair exists.
+給定整數陣列 `nums` 與整數 `target`，找出兩個不同索引，使這兩個位置的數值總和等於 `target`，並回傳兩個索引。每組輸入恰有一組答案，同一個位置不能使用兩次，索引順序不限。
+
+```text
+輸入：nums = [2, 7, 11, 15], target = 9
+輸出：[0, 1]
+```
+
+### 限制
+
+- `2 <= nums.length <= 10000`
+- `-1000000000 <= nums[i], target <= 1000000000`
+- 恰有一組有效答案。
 
 ## 核心觀念
 

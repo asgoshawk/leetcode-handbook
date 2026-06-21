@@ -18,9 +18,22 @@ import rsCode from '../../../../solutions/0020-valid-parentheses/rust.rs?raw';
 
 <ProblemMeta difficulty="Easy" topics={['String', 'Stack']} url="https://leetcode.com/problems/valid-parentheses/" />
 
-## Problem summary
+## 題目敘述
 
-Given a string containing three kinds of brackets, determine whether every opening bracket is closed by the same kind of bracket in the correct order.
+字串 `s` 只包含 `()`、`[]`、`{}` 三種括號。若每個左括號都由相同種類的右括號關閉、括號按照正確巢狀順序關閉，而且沒有多餘括號，就回傳 `true`，否則回傳 `false`。
+
+```text
+輸入：s = "()[]{}"
+輸出：true
+
+輸入：s = "([)]"
+輸出：false
+```
+
+### 限制
+
+- `1 <= s.length <= 10000`
+- `s` 只包含 `()[]{}`。
 
 ## 核心觀念
 
