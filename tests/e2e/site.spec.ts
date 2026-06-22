@@ -70,3 +70,26 @@ test('complexity formulas render exponents with MathML', async ({ page }) => {
   await expect(page.locator('.katex')).toContainText('O(n2)');
   expect(await page.locator('.katex math msup').count()).toBeGreaterThan(0);
 });
+
+test('light theme uses light surfaces with readable card text', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('starlight-theme', 'light'));
+  await page.goto('/leetcode-handbook/');
+
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  const theme = await page.locator('article.card').first().evaluate((card) => {
+    const rootStyle = getComputedStyle(document.documentElement);
+    const cardStyle = getComputedStyle(card);
+    const titleStyle = getComputedStyle(card.querySelector('.title') ?? card);
+    return {
+      cardBackground: rootStyle.getPropertyValue('--ui-card-bg'),
+      cardText: titleStyle.color,
+      headerBackground: getComputedStyle(document.querySelector('header.header')!).backgroundColor,
+      renderedBackground: cardStyle.backgroundImage,
+    };
+  });
+
+  expect(theme.cardBackground).toContain('255 255 255');
+  expect(theme.renderedBackground).not.toContain('32, 36, 45');
+  expect(theme.cardText).not.toBe('rgb(230, 233, 239)');
+  expect(theme.headerBackground).not.toBe('rgba(17, 19, 24, 0.82)');
+});
