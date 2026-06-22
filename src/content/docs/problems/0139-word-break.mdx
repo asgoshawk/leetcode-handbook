@@ -1,0 +1,67 @@
+---
+title: 139. Word Break
+description: 用可達前綴定義動態規劃狀態。
+problemNumber: 139
+difficulty: Medium
+topics: [Hash Table, String, Dynamic Programming]
+leetcodeUrl: https://leetcode.com/problems/word-break/
+order: 32
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0139-word-break/javascript.js?raw';
+import pyCode from '../../../../solutions/0139-word-break/python.py?raw';
+import rsCode from '../../../../solutions/0139-word-break/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Hash Table', 'String', 'Dynamic Programming']} url="https://leetcode.com/problems/word-break/" />
+
+## 題目敘述
+
+給定字串 `s` 與字串陣列 `wordDict`。若能將 `s` 分割為一個或多個字典單字依序串接而成，回傳 `true`，否則回傳 `false`。字典中的同一個單字可重複使用，不要求使用所有字典單字。
+
+```text
+輸入：s = "leetcode"，wordDict = ["leet","code"]
+輸出：true
+
+輸入：s = "catsandog"，wordDict = ["cats","dog","sand","and","cat"]
+輸出：false
+```
+
+### 限制
+
+- `1 <= s.length <= 300`
+- `1 <= wordDict.length <= 1000`
+- 每個單字長度介於 `1` 與 `20`
+- 所有字串只包含小寫英文字母
+- `wordDict` 中的單字互不相同
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+令 `reachable[i]` 表示前 `i` 個字元能否由字典組成。若存在 `start < end`，使前綴可達且 `s[start:end]` 在字典中，則 `end` 也可達。
+
+### 不變量與正確性
+
+若狀態轉移成立，已有合法前綴再接上一個字典單字，必構成合法分割。反之，任何合法的前 `end` 字元分割都有最後一個單字，其起點 `start` 必符合轉移條件，因此不會漏解。
+
+## 複雜度
+
+- 時間：$O(n^2)$ 次狀態檢查；字串切片成本依語言而異。
+- 額外空間：$O(n + D)$，其中 $D$ 為字典大小。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Word Break](https://leetcode.com/problems/word-break/)：官方原題、限制與 Topics。
+- [MIT OpenCourseWare：Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：相關演算法與資料結構背景。

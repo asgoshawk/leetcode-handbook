@@ -1,0 +1,65 @@
+---
+title: 300. Longest Increasing Subsequence
+description: 用最小結尾陣列與二元搜尋求 LIS 長度。
+problemNumber: 300
+difficulty: Medium
+topics: [Array, Binary Search, Dynamic Programming]
+leetcodeUrl: https://leetcode.com/problems/longest-increasing-subsequence/
+order: 36
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0300-longest-increasing-subsequence/javascript.js?raw';
+import pyCode from '../../../../solutions/0300-longest-increasing-subsequence/python.py?raw';
+import rsCode from '../../../../solutions/0300-longest-increasing-subsequence/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Binary Search', 'Dynamic Programming']} url="https://leetcode.com/problems/longest-increasing-subsequence/" />
+
+## 題目敘述
+
+給定整數陣列 `nums`，請回傳其最長嚴格遞增 subsequence 的長度。Subsequence 可刪除任意元素但不可改變剩餘元素的相對順序；嚴格遞增表示後一個值必須大於前一個值。
+
+```text
+輸入：nums = [10,9,2,5,3,7,101,18]
+輸出：4
+說明：[2,3,7,101] 是長度 4 的遞增 subsequence。
+
+輸入：nums = [7,7,7,7]
+輸出：1
+```
+
+### 限制
+
+- `1 <= nums.length <= 2500`
+- `-10000 <= nums[i] <= 10000`
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+`tails[i]` 保存目前所見長度 `i+1` 的遞增 subsequence 中最小的結尾值。對每個新值，以 lower bound 找到第一個不小於它的位置並取代；若不存在則延長陣列。
+
+### 不變量與正確性
+
+較小的結尾不會降低未來延伸機會，因此取代不會損失可行解。`tails` 嚴格遞增，其長度每次增加都代表找到更長 subsequence；反之每個值只可能放在由二元搜尋決定的合法長度，故最終長度恰為 LIS。
+
+## 複雜度
+
+- 時間：$O(n \log n)$。
+- 額外空間：$O(n)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Binary Search](https://algs4.cs.princeton.edu/11model/)：相關演算法與資料結構背景。

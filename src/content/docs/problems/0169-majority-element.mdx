@@ -1,0 +1,65 @@
+---
+title: 169. Majority Element
+description: 以 Boyer–Moore majority vote 消去不同值。
+problemNumber: 169
+difficulty: Easy
+topics: [Array, Counting, Divide and Conquer]
+leetcodeUrl: https://leetcode.com/problems/majority-element/
+order: 33
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0169-majority-element/javascript.js?raw';
+import pyCode from '../../../../solutions/0169-majority-element/python.py?raw';
+import rsCode from '../../../../solutions/0169-majority-element/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Array', 'Counting', 'Divide and Conquer']} url="https://leetcode.com/problems/majority-element/" />
+
+## 題目敘述
+
+給定長度為 `n` 的整數陣列 `nums`，其中保證存在一個出現次數嚴格大於 `floor(n / 2)` 的 majority element。請回傳該元素。
+
+```text
+輸入：nums = [3,2,3]
+輸出：3
+
+輸入：nums = [2,2,1,1,1,2,2]
+輸出：2
+```
+
+### 限制
+
+- `1 <= nums.length <= 50000`
+- `-1000000000 <= nums[i] <= 1000000000`
+- 輸入保證存在 majority element
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+維護候選值與票數。相同值加一，不同值減一；票數歸零時改用目前值。這等價於反覆刪除一對不同元素。
+
+### 不變量與正確性
+
+從陣列刪除任意一對不同值，不會改變 majority element：它至多被刪一次，而其他元素總數也少一次。持續配對消去後，保證占過半的值不可能全部消失，最後候選值必是答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Majority Element](https://leetcode.com/problems/majority-element/)：官方原題、限制與 Topics。
+- [Boyer 與 Moore：MJRTY majority vote algorithm](https://www.cs.utexas.edu/~moore/best-ideas/mjrty/)：相關演算法與資料結構背景。

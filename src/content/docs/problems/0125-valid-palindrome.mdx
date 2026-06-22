@@ -1,0 +1,67 @@
+---
+title: 125. Valid Palindrome
+description: 忽略非英數字元與大小寫後，以雙指標比對。
+problemNumber: 125
+difficulty: Easy
+topics: [Two Pointers, String]
+leetcodeUrl: https://leetcode.com/problems/valid-palindrome/
+order: 30
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0125-valid-palindrome/javascript.js?raw';
+import pyCode from '../../../../solutions/0125-valid-palindrome/python.py?raw';
+import rsCode from '../../../../solutions/0125-valid-palindrome/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Two Pointers', 'String']} url="https://leetcode.com/problems/valid-palindrome/" />
+
+## 題目敘述
+
+給定字串 `s`。將所有英文字母轉為小寫並移除非英數字元後，若結果由左讀到右與由右讀到左完全相同，就稱為 palindrome。請判斷 `s` 是否符合此條件；空的正規化結果視為 palindrome。
+
+```text
+輸入：s = "A man, a plan, a canal: Panama"
+輸出：true
+
+輸入：s = "race a car"
+輸出：false
+
+輸入：s = " "
+輸出：true
+```
+
+### 限制
+
+- `1 <= s.length <= 200000`
+- `s` 僅包含可列印 ASCII 字元
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+左右指標分別跳過非英數字元，再以不分大小寫方式比較有效字元。相同就同時往內，任一對不同即可立即回傳 false。
+
+### 不變量與正確性
+
+每輪比較的是正規化字串中尚未檢查的最左與最右字元。若不同，必非 palindrome；若相同，移除這一對後，原問題等價於比較剩餘內部字串。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)：官方原題、限制與 Topics。
+- [MDN：Regular expression character classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Character_classes)：相關演算法與資料結構背景。

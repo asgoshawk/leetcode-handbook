@@ -130,3 +130,123 @@ test('Coin Change finds the minimum or reports impossibility', async () => {
   assert.equal(coinChange([2], 3), -1);
   assert.equal(coinChange([1], 0), 0);
 });
+
+const plain = (value) => JSON.parse(JSON.stringify(value));
+const list = (values) => values.reduceRight((next, val) => ({ val, next }), null);
+const listValues = (head) => {
+  const values = [];
+  while (head) { values.push(head.val); head = head.next; }
+  return values;
+};
+
+test('Container With Most Water finds the largest area', async () => {
+  const maxArea = await load('0011-container-with-most-water/javascript.js', 'maxArea');
+  assert.equal(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]), 49);
+});
+
+test('Merge Two Sorted Lists reuses sorted nodes', async () => {
+  const mergeTwoLists = await load('0021-merge-two-sorted-lists/javascript.js', 'mergeTwoLists');
+  assert.deepEqual(listValues(mergeTwoLists(list([1, 2, 4]), list([1, 3, 4]))), [1, 1, 2, 3, 4, 4]);
+});
+
+test('Merge k Sorted Lists handles several and empty lists', async () => {
+  const mergeKLists = await load('0023-merge-k-sorted-lists/javascript.js', 'mergeKLists');
+  assert.deepEqual(listValues(mergeKLists([list([1, 4, 5]), list([1, 3, 4]), list([2, 6])])), [1, 1, 2, 3, 4, 4, 5, 6]);
+  assert.equal(mergeKLists([]), null);
+});
+
+test('Rotated Search handles both sorted halves', async () => {
+  const search = await load('0033-search-in-rotated-sorted-array/javascript.js', 'search');
+  assert.equal(search([4, 5, 6, 7, 0, 1, 2], 0), 4);
+  assert.equal(search([4, 5, 6, 7, 0, 1, 2], 3), -1);
+});
+
+test('Permutations generates every arrangement', async () => {
+  const permute = await load('0046-permutations/javascript.js', 'permute');
+  assert.deepEqual(plain(permute([1, 2, 3])).map((x) => x.join('')).sort(), ['123', '132', '213', '231', '312', '321']);
+});
+
+test('Maximum Subarray handles mixed and negative values', async () => {
+  const maxSubArray = await load('0053-maximum-subarray/javascript.js', 'maxSubArray');
+  assert.equal(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]), 6);
+  assert.equal(maxSubArray([-1]), -1);
+});
+
+test('Merge Intervals combines overlaps and touching endpoints', async () => {
+  const merge = await load('0056-merge-intervals/javascript.js', 'merge');
+  assert.deepEqual(plain(merge([[1, 3], [2, 6], [8, 10], [15, 18]])), [[1, 6], [8, 10], [15, 18]]);
+  assert.deepEqual(plain(merge([[1, 4], [4, 5]])), [[1, 5]]);
+});
+
+test('Climbing Stairs counts valid step sequences', async () => {
+  const climbStairs = await load('0070-climbing-stairs/javascript.js', 'climbStairs');
+  assert.equal(climbStairs(2), 2);
+  assert.equal(climbStairs(5), 8);
+});
+
+test('Validate BST enforces ancestor bounds', async () => {
+  const isValidBST = await load('0098-validate-binary-search-tree/javascript.js', 'isValidBST');
+  assert.equal(isValidBST({ val: 2, left: { val: 1 }, right: { val: 3 } }), true);
+  assert.equal(isValidBST({ val: 5, left: { val: 1 }, right: { val: 4, left: { val: 3 }, right: { val: 6 } } }), false);
+});
+
+test('Same Tree compares values and shape', async () => {
+  const isSameTree = await load('0100-same-tree/javascript.js', 'isSameTree');
+  assert.equal(isSameTree({ val: 1, left: { val: 2 }, right: null }, { val: 1, left: { val: 2 }, right: null }), true);
+  assert.equal(isSameTree({ val: 1, left: { val: 2 } }, { val: 1, right: { val: 2 } }), false);
+});
+
+test('Level Order groups nodes by depth', async () => {
+  const levelOrder = await load('0102-binary-tree-level-order-traversal/javascript.js', 'levelOrder');
+  const root = { val: 3, left: { val: 9 }, right: { val: 20, left: { val: 15 }, right: { val: 7 } } };
+  assert.deepEqual(plain(levelOrder(root)), [[3], [9, 20], [15, 7]]);
+  assert.deepEqual(plain(levelOrder(null)), []);
+});
+
+test('Valid Palindrome ignores punctuation and case', async () => {
+  const isPalindrome = await load('0125-valid-palindrome/javascript.js', 'isPalindrome');
+  assert.equal(isPalindrome('A man, a plan, a canal: Panama'), true);
+  assert.equal(isPalindrome('race a car'), false);
+});
+
+test('Single Number cancels paired values', async () => {
+  const singleNumber = await load('0136-single-number/javascript.js', 'singleNumber');
+  assert.equal(singleNumber([4, 1, 2, 1, 2]), 4);
+});
+
+test('Word Break identifies segmentable strings', async () => {
+  const wordBreak = await load('0139-word-break/javascript.js', 'wordBreak');
+  assert.equal(wordBreak('leetcode', ['leet', 'code']), true);
+  assert.equal(wordBreak('catsandog', ['cats', 'dog', 'sand', 'and', 'cat']), false);
+});
+
+test('Majority Element keeps the surviving candidate', async () => {
+  const majorityElement = await load('0169-majority-element/javascript.js', 'majorityElement');
+  assert.equal(majorityElement([2, 2, 1, 1, 1, 2, 2]), 2);
+});
+
+test('Course Schedule detects prerequisite cycles', async () => {
+  const canFinish = await load('0207-course-schedule/javascript.js', 'canFinish');
+  assert.equal(canFinish(2, [[1, 0]]), true);
+  assert.equal(canFinish(2, [[1, 0], [0, 1]]), false);
+});
+
+test('Sliding Window Maximum reports each window', async () => {
+  const maxSlidingWindow = await load('0239-sliding-window-maximum/javascript.js', 'maxSlidingWindow');
+  assert.deepEqual(plain(maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3)), [3, 3, 5, 5, 6, 7]);
+});
+
+test('Longest Increasing Subsequence finds the best length', async () => {
+  const lengthOfLIS = await load('0300-longest-increasing-subsequence/javascript.js', 'lengthOfLIS');
+  assert.equal(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]), 4);
+});
+
+test('Top K Frequent Elements returns the most common values', async () => {
+  const topKFrequent = await load('0347-top-k-frequent-elements/javascript.js', 'topKFrequent');
+  assert.deepEqual(plain(topKFrequent([1, 1, 1, 2, 2, 3], 2)).sort(), [1, 2]);
+});
+
+test('Flood Fill recolors only the connected component', async () => {
+  const floodFill = await load('0733-flood-fill/javascript.js', 'floodFill');
+  assert.deepEqual(plain(floodFill([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2)), [[2, 2, 2], [2, 2, 0], [2, 0, 1]]);
+});

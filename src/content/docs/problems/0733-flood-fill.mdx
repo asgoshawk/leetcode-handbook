@@ -1,0 +1,65 @@
+---
+title: 733. Flood Fill
+description: 從起點走訪四方向連通區域並重新著色。
+problemNumber: 733
+difficulty: Easy
+topics: [Array, Depth-First Search, Breadth-First Search, Matrix]
+leetcodeUrl: https://leetcode.com/problems/flood-fill/
+order: 38
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0733-flood-fill/javascript.js?raw';
+import pyCode from '../../../../solutions/0733-flood-fill/python.py?raw';
+import rsCode from '../../../../solutions/0733-flood-fill/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Array', 'Depth-First Search', 'Breadth-First Search', 'Matrix']} url="https://leetcode.com/problems/flood-fill/" />
+
+## 題目敘述
+
+給定代表影像的整數矩陣 `image`、起點列 `sr`、起點欄 `sc` 與新顏色 `color`。從起點開始，將所有經由上、下、左、右相連且原始顏色與起點相同的 pixel 改為新顏色，最後回傳修改後的影像。斜角相鄰不算連通。
+
+```text
+輸入：image = [[1,1,1],[1,1,0],[1,0,1]]，sr = 1，sc = 1，color = 2
+輸出：[[2,2,2],[2,2,0],[2,0,1]]
+
+輸入：image = [[0,0,0]]，sr = 0，sc = 0，color = 0
+輸出：[[0,0,0]]
+```
+
+### 限制
+
+- `1 <= image.length, image[i].length <= 50`
+- `0 <= image[i][j], color < 65536`
+- `sr` 與 `sc` 必定位於影像範圍內
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+記住起點原始顏色，以 DFS 走訪四個方向。遇到邊界或不同顏色就停止；拜訪時立即改色，也同時扮演 visited 標記。若新舊顏色相同，必須直接回傳以避免無限遞迴。
+
+### 不變量與正確性
+
+DFS 只沿著相同原始顏色的四方向邊移動，因此不會改到連通區外。任何位於起點連通區內的 pixel 都存在一條此類路徑，DFS 會沿路抵達並改色，所以結果不多也不少。
+
+## 複雜度
+
+- 時間：$O(mn)$。
+- 額外空間：最壞為 $O(mn)$ 遞迴深度。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Flood Fill](https://leetcode.com/problems/flood-fill/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Depth-First Search](https://algs4.cs.princeton.edu/41graph/)：相關演算法與資料結構背景。

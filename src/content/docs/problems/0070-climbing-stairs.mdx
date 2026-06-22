@@ -1,0 +1,64 @@
+---
+title: 70. Climbing Stairs
+description: 將最後一步分類，得到 Fibonacci 型動態規劃。
+problemNumber: 70
+difficulty: Easy
+topics: [Math, Dynamic Programming, Memoization]
+leetcodeUrl: https://leetcode.com/problems/climbing-stairs/
+order: 26
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0070-climbing-stairs/javascript.js?raw';
+import pyCode from '../../../../solutions/0070-climbing-stairs/python.py?raw';
+import rsCode from '../../../../solutions/0070-climbing-stairs/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Math', 'Dynamic Programming', 'Memoization']} url="https://leetcode.com/problems/climbing-stairs/" />
+
+## 題目敘述
+
+你正要爬上共有 `n` 階的樓梯，每次只能向上走 `1` 階或 `2` 階。請回傳抵達第 `n` 階共有多少種不同的走法；兩種走法只要任一步的步幅不同，就視為不同。
+
+```text
+輸入：n = 2
+輸出：2
+說明：可以走 1+1 或一次走 2 階。
+
+輸入：n = 3
+輸出：3
+```
+
+### 限制
+
+- `1 <= n <= 45`
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+抵達第 `i` 階的最後一步必定來自 `i-1` 或 `i-2`，所以走法數為兩者相加。只保留前兩個狀態即可。
+
+### 不變量與正確性
+
+依最後一步分類的兩組走法互斥且涵蓋全部可能：走 1 階者與抵達 `i-1` 的走法一一對應，走 2 階者與抵達 `i-2` 的走法一一對應。因此遞迴式正確。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)：官方原題、限制與 Topics。
+- [MIT OpenCourseWare：Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：相關演算法與資料結構背景。

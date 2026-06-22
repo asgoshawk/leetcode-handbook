@@ -1,0 +1,66 @@
+---
+title: 347. Top K Frequent Elements
+description: 以頻率桶在線性時間取出最常出現的 k 個值。
+problemNumber: 347
+difficulty: Medium
+topics: [Array, Hash Table, Bucket Sort, Heap]
+leetcodeUrl: https://leetcode.com/problems/top-k-frequent-elements/
+order: 37
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0347-top-k-frequent-elements/javascript.js?raw';
+import pyCode from '../../../../solutions/0347-top-k-frequent-elements/python.py?raw';
+import rsCode from '../../../../solutions/0347-top-k-frequent-elements/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Hash Table', 'Bucket Sort', 'Heap']} url="https://leetcode.com/problems/top-k-frequent-elements/" />
+
+## 題目敘述
+
+給定整數陣列 `nums` 與整數 `k`，請回傳出現頻率最高的 `k` 個不同元素。輸入保證答案集合唯一，回傳順序不限。演算法的時間複雜度必須優於 $O(n \log n)$。
+
+```text
+輸入：nums = [1,1,1,2,2,3]，k = 2
+輸出：[1,2]
+
+輸入：nums = [1]，k = 1
+輸出：[1]
+```
+
+### 限制
+
+- `1 <= nums.length <= 100000`
+- `-10000 <= nums[i] <= 10000`
+- `k` 介於 `1` 與不同元素個數之間
+- 輸入保證答案唯一
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+先以雜湊表計數。頻率最高不會超過 `n`，因此建立以頻率為索引的 buckets，再由高頻率往低頻率收集元素，直到取得 `k` 個。
+
+### 不變量與正確性
+
+每個不同元素恰好放入其真實頻率對應的 bucket。由最大頻率向下掃描會先遇到所有更常出現的元素；取得前 `k` 個時，集合正是頻率排名最高者。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(n)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Sorting Applications](https://algs4.cs.princeton.edu/25applications/)：相關演算法與資料結構背景。

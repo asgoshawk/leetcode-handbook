@@ -1,0 +1,65 @@
+---
+title: 56. Merge Intervals
+description: 依起點排序後，合併重疊區間。
+problemNumber: 56
+difficulty: Medium
+topics: [Array, Sorting]
+leetcodeUrl: https://leetcode.com/problems/merge-intervals/
+order: 25
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0056-merge-intervals/javascript.js?raw';
+import pyCode from '../../../../solutions/0056-merge-intervals/python.py?raw';
+import rsCode from '../../../../solutions/0056-merge-intervals/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Sorting']} url="https://leetcode.com/problems/merge-intervals/" />
+
+## 題目敘述
+
+給定一組閉區間 `intervals`，每個區間為 `[start, end]`。請合併所有彼此重疊或邊界相接的區間，回傳一組互不重疊且涵蓋原輸入全部範圍的區間。答案須按照起點由小到大排列。
+
+```text
+輸入：intervals = [[1,3],[2,6],[8,10],[15,18]]
+輸出：[[1,6],[8,10],[15,18]]
+
+輸入：intervals = [[1,4],[4,5]]
+輸出：[[1,5]]
+```
+
+### 限制
+
+- `1 <= intervals.length <= 10000`
+- `intervals[i].length == 2`
+- `0 <= start <= end <= 10000`
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+先依起點排序。接著目前區間若與答案最後一段重疊，就延伸其終點；否則開啟新的答案區間。
+
+### 不變量與正確性
+
+排序後，尚未處理區間的起點不會早於目前區間。若下一段起點不大於目前終點，兩者聯集仍是一段區間；若更大，後續區間也不可能再與目前段重疊，因此可安全結束目前段。
+
+## 複雜度
+
+- 時間：$O(n \log n)$。
+- 額外空間：$O(n)$，包含答案與排序實作所需空間。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Merge Intervals](https://leetcode.com/problems/merge-intervals/)：官方原題、限制與 Topics。
+- [MIT OpenCourseWare：Sorting](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-3-insertion-sort-merge-sort/)：相關演算法與資料結構背景。

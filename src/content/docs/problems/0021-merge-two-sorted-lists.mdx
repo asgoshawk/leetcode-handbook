@@ -1,0 +1,65 @@
+---
+title: 21. Merge Two Sorted Lists
+description: 逐一比較節點，合併兩條已排序鏈結串列。
+problemNumber: 21
+difficulty: Easy
+topics: [Linked List, Recursion]
+leetcodeUrl: https://leetcode.com/problems/merge-two-sorted-lists/
+order: 20
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0021-merge-two-sorted-lists/javascript.js?raw';
+import pyCode from '../../../../solutions/0021-merge-two-sorted-lists/python.py?raw';
+import rsCode from '../../../../solutions/0021-merge-two-sorted-lists/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Linked List', 'Recursion']} url="https://leetcode.com/problems/merge-two-sorted-lists/" />
+
+## 題目敘述
+
+給定兩條已依非遞減順序排列的單向鏈結串列 `list1` 與 `list2`。請將兩者的既有節點串接成一條同樣依非遞減順序排列的新串列，並回傳新串列的頭節點。任一輸入可能為空串列。
+
+```text
+輸入：list1 = [1,2,4]，list2 = [1,3,4]
+輸出：[1,1,2,3,4,4]
+
+輸入：list1 = []，list2 = [0]
+輸出：[0]
+```
+
+### 限制
+
+- 兩條串列的節點總數介於 `0` 與 `50`
+- `-100 <= Node.val <= 100`
+- 兩條串列皆已依非遞減順序排列
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+比較兩條串列目前的頭節點，將較小者接到答案尾端並前進該串列。虛擬頭節點可統一處理答案第一個節點，不需要額外分支。
+
+### 不變量與正確性
+
+每次接上的節點是兩條未處理串列中最小的值，因此答案前綴維持排序。當其中一條耗盡，另一條本身已排序且所有值皆不小於答案尾端，可整段接上。
+
+## 複雜度
+
+- 時間：$O(m+n)$。
+- 額外空間：Rust 為 $O(m+n)$ 遞迴呼叫堆疊；JavaScript 與 Python 的迭代版本為 $O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Bags, Queues, and Stacks](https://algs4.cs.princeton.edu/13stacks/)：相關演算法與資料結構背景。

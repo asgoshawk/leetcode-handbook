@@ -1,0 +1,65 @@
+---
+title: 136. Single Number
+description: 利用 XOR 的抵消性找出只出現一次的值。
+problemNumber: 136
+difficulty: Easy
+topics: [Array, Bit Manipulation]
+leetcodeUrl: https://leetcode.com/problems/single-number/
+order: 31
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0136-single-number/javascript.js?raw';
+import pyCode from '../../../../solutions/0136-single-number/python.py?raw';
+import rsCode from '../../../../solutions/0136-single-number/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Array', 'Bit Manipulation']} url="https://leetcode.com/problems/single-number/" />
+
+## 題目敘述
+
+給定非空整數陣列 `nums`，其中恰好有一個元素只出現一次，其餘每個元素都剛好出現兩次。請找出只出現一次的元素。演算法必須是線性時間，且只能使用常數額外空間。
+
+```text
+輸入：nums = [2,2,1]
+輸出：1
+
+輸入：nums = [4,1,2,1,2]
+輸出：4
+```
+
+### 限制
+
+- `1 <= nums.length <= 30000`
+- `-30000 <= nums[i] <= 30000`
+- 除一個值外，其餘值皆恰好出現兩次
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+XOR 具有交換律與結合律，且 `x XOR x = 0`、`x XOR 0 = x`。把所有值 XOR 起來，成對值會抵消，只留下單獨值。
+
+### 不變量與正確性
+
+因交換律與結合律，可將相同值重新分組。每一對都變成 0，而 0 不影響 XOR 結果，因此最後結果恰為唯一沒有配對的值。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Single Number](https://leetcode.com/problems/single-number/)：官方原題、限制與 Topics。
+- [MDN：Bitwise XOR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_XOR)：相關演算法與資料結構背景。

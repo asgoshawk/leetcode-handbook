@@ -1,0 +1,64 @@
+---
+title: 102. Binary Tree Level Order Traversal
+description: 以佇列逐層走訪二元樹。
+problemNumber: 102
+difficulty: Medium
+topics: [Tree, Breadth-First Search, Binary Tree]
+leetcodeUrl: https://leetcode.com/problems/binary-tree-level-order-traversal/
+order: 29
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0102-binary-tree-level-order-traversal/javascript.js?raw';
+import pyCode from '../../../../solutions/0102-binary-tree-level-order-traversal/python.py?raw';
+import rsCode from '../../../../solutions/0102-binary-tree-level-order-traversal/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Tree', 'Breadth-First Search', 'Binary Tree']} url="https://leetcode.com/problems/binary-tree-level-order-traversal/" />
+
+## 題目敘述
+
+給定二元樹根節點 `root`，請依照由上到下、每層由左到右的順序回傳節點值。回傳值是一個二維陣列，其中第 `i` 個子陣列包含深度為 `i` 的所有節點值；空樹回傳空陣列。
+
+```text
+輸入：root = [3,9,20,null,null,15,7]
+輸出：[[3],[9,20],[15,7]]
+
+輸入：root = []
+輸出：[]
+```
+
+### 限制
+
+- 樹的節點數介於 `0` 與 `2000`
+- `-1000 <= Node.val <= 1000`
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+使用 FIFO 佇列保存待走訪節點。每輪先記住當下佇列長度，恰好取出這些節點便是一整層；它們的子節點則留給下一輪。
+
+### 不變量與正確性
+
+開始每輪時，佇列前段恰好包含同一深度的全部節點。取出它們並依左右順序加入下一層節點，因此下一輪仍滿足相同不變量，最終依層完整輸出。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(w)$，其中 $w$ 為樹的最大寬度。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Undirected Graphs](https://algs4.cs.princeton.edu/41graph/)：相關演算法與資料結構背景。

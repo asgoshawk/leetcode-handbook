@@ -1,0 +1,62 @@
+---
+title: 11. Container With Most Water
+description: 以雙指標由兩端向內尋找最大容器面積。
+problemNumber: 11
+difficulty: Medium
+topics: [Array, Two Pointers, Greedy]
+leetcodeUrl: https://leetcode.com/problems/container-with-most-water/
+order: 19
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0011-container-with-most-water/javascript.js?raw';
+import pyCode from '../../../../solutions/0011-container-with-most-water/python.py?raw';
+import rsCode from '../../../../solutions/0011-container-with-most-water/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Array', 'Two Pointers', 'Greedy']} url="https://leetcode.com/problems/container-with-most-water/" />
+
+## 題目敘述
+
+給定整數陣列 `height`，第 `i` 個值代表位於座標 `(i, 0)` 到 `(i, height[i])` 的垂直線段。請選擇兩條線段，使它們與 x 軸形成的容器可容納最多的水，並回傳最大面積。容器不可傾斜；水位由較短的線段決定。
+
+```text
+輸入：height = [1,8,6,2,5,4,8,3,7]
+輸出：49
+說明：選擇索引 1 與 8，寬度為 7、高度為 7。
+```
+
+### 限制
+
+- `2 <= height.length <= 100000`
+- `0 <= height[i] <= 10000`
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+從最寬的左右兩端開始。面積由較短邊限制；若保留較短邊並縮小寬度，不可能得到更大面積，因此每次移動較短邊，才有機會以更高線段補償寬度損失。
+
+### 不變量與正確性
+
+當左邊較短時，任何以左邊為界且右端更靠左的容器，寬度更小且高度不會超過左邊，因此都不會優於目前面積，可安全排除左邊；右邊較短時同理。演算法逐步排除不可能改善答案的邊界，故不漏掉最佳解。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Container With Most Water](https://leetcode.com/problems/container-with-most-water/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Analysis of Algorithms](https://algs4.cs.princeton.edu/14analysis/)：相關演算法與資料結構背景。

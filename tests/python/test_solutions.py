@@ -125,6 +125,59 @@ class SolutionTests(unittest.TestCase):
         self.assertEqual(solution.coinChange([2], 3), -1)
         self.assertEqual(solution.coinChange([1], 0), 0)
 
+    def test_new_array_and_string_problems(self):
+        self.assertEqual(load("0011-container-with-most-water/python.py").Solution().maxArea([1,8,6,2,5,4,8,3,7]), 49)
+        rotated = load("0033-search-in-rotated-sorted-array/python.py").Solution()
+        self.assertEqual(rotated.search([4,5,6,7,0,1,2], 0), 4)
+        self.assertEqual(rotated.search([4,5,6,7,0,1,2], 3), -1)
+        permutations = load("0046-permutations/python.py").Solution().permute([1,2,3])
+        self.assertEqual(sorted(permutations), sorted([[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]))
+        self.assertEqual(load("0053-maximum-subarray/python.py").Solution().maxSubArray([-2,1,-3,4,-1,2,1,-5,4]), 6)
+        self.assertEqual(load("0056-merge-intervals/python.py").Solution().merge([[1,3],[2,6],[8,10],[15,18]]), [[1,6],[8,10],[15,18]])
+        self.assertTrue(load("0125-valid-palindrome/python.py").Solution().isPalindrome("A man, a plan, a canal: Panama"))
+        self.assertEqual(load("0136-single-number/python.py").Solution().singleNumber([4,1,2,1,2]), 4)
+        self.assertEqual(load("0169-majority-element/python.py").Solution().majorityElement([2,2,1,1,1,2,2]), 2)
+
+    def test_new_dynamic_programming_and_graph_problems(self):
+        self.assertEqual(load("0070-climbing-stairs/python.py").Solution().climbStairs(5), 8)
+        word_break = load("0139-word-break/python.py").Solution()
+        self.assertTrue(word_break.wordBreak("leetcode", ["leet", "code"]))
+        self.assertFalse(word_break.wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"]))
+        courses = load("0207-course-schedule/python.py").Solution()
+        self.assertTrue(courses.canFinish(2, [[1,0]]))
+        self.assertFalse(courses.canFinish(2, [[1,0],[0,1]]))
+        self.assertEqual(load("0239-sliding-window-maximum/python.py").Solution().maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3), [3,3,5,5,6,7])
+        self.assertEqual(load("0300-longest-increasing-subsequence/python.py").Solution().lengthOfLIS([10,9,2,5,3,7,101,18]), 4)
+        self.assertEqual(sorted(load("0347-top-k-frequent-elements/python.py").Solution().topKFrequent([1,1,1,2,2,3], 2)), [1,2])
+        self.assertEqual(load("0733-flood-fill/python.py").Solution().floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2), [[2,2,2],[2,2,0],[2,0,1]])
+
+    def test_new_linked_list_problems(self):
+        def values(head):
+            result = []
+            while head:
+                result.append(head.val)
+                head = head.next
+            return result
+
+        module = load("0021-merge-two-sorted-lists/python.py")
+        module.ListNode = ListNode
+        merged = module.Solution().mergeTwoLists(ListNode(1, ListNode(2, ListNode(4))), ListNode(1, ListNode(3, ListNode(4))))
+        self.assertEqual(values(merged), [1,1,2,3,4,4])
+        module = load("0023-merge-k-sorted-lists/python.py")
+        module.ListNode = ListNode
+        merged = module.Solution().mergeKLists([ListNode(1, ListNode(4)), ListNode(1, ListNode(3)), ListNode(2)])
+        self.assertEqual(values(merged), [1,1,2,3,4])
+
+    def test_new_tree_problems(self):
+        valid_bst = load("0098-validate-binary-search-tree/python.py").Solution()
+        self.assertTrue(valid_bst.isValidBST(TreeNode(2, TreeNode(1), TreeNode(3))))
+        self.assertFalse(valid_bst.isValidBST(TreeNode(5, TreeNode(1), TreeNode(4, TreeNode(3), TreeNode(6)))))
+        same = load("0100-same-tree/python.py").Solution()
+        self.assertTrue(same.isSameTree(TreeNode(1, TreeNode(2)), TreeNode(1, TreeNode(2))))
+        self.assertFalse(same.isSameTree(TreeNode(1, TreeNode(2)), TreeNode(1, None, TreeNode(2))))
+        root = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
+        self.assertEqual(load("0102-binary-tree-level-order-traversal/python.py").Solution().levelOrder(root), [[3],[9,20],[15,7]])
+
 
 if __name__ == "__main__":
     unittest.main()

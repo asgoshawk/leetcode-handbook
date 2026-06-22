@@ -1,0 +1,66 @@
+---
+title: 207. Course Schedule
+description: 以 Kahn 演算法判斷先修關係是否含環。
+problemNumber: 207
+difficulty: Medium
+topics: [Depth-First Search, Breadth-First Search, Graph, Topological Sort]
+leetcodeUrl: https://leetcode.com/problems/course-schedule/
+order: 34
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0207-course-schedule/javascript.js?raw';
+import pyCode from '../../../../solutions/0207-course-schedule/python.py?raw';
+import rsCode from '../../../../solutions/0207-course-schedule/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={['Depth-First Search', 'Breadth-First Search', 'Graph', 'Topological Sort']} url="https://leetcode.com/problems/course-schedule/" />
+
+## 題目敘述
+
+共有 `numCourses` 門課，編號從 `0` 到 `numCourses - 1`。每個 `prerequisites[i] = [course, prerequisite]` 表示修 `course` 前必須先修 `prerequisite`。請判斷是否可能修完所有課程；若先修關係形成環，就不可能完成。
+
+```text
+輸入：numCourses = 2，prerequisites = [[1,0]]
+輸出：true
+
+輸入：numCourses = 2，prerequisites = [[1,0],[0,1]]
+輸出：false
+```
+
+### 限制
+
+- `1 <= numCourses <= 2000`
+- `0 <= prerequisites.length <= 5000`
+- 每組關係包含兩個有效且不同的課程編號
+- 所有先修關係互不重複
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+把先修課指向後續課，並計算每門課的 indegree。反覆修習 indegree 為 0 的課，移除其邊；若最後處理數量少於課程總數，剩餘部分必含環。
+
+### 不變量與正確性
+
+indegree 為 0 的課沒有未完成先修，可安全排入順序。移除後新出現的 indegree 0 節點也同理。DAG 必定反覆存在此類節點；若流程提早停止，剩餘每個節點都有前驅，沿前驅有限次必重訪節點而形成環。
+
+## 複雜度
+
+- 時間：$O(V+E)$。
+- 額外空間：$O(V+E)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Course Schedule](https://leetcode.com/problems/course-schedule/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Directed Graphs](https://algs4.cs.princeton.edu/42digraph/)：相關演算法與資料結構背景。

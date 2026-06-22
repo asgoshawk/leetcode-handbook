@@ -1,0 +1,64 @@
+---
+title: 100. Same Tree
+description: 同步遞迴比較兩棵二元樹的結構與值。
+problemNumber: 100
+difficulty: Easy
+topics: [Tree, Depth-First Search, Breadth-First Search]
+leetcodeUrl: https://leetcode.com/problems/same-tree/
+order: 28
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0100-same-tree/javascript.js?raw';
+import pyCode from '../../../../solutions/0100-same-tree/python.py?raw';
+import rsCode from '../../../../solutions/0100-same-tree/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={['Tree', 'Depth-First Search', 'Breadth-First Search']} url="https://leetcode.com/problems/same-tree/" />
+
+## 題目敘述
+
+給定兩棵二元樹的根節點 `p` 與 `q`，請判斷它們是否完全相同。兩棵樹必須具有相同結構，且每一個對應位置的節點值都相等；兩者皆為空樹時也視為相同。
+
+```text
+輸入：p = [1,2,3]，q = [1,2,3]
+輸出：true
+
+輸入：p = [1,2]，q = [1,null,2]
+輸出：false
+```
+
+### 限制
+
+- 兩棵樹的節點數皆介於 `0` 與 `100`
+- `-10000 <= Node.val <= 10000`
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+同步比較兩個位置：同為空代表該位置相同，只有一個為空或值不同則失敗；否則遞迴比較左右子樹。
+
+### 不變量與正確性
+
+以樹高歸納。空樹情況直接正確；非空時，兩棵樹相同當且僅當根值相同且左右子樹分別相同，正好對應演算法的三個條件。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(h)$，其中 $h$ 為樹高。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Same Tree](https://leetcode.com/problems/same-tree/)：官方原題、限制與 Topics。
+- [Princeton Algorithms：Binary Search Trees](https://algs4.cs.princeton.edu/32bst/)：相關演算法與資料結構背景。

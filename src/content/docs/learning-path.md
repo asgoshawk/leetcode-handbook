@@ -32,6 +32,26 @@ description: 從分析問題到間隔複習的可重複流程。
 | 16 | Product of Array Except Self | prefix product、suffix product |
 | 17 | Coin Change | 動態規劃、最小化 |
 | 18 | Minimum Window Substring | 滑動視窗、頻率限制 |
+| 19 | Merge Two Sorted Lists | 鏈結串列合併、虛擬頭節點 |
+| 20 | Climbing Stairs | 動態規劃、狀態壓縮 |
+| 21 | Same Tree | 同步遞迴、結構比較 |
+| 22 | Valid Palindrome | 雙指標、字元正規化 |
+| 23 | Single Number | bitwise XOR、常數空間 |
+| 24 | Majority Element | Boyer–Moore vote、配對消去 |
+| 25 | Flood Fill | connected component、深度優先搜尋 |
+| 26 | Container With Most Water | 雙指標、greedy 排除 |
+| 27 | Search in Rotated Sorted Array | 二元搜尋、有序半側 |
+| 28 | Permutations | backtracking、狀態還原 |
+| 29 | Maximum Subarray | Kadane algorithm、局部最佳值 |
+| 30 | Merge Intervals | 排序、區間合併 |
+| 31 | Validate Binary Search Tree | 祖先界線、深度優先搜尋 |
+| 32 | Binary Tree Level Order Traversal | 佇列、廣度優先搜尋 |
+| 33 | Word Break | 可達前綴、動態規劃 |
+| 34 | Course Schedule | topological sort、indegree |
+| 35 | Longest Increasing Subsequence | 最小結尾、lower bound |
+| 36 | Top K Frequent Elements | 頻率統計、bucket sort |
+| 37 | Merge k Sorted Lists | divide and conquer、排序合併 |
+| 38 | Sliding Window Maximum | monotonic queue、候選淘汰 |
 
 ## 三種語言的練習方式
 

@@ -239,3 +239,116 @@ mod coin_change {
         assert_eq!(Solution::coin_change(vec![1], 0), 0);
     }
 }
+
+macro_rules! simple_solution_test {
+    ($module:ident, $path:literal, $body:block) => {
+        mod $module {
+            pub struct Solution;
+            include!($path);
+            #[test]
+            fn verifies_examples() $body
+        }
+    };
+}
+
+simple_solution_test!(container, "../../../solutions/0011-container-with-most-water/rust.rs", {
+    assert_eq!(Solution::max_area(vec![1,8,6,2,5,4,8,3,7]), 49);
+});
+simple_solution_test!(rotated_search, "../../../solutions/0033-search-in-rotated-sorted-array/rust.rs", {
+    assert_eq!(Solution::search(vec![4,5,6,7,0,1,2], 0), 4);
+    assert_eq!(Solution::search(vec![4,5,6,7,0,1,2], 3), -1);
+});
+simple_solution_test!(permutations, "../../../solutions/0046-permutations/rust.rs", {
+    let mut result = Solution::permute(vec![1,2,3]); result.sort();
+    let mut expected = vec![vec![1,2,3],vec![1,3,2],vec![2,1,3],vec![2,3,1],vec![3,1,2],vec![3,2,1]]; expected.sort();
+    assert_eq!(result, expected);
+});
+simple_solution_test!(maximum_subarray, "../../../solutions/0053-maximum-subarray/rust.rs", {
+    assert_eq!(Solution::max_sub_array(vec![-2,1,-3,4,-1,2,1,-5,4]), 6);
+});
+simple_solution_test!(merge_intervals, "../../../solutions/0056-merge-intervals/rust.rs", {
+    assert_eq!(Solution::merge(vec![vec![1,3],vec![2,6],vec![8,10],vec![15,18]]), vec![vec![1,6],vec![8,10],vec![15,18]]);
+});
+simple_solution_test!(climbing_stairs, "../../../solutions/0070-climbing-stairs/rust.rs", {
+    assert_eq!(Solution::climb_stairs(5), 8);
+});
+simple_solution_test!(valid_palindrome, "../../../solutions/0125-valid-palindrome/rust.rs", {
+    assert!(Solution::is_palindrome("A man, a plan, a canal: Panama".into()));
+    assert!(!Solution::is_palindrome("race a car".into()));
+});
+simple_solution_test!(single_number, "../../../solutions/0136-single-number/rust.rs", {
+    assert_eq!(Solution::single_number(vec![4,1,2,1,2]), 4);
+});
+simple_solution_test!(word_break, "../../../solutions/0139-word-break/rust.rs", {
+    assert!(Solution::word_break("leetcode".into(), vec!["leet".into(), "code".into()]));
+    assert!(!Solution::word_break("catsandog".into(), vec!["cats".into(),"dog".into(),"sand".into(),"and".into(),"cat".into()]));
+});
+simple_solution_test!(majority_element, "../../../solutions/0169-majority-element/rust.rs", {
+    assert_eq!(Solution::majority_element(vec![2,2,1,1,1,2,2]), 2);
+});
+simple_solution_test!(course_schedule, "../../../solutions/0207-course-schedule/rust.rs", {
+    assert!(Solution::can_finish(2, vec![vec![1,0]]));
+    assert!(!Solution::can_finish(2, vec![vec![1,0],vec![0,1]]));
+});
+simple_solution_test!(sliding_window, "../../../solutions/0239-sliding-window-maximum/rust.rs", {
+    assert_eq!(Solution::max_sliding_window(vec![1,3,-1,-3,5,3,6,7], 3), vec![3,3,5,5,6,7]);
+});
+simple_solution_test!(longest_increasing, "../../../solutions/0300-longest-increasing-subsequence/rust.rs", {
+    assert_eq!(Solution::length_of_lis(vec![10,9,2,5,3,7,101,18]), 4);
+});
+simple_solution_test!(top_k, "../../../solutions/0347-top-k-frequent-elements/rust.rs", {
+    let mut result = Solution::top_k_frequent(vec![1,1,1,2,2,3], 2); result.sort();
+    assert_eq!(result, vec![1,2]);
+});
+simple_solution_test!(flood_fill, "../../../solutions/0733-flood-fill/rust.rs", {
+    assert_eq!(Solution::flood_fill(vec![vec![1,1,1],vec![1,1,0],vec![1,0,1]], 1, 1, 2), vec![vec![2,2,2],vec![2,2,0],vec![2,0,1]]);
+});
+
+mod merge_two_lists {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0021-merge-two-sorted-lists/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert_eq!(Solution::merge_two_lists(list(&[1,2,4]), list(&[1,3,4])), list(&[1,1,2,3,4,4])); }
+}
+
+mod merge_k_lists {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0023-merge-k-sorted-lists/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert_eq!(Solution::merge_k_lists(vec![list(&[1,4,5]),list(&[1,3,4]),list(&[2,6])]), list(&[1,1,2,3,4,4,5,6])); }
+}
+
+mod validate_bst {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0098-validate-binary-search-tree/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() {
+        assert!(Solution::is_valid_bst(node(2, node(1,None,None), node(3,None,None))));
+        assert!(!Solution::is_valid_bst(node(5, node(1,None,None), node(4,node(3,None,None),node(6,None,None)))));
+    }
+}
+
+mod same_tree_new {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0100-same-tree/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() { assert!(Solution::is_same_tree(node(1,node(2,None,None),None), node(1,node(2,None,None),None))); }
+}
+
+mod level_order_new {
+    use std::{cell::RefCell, collections::VecDeque, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0102-binary-tree-level-order-traversal/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() {
+        let root = node(3,node(9,None,None),node(20,node(15,None,None),node(7,None,None)));
+        assert_eq!(Solution::level_order(root), vec![vec![3],vec![9,20],vec![15,7]]);
+    }
+}
