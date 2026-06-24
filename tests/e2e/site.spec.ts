@@ -89,9 +89,51 @@ test('light theme uses light surfaces with readable card text', async ({ page })
     };
   });
 
-  expect(theme.base100).toContain('100%');
-  expect(theme.cardBackground).toContain('oklch(100%');
+  expect(theme.base100).toBe('#f8fafc');
+  expect(theme.cardBackground).toContain('#f8fafc');
   expect(theme.renderedBackground).not.toContain('32, 36, 45');
   expect(theme.cardText).not.toBe('rgb(230, 233, 239)');
   expect(theme.headerBackground).not.toBe('rgba(17, 19, 24, 0.82)');
+});
+
+test('theme selector switches Starlight and daisyUI tokens together', async ({ page }) => {
+  await page.goto('/leetcode-handbook/');
+
+  const readTheme = () =>
+    page.evaluate(() => {
+      const root = document.documentElement;
+      const style = getComputedStyle(root);
+      return {
+        dataTheme: root.dataset.theme,
+        storedTheme: localStorage.getItem('starlight-theme'),
+        base100: style.getPropertyValue('--color-base-100').trim(),
+        text: style.getPropertyValue('--color-base-content').trim(),
+      };
+    });
+
+  await page.locator('starlight-theme-select select').first().evaluate((select) => {
+    if (!(select instanceof HTMLSelectElement)) throw new Error('Theme select is not available');
+    select.value = 'light';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect.poll(readTheme).toMatchObject({
+    dataTheme: 'light',
+    storedTheme: 'light',
+    base100: '#f8fafc',
+    text: '#172033',
+  });
+
+  await page.locator('starlight-theme-select select').first().evaluate((select) => {
+    if (!(select instanceof HTMLSelectElement)) throw new Error('Theme select is not available');
+    select.value = 'dark';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect.poll(readTheme).toMatchObject({
+    dataTheme: 'dark',
+    storedTheme: 'dark',
+    base100: '#111318',
+    text: '#e6e9ef',
+  });
 });

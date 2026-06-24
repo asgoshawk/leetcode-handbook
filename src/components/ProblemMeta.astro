@@ -17,7 +17,7 @@ const difficultyClass = {
 <div class="my-5 mb-8 flex flex-wrap items-center gap-2" aria-label="題目資訊">
   <span class:list={["badge", "badge-soft", "font-semibold", difficultyClass]}>{difficulty}</span>
   <ul class="contents" aria-label="題型標籤">
-    {topics.map((topic) => <li class="badge badge-soft badge-neutral font-semibold">{topic}</li>)}
+    {topics.map((topic) => <li class="badge badge-soft font-semibold">{topic}</li>)}
   </ul>
   <a class="link link-primary link-hover ms-0 mt-1 text-sm font-semibold sm:ms-auto sm:mt-0" href={url} target="_blank" rel="noreferrer">在 LeetCode 開啟原題 <span aria-hidden="true">↗</span></a>
 </div>
