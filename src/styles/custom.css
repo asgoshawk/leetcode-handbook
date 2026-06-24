@@ -242,10 +242,25 @@ article.card:hover {
 .sl-markdown-content table:not(.not-content *) {
   border-collapse: separate;
   border-spacing: 0;
+  table-layout: fixed;
 }
 
 .sl-markdown-content th {
   background: var(--ui-table-heading-bg);
+}
+
+.sl-markdown-content :where(th, td):first-child {
+  width: 5.5rem;
+  white-space: nowrap;
+}
+
+.sl-markdown-content :where(th, td):nth-child(2) {
+  width: 48%;
+}
+
+.sl-markdown-content :where(th, td) {
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .expressive-code figure {
@@ -265,6 +280,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   .sl-markdown-content { overflow-wrap: anywhere; }
   .sl-markdown-content table { font-size: .875rem; }
   .sl-markdown-content :where(th, td) { padding-inline: .625rem; }
+  .sl-markdown-content :where(th, td):first-child { width: 3.75rem; }
+  .sl-markdown-content :where(th, td):nth-child(2) { width: 44%; }
   .pagination-links a { min-height: 6.25rem; }
 }
 
