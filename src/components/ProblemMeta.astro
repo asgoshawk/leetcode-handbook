@@ -6,24 +6,18 @@ interface Props {
 }
 
 const { difficulty, topics, url } = Astro.props;
+
+const difficultyClass = {
+  Easy: 'badge-success',
+  Medium: 'badge-warning',
+  Hard: 'badge-error',
+}[difficulty];
 ---
 
-<div class="problem-meta" aria-label="題目資訊">
-  <span class:list={["difficulty", difficulty.toLowerCase()]}>{difficulty}</span>
-  <ul aria-label="題型標籤">
-    {topics.map((topic) => <li>{topic}</li>)}
+<div class="my-5 mb-8 flex flex-wrap items-center gap-2" aria-label="題目資訊">
+  <span class:list={["badge", "badge-soft", "font-semibold", difficultyClass]}>{difficulty}</span>
+  <ul class="contents" aria-label="題型標籤">
+    {topics.map((topic) => <li class="badge badge-soft badge-neutral font-semibold">{topic}</li>)}
   </ul>
-  <a href={url} target="_blank" rel="noreferrer">在 LeetCode 開啟原題 <span aria-hidden="true">↗</span></a>
+  <a class="link link-primary link-hover ms-0 mt-1 text-sm font-semibold sm:ms-auto sm:mt-0" href={url} target="_blank" rel="noreferrer">在 LeetCode 開啟原題 <span aria-hidden="true">↗</span></a>
 </div>
-
-<style>
-  .problem-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .625rem; margin-block: 1.25rem 2rem; }
-  .problem-meta ul { display: contents; margin: 0; padding: 0; }
-  .problem-meta li, .difficulty { display: inline-flex; align-items: center; min-height: 1.75rem; padding: .2rem .625rem; border: 1px solid var(--sl-color-hairline-light); border-radius: 999px; font-size: .8125rem; font-weight: 650; line-height: 1.2; }
-  .problem-meta li { color: var(--sl-color-gray-2); background: var(--ui-topic-bg); }
-  .difficulty.easy { color: var(--ui-easy-text); border-color: var(--ui-easy-border); background: var(--ui-easy-bg); }
-  .difficulty.medium { color: var(--ui-medium-text); border-color: var(--ui-medium-border); background: var(--ui-medium-bg); }
-  .difficulty.hard { color: var(--ui-hard-text); border-color: var(--ui-hard-border); background: var(--ui-hard-bg); }
-  .problem-meta a { margin-inline-start: auto; font-size: .875rem; font-weight: 650; white-space: nowrap; }
-  @media (max-width: 40rem) { .problem-meta a { flex-basis: 100%; margin-block-start: .25rem; margin-inline-start: 0; } }
-</style>

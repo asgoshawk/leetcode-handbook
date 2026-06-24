@@ -81,6 +81,7 @@ test('light theme uses light surfaces with readable card text', async ({ page })
     const cardStyle = getComputedStyle(card);
     const titleStyle = getComputedStyle(card.querySelector('.title') ?? card);
     return {
+      base100: rootStyle.getPropertyValue('--color-base-100'),
       cardBackground: rootStyle.getPropertyValue('--ui-card-bg'),
       cardText: titleStyle.color,
       headerBackground: getComputedStyle(document.querySelector('header.header')!).backgroundColor,
@@ -88,7 +89,8 @@ test('light theme uses light surfaces with readable card text', async ({ page })
     };
   });
 
-  expect(theme.cardBackground).toContain('255 255 255');
+  expect(theme.base100).toContain('100%');
+  expect(theme.cardBackground).toContain('oklch(100%');
   expect(theme.renderedBackground).not.toContain('32, 36, 45');
   expect(theme.cardText).not.toBe('rgb(230, 233, 239)');
   expect(theme.headerBackground).not.toBe('rgba(17, 19, 24, 0.82)');

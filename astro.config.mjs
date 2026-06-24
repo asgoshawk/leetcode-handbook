@@ -1,11 +1,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import tailwindcss from '@tailwindcss/vite';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
 export default defineConfig({
   site: 'https://asgoshawk.github.io',
   base: '/leetcode-handbook',
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
