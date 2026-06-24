@@ -29,17 +29,22 @@ test('learning path table uses the full content width', async ({ page }) => {
   const widths = await table.evaluate((element) => {
     const header = element.querySelector('thead');
     const firstHeader = element.querySelector('th:first-child');
+    const firstCell = element.querySelector('tbody td:first-child');
     return {
       table: element.getBoundingClientRect().width,
       header: header?.getBoundingClientRect().width ?? 0,
       firstHeaderWidth: firstHeader?.getBoundingClientRect().width ?? 0,
       firstHeaderHeight: firstHeader?.getBoundingClientRect().height ?? 0,
+      firstHeaderPaddingStart: firstHeader ? parseFloat(getComputedStyle(firstHeader).paddingInlineStart) : 0,
+      firstCellPaddingStart: firstCell ? parseFloat(getComputedStyle(firstCell).paddingInlineStart) : 0,
     };
   });
 
   expect(widths.header).toBeGreaterThanOrEqual(widths.table - 2);
   expect(widths.firstHeaderWidth).toBeGreaterThan(48);
   expect(widths.firstHeaderHeight).toBeLessThan(80);
+  expect(widths.firstHeaderPaddingStart).toBeGreaterThanOrEqual(14);
+  expect(widths.firstCellPaddingStart).toBeGreaterThanOrEqual(14);
 });
 
 test('mobile pages do not overflow horizontally', async ({ page }) => {

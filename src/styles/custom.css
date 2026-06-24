@@ -249,18 +249,20 @@ article.card:hover {
   background: var(--ui-table-heading-bg);
 }
 
+.sl-markdown-content :where(th, td) {
+  padding: 0.9rem 1.1rem;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 .sl-markdown-content :where(th, td):first-child {
   width: 5.5rem;
+  padding-inline-start: 1.25rem;
   white-space: nowrap;
 }
 
 .sl-markdown-content :where(th, td):nth-child(2) {
   width: 48%;
-}
-
-.sl-markdown-content :where(th, td) {
-  overflow-wrap: anywhere;
-  word-break: normal;
 }
 
 .expressive-code figure {
@@ -279,8 +281,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   :root { --sl-text-5xl: 2rem; }
   .sl-markdown-content { overflow-wrap: anywhere; }
   .sl-markdown-content table { font-size: .875rem; }
-  .sl-markdown-content :where(th, td) { padding-inline: .625rem; }
-  .sl-markdown-content :where(th, td):first-child { width: 3.75rem; }
+  .sl-markdown-content :where(th, td) { padding: .75rem .7rem; }
+  .sl-markdown-content :where(th, td):first-child { width: 4rem; padding-inline-start: .875rem; }
   .sl-markdown-content :where(th, td):nth-child(2) { width: 44%; }
   .pagination-links a { min-height: 6.25rem; }
 }
