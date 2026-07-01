@@ -1,0 +1,65 @@
+---
+title: 35. Search Insert Position
+description: 用 lower bound 找到插入位置。
+problemNumber: 35
+difficulty: Easy
+topics: [Array, Binary Search]
+leetcodeUrl: https://leetcode.com/problems/search-insert-position/
+order: 40
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0035-search-insert-position/javascript.js?raw';
+import pyCode from '../../../../solutions/0035-search-insert-position/python.py?raw';
+import rsCode from '../../../../solutions/0035-search-insert-position/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["Array","Binary Search"]} url="https://leetcode.com/problems/search-insert-position/" />
+
+## 題目敘述
+
+給定已排序且不重複的整數陣列 `nums` 與 `target`，若 `target` 存在則回傳其索引；否則回傳它應插入的位置，使陣列仍保持排序。
+
+```text
+輸入：nums = [1,3,5,6], target = 5
+輸出：2
+
+輸入：nums = [1,3,5,6], target = 2
+輸出：1
+```
+
+### 限制
+
+- `1 <= nums.length <= 10000`
+- `nums` 嚴格遞增。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+`left` 永遠是可能答案的最左界，`right` 是不含端點的右界。當 `nums[mid] < target` 時答案只能在右側，否則保留 `mid`。
+
+### 不變量與正確性
+
+演算法在每一步都維護上述狀態定義：已處理區段的答案不會被後續操作破壞，尚未處理區段則保留必要資訊。每次轉移都只根據目前元素與既有狀態更新，因此處理完所有輸入後，狀態即涵蓋所有可能答案。
+
+## 複雜度
+
+- 時間：$O(\log n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode 官方題目](https://leetcode.com/problems/search-insert-position/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

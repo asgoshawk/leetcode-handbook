@@ -1,0 +1,62 @@
+---
+title: 39. Combination Sum
+description: 可重複選同一候選數的 backtracking。
+problemNumber: 39
+difficulty: Medium
+topics: [Array, Backtracking]
+leetcodeUrl: https://leetcode.com/problems/combination-sum/
+order: 49
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0039-combination-sum/javascript.js?raw';
+import pyCode from '../../../../solutions/0039-combination-sum/python.py?raw';
+import rsCode from '../../../../solutions/0039-combination-sum/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Array","Backtracking"]} url="https://leetcode.com/problems/combination-sum/" />
+
+## 題目敘述
+
+給定互不相同的正整數 `candidates` 與 `target`，找出所有總和等於 `target` 的組合。每個候選數可被使用多次。
+
+```text
+輸入：candidates = [2,3,6,7], target = 7
+輸出：[[2,2,3],[7]]
+```
+
+### 限制
+
+- `1 <= candidates.length <= 30`
+- `2 <= target <= 500`。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+排序後從目前索引往後選，選中某數後仍可停留在同一索引，代表該數可以重複使用。若剩餘值小於候選數即可剪枝。
+
+### 不變量與正確性
+
+演算法在每一步都維護上述狀態定義：已處理區段的答案不會被後續操作破壞，尚未處理區段則保留必要資訊。每次轉移都只根據目前元素與既有狀態更新，因此處理完所有輸入後，狀態即涵蓋所有可能答案。
+
+## 複雜度
+
+- 時間：與答案數量相關，最差呈指數成長。
+- 額外空間：$O(target / min(candidates))$ 遞迴深度。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode 官方題目](https://leetcode.com/problems/combination-sum/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

@@ -1,0 +1,61 @@
+---
+title: 17. Letter Combinations of a Phone Number
+description: 用 backtracking 枚舉每個按鍵字母。
+problemNumber: 17
+difficulty: Medium
+topics: [Hash Table, String, Backtracking]
+leetcodeUrl: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+order: 48
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0017-letter-combinations-of-a-phone-number/javascript.js?raw';
+import pyCode from '../../../../solutions/0017-letter-combinations-of-a-phone-number/python.py?raw';
+import rsCode from '../../../../solutions/0017-letter-combinations-of-a-phone-number/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Hash Table","String","Backtracking"]} url="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" />
+
+## 題目敘述
+
+給定只包含 2 到 9 的字串 `digits`，依電話鍵盤映射回傳所有可能字母組合。若輸入為空字串，回傳空陣列。
+
+```text
+輸入：digits = "23"
+輸出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
+```
+
+### 限制
+
+- `0 <= digits.length <= 4`。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+每一位數字代表一組候選字母。遞迴深度等於輸入長度，每層選一個字母接到目前路徑。
+
+### 不變量與正確性
+
+演算法在每一步都維護上述狀態定義：已處理區段的答案不會被後續操作破壞，尚未處理區段則保留必要資訊。每次轉移都只根據目前元素與既有狀態更新，因此處理完所有輸入後，狀態即涵蓋所有可能答案。
+
+## 複雜度
+
+- 時間：$O(4^n \cdot n)$。
+- 額外空間：$O(n)$，不含輸出。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode 官方題目](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

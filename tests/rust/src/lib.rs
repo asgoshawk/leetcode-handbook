@@ -352,3 +352,66 @@ mod level_order_new {
         assert_eq!(Solution::level_order(root), vec![vec![3],vec![9,20],vec![15,7]]);
     }
 }
+
+
+// Additional generated problem coverage.
+simple_solution_test!(remove_duplicates_from_sorted_array, "../../../solutions/0026-remove-duplicates-from-sorted-array/rust.rs", {
+    let mut nums = vec![1,1,2]; assert_eq!(Solution::remove_duplicates(&mut nums), 2); assert_eq!(&nums[..2], &[1,2]);
+});
+simple_solution_test!(search_insert_position, "../../../solutions/0035-search-insert-position/rust.rs", {
+    assert_eq!(Solution::search_insert(vec![1,3,5,6], 5), 2); assert_eq!(Solution::search_insert(vec![1,3,5,6], 2), 1);
+});
+simple_solution_test!(plus_one, "../../../solutions/0066-plus-one/rust.rs", {
+    assert_eq!(Solution::plus_one(vec![1,2,3]), vec![1,2,4]); assert_eq!(Solution::plus_one(vec![9,9]), vec![1,0,0]);
+});
+simple_solution_test!(pascals_triangle, "../../../solutions/0118-pascals-triangle/rust.rs", {
+    assert_eq!(Solution::generate(5), vec![vec![1],vec![1,1],vec![1,2,1],vec![1,3,3,1],vec![1,4,6,4,1]]);
+});
+simple_solution_test!(two_sum_ii_input_array_is_sorted, "../../../solutions/0167-two-sum-ii-input-array-is-sorted/rust.rs", {
+    assert_eq!(Solution::two_sum(vec![2,7,11,15], 9), vec![1,2]);
+});
+simple_solution_test!(number_of_1_bits, "../../../solutions/0191-number-of-1-bits/rust.rs", {
+    assert_eq!(Solution::hamming_weight(11), 3); assert_eq!(Solution::hamming_weight(128), 1);
+});
+simple_solution_test!(missing_number, "../../../solutions/0268-missing-number/rust.rs", {
+    assert_eq!(Solution::missing_number(vec![3,0,1]), 2); assert_eq!(Solution::missing_number(vec![0,1]), 2);
+});
+simple_solution_test!(move_zeroes, "../../../solutions/0283-move-zeroes/rust.rs", {
+    let mut nums = vec![0,1,0,3,12]; Solution::move_zeroes(&mut nums); assert_eq!(nums, vec![1,3,12,0,0]);
+});
+simple_solution_test!(longest_palindromic_substring, "../../../solutions/0005-longest-palindromic-substring/rust.rs", {
+    assert_eq!(Solution::longest_palindrome("cbbd".into()), "bb"); assert!(["bab", "aba"].contains(&Solution::longest_palindrome("babad".into()).as_str()));
+});
+simple_solution_test!(letter_combinations_of_a_phone_number, "../../../solutions/0017-letter-combinations-of-a-phone-number/rust.rs", {
+    let mut got = Solution::letter_combinations("23".into()); got.sort(); assert_eq!(got, vec!["ad","ae","af","bd","be","bf","cd","ce","cf"]); assert!(Solution::letter_combinations("".into()).is_empty());
+});
+simple_solution_test!(combination_sum, "../../../solutions/0039-combination-sum/rust.rs", {
+    let mut got: Vec<String> = Solution::combination_sum(vec![2,3,6,7], 7).into_iter().map(|x| x.iter().map(i32::to_string).collect::<Vec<_>>().join(",")).collect(); got.sort(); assert_eq!(got, vec!["2,2,3", "7"]);
+});
+simple_solution_test!(spiral_matrix, "../../../solutions/0054-spiral-matrix/rust.rs", {
+    assert_eq!(Solution::spiral_order(vec![vec![1,2,3],vec![4,5,6],vec![7,8,9]]), vec![1,2,3,6,9,8,7,4,5]);
+});
+simple_solution_test!(unique_paths, "../../../solutions/0062-unique-paths/rust.rs", {
+    assert_eq!(Solution::unique_paths(3, 7), 28); assert_eq!(Solution::unique_paths(3, 2), 3);
+});
+simple_solution_test!(set_matrix_zeroes, "../../../solutions/0073-set-matrix-zeroes/rust.rs", {
+    let mut matrix = vec![vec![1,1,1],vec![1,0,1],vec![1,1,1]]; Solution::set_zeroes(&mut matrix); assert_eq!(matrix, vec![vec![1,0,1],vec![0,0,0],vec![1,0,1]]);
+});
+simple_solution_test!(sort_colors, "../../../solutions/0075-sort-colors/rust.rs", {
+    let mut nums = vec![2,0,2,1,1,0]; Solution::sort_colors(&mut nums); assert_eq!(nums, vec![0,0,1,1,2,2]);
+});
+simple_solution_test!(subsets, "../../../solutions/0078-subsets/rust.rs", {
+    let mut got: Vec<String> = Solution::subsets(vec![1,2]).into_iter().map(|x| x.iter().map(i32::to_string).collect::<Vec<_>>().join(",")).collect(); got.sort(); assert_eq!(got, vec!["", "1", "1,2", "2"]);
+});
+simple_solution_test!(subsets_ii, "../../../solutions/0090-subsets-ii/rust.rs", {
+    let mut got: Vec<String> = Solution::subsets_with_dup(vec![1,2,2]).into_iter().map(|x| x.iter().map(i32::to_string).collect::<Vec<_>>().join(",")).collect(); got.sort(); assert_eq!(got, vec!["", "1", "1,2", "1,2,2", "2", "2,2"]);
+});
+simple_solution_test!(find_minimum_in_rotated_sorted_array, "../../../solutions/0153-find-minimum-in-rotated-sorted-array/rust.rs", {
+    assert_eq!(Solution::find_min(vec![3,4,5,1,2]), 1); assert_eq!(Solution::find_min(vec![11,13,15,17]), 11);
+});
+simple_solution_test!(minimum_size_subarray_sum, "../../../solutions/0209-minimum-size-subarray-sum/rust.rs", {
+    assert_eq!(Solution::min_sub_array_len(7, vec![2,3,1,2,4,3]), 2); assert_eq!(Solution::min_sub_array_len(100, vec![1,2,3]), 0);
+});
+simple_solution_test!(subarray_sum_equals_k, "../../../solutions/0560-subarray-sum-equals-k/rust.rs", {
+    assert_eq!(Solution::subarray_sum(vec![1,1,1], 2), 2); assert_eq!(Solution::subarray_sum(vec![1,2,3], 3), 2);
+});

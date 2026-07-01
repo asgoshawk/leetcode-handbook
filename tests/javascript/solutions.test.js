@@ -250,3 +250,30 @@ test('Flood Fill recolors only the connected component', async () => {
   const floodFill = await load('0733-flood-fill/javascript.js', 'floodFill');
   assert.deepEqual(plain(floodFill([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2)), [[2, 2, 2], [2, 2, 0], [2, 0, 1]]);
 });
+
+
+test('Additional array and binary-search problems work', async () => {
+  { const removeDuplicates = await load('0026-remove-duplicates-from-sorted-array/javascript.js', 'removeDuplicates'); const nums = [1,1,2]; assert.equal(removeDuplicates(nums), 2); assert.deepEqual(nums.slice(0,2), [1,2]); }
+  { const searchInsert = await load('0035-search-insert-position/javascript.js', 'searchInsert'); assert.equal(searchInsert([1,3,5,6], 5), 2); assert.equal(searchInsert([1,3,5,6], 2), 1); }
+  { const plusOne = await load('0066-plus-one/javascript.js', 'plusOne'); assert.deepEqual(plain(plusOne([1,2,3])), [1,2,4]); assert.deepEqual(plain(plusOne([9,9])), [1,0,0]); }
+  { const generate = await load('0118-pascals-triangle/javascript.js', 'generate'); assert.deepEqual(plain(generate(5)), [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]); }
+  { const twoSum = await load('0167-two-sum-ii-input-array-is-sorted/javascript.js', 'twoSum'); assert.deepEqual(plain(twoSum([2,7,11,15], 9)), [1,2]); }
+  { const hammingWeight = await load('0191-number-of-1-bits/javascript.js', 'hammingWeight'); assert.equal(hammingWeight(11), 3); assert.equal(hammingWeight(128), 1); }
+  { const missingNumber = await load('0268-missing-number/javascript.js', 'missingNumber'); assert.equal(missingNumber([3,0,1]), 2); assert.equal(missingNumber([0,1]), 2); }
+  { const moveZeroes = await load('0283-move-zeroes/javascript.js', 'moveZeroes'); assert.deepEqual(plain(moveZeroes([0,1,0,3,12])), [1,3,12,0,0]); }
+});
+
+test('Additional backtracking, matrix, and prefix problems work', async () => {
+  { const longestPalindrome = await load('0005-longest-palindromic-substring/javascript.js', 'longestPalindrome'); assert.equal(longestPalindrome('cbbd'), 'bb'); assert.ok(['bab','aba'].includes(longestPalindrome('babad'))); }
+  { const letterCombinations = await load('0017-letter-combinations-of-a-phone-number/javascript.js', 'letterCombinations'); assert.deepEqual(plain(letterCombinations('23')).sort(), ['ad','ae','af','bd','be','bf','cd','ce','cf']); assert.deepEqual(plain(letterCombinations('')), []); }
+  { const combinationSum = await load('0039-combination-sum/javascript.js', 'combinationSum'); assert.deepEqual(plain(combinationSum([2,3,6,7], 7)).map(x => x.join(',')).sort(), ['2,2,3','7']); }
+  { const spiralOrder = await load('0054-spiral-matrix/javascript.js', 'spiralOrder'); assert.deepEqual(plain(spiralOrder([[1,2,3],[4,5,6],[7,8,9]])), [1,2,3,6,9,8,7,4,5]); }
+  { const uniquePaths = await load('0062-unique-paths/javascript.js', 'uniquePaths'); assert.equal(uniquePaths(3, 7), 28); assert.equal(uniquePaths(3, 2), 3); }
+  { const setZeroes = await load('0073-set-matrix-zeroes/javascript.js', 'setZeroes'); assert.deepEqual(plain(setZeroes([[1,1,1],[1,0,1],[1,1,1]])), [[1,0,1],[0,0,0],[1,0,1]]); }
+  { const sortColors = await load('0075-sort-colors/javascript.js', 'sortColors'); assert.deepEqual(plain(sortColors([2,0,2,1,1,0])), [0,0,1,1,2,2]); }
+  { const subsets = await load('0078-subsets/javascript.js', 'subsets'); assert.deepEqual(plain(subsets([1,2])).map(x => x.join(',')).sort(), ['', '1', '1,2', '2']); }
+  { const subsetsWithDup = await load('0090-subsets-ii/javascript.js', 'subsetsWithDup'); assert.deepEqual(plain(subsetsWithDup([1,2,2])).map(x => x.join(',')).sort(), ['', '1', '1,2', '1,2,2', '2', '2,2']); }
+  { const findMin = await load('0153-find-minimum-in-rotated-sorted-array/javascript.js', 'findMin'); assert.equal(findMin([3,4,5,1,2]), 1); assert.equal(findMin([11,13,15,17]), 11); }
+  { const minSubArrayLen = await load('0209-minimum-size-subarray-sum/javascript.js', 'minSubArrayLen'); assert.equal(minSubArrayLen(7, [2,3,1,2,4,3]), 2); assert.equal(minSubArrayLen(100, [1,2,3]), 0); }
+  { const subarraySum = await load('0560-subarray-sum-equals-k/javascript.js', 'subarraySum'); assert.equal(subarraySum([1,1,1], 2), 2); assert.equal(subarraySum([1,2,3], 3), 2); }
+});
