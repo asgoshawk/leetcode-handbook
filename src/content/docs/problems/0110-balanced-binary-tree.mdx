@@ -1,0 +1,61 @@
+---
+title: 110. Balanced Binary Tree
+description: 自底向上回傳高度，同時偵測失衡。
+problemNumber: 110
+difficulty: Easy
+topics: [Tree, Depth-First Search, Binary Tree]
+leetcodeUrl: https://leetcode.com/problems/balanced-binary-tree/
+order: 70
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0110-balanced-binary-tree/javascript.js?raw';
+import pyCode from '../../../../solutions/0110-balanced-binary-tree/python.py?raw';
+import rsCode from '../../../../solutions/0110-balanced-binary-tree/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["Tree","Depth-First Search","Binary Tree"]} url="https://leetcode.com/problems/balanced-binary-tree/" />
+
+## 題目敘述
+
+給定二元樹，判斷是否為高度平衡：每個節點的左右子樹高度差都不超過 1。
+
+```text
+輸入：root = [3,9,20,null,null,15,7]
+輸出：true
+```
+
+### 限制
+
+- 節點數介於 0 到 5000。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+若左右子樹高度差超過 1，就回傳失敗標記；否則高度為兩側最大高度加一。自底向上可以避免重複計算高度。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(h)$ 遞迴深度。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

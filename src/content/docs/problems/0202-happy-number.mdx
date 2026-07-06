@@ -1,0 +1,61 @@
+---
+title: 202. Happy Number
+description: 用集合偵測平方和序列是否進入循環。
+problemNumber: 202
+difficulty: Easy
+topics: [Hash Table, Math, Two Pointers]
+leetcodeUrl: https://leetcode.com/problems/happy-number/
+order: 73
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0202-happy-number/javascript.js?raw';
+import pyCode from '../../../../solutions/0202-happy-number/python.py?raw';
+import rsCode from '../../../../solutions/0202-happy-number/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["Hash Table","Math","Two Pointers"]} url="https://leetcode.com/problems/happy-number/" />
+
+## 題目敘述
+
+對正整數 `n`，反覆將它替換成各位數平方和。若最後變成 1，稱為 happy number；請判斷 `n` 是否為 happy number。
+
+```text
+輸入：n = 19
+輸出：true
+```
+
+### 限制
+
+- `1 <= n <= 2^31 - 1`。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+反覆把數字替換成各位數平方和。若到達 1 即為 happy number；若某個值重複出現，之後會無限循環，不可能到達 1。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(\log n)$ 到進入固定小範圍後循環。
+- 額外空間：$O(1)$ 或 $O(k)$，依循環偵測方式而定。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Happy Number](https://leetcode.com/problems/happy-number/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

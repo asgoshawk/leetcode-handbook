@@ -415,3 +415,85 @@ simple_solution_test!(minimum_size_subarray_sum, "../../../solutions/0209-minimu
 simple_solution_test!(subarray_sum_equals_k, "../../../solutions/0560-subarray-sum-equals-k/rust.rs", {
     assert_eq!(Solution::subarray_sum(vec![1,1,1], 2), 2); assert_eq!(Solution::subarray_sum(vec![1,2,3], 3), 2);
 });
+
+
+// Fourth generated problem batch.
+simple_solution_test!(longest_common_prefix, "../../../solutions/0014-longest-common-prefix/rust.rs", {
+    assert_eq!(Solution::longest_common_prefix(vec!["flower".into(),"flow".into(),"flight".into()]), "fl"); assert_eq!(Solution::longest_common_prefix(vec!["dog".into(),"racecar".into(),"car".into()]), "");
+});
+mod remove_nth_node_from_end_of_list {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0019-remove-nth-node-from-end-of-list/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert_eq!(Solution::remove_nth_from_end(list(&[1,2,3,4,5]), 2), list(&[1,2,3,5])); }
+}
+simple_solution_test!(generate_parentheses, "../../../solutions/0022-generate-parentheses/rust.rs", {
+    let mut got = Solution::generate_parenthesis(3); got.sort(); assert_eq!(got, vec!["((()))","(()())","(())()","()(())","()()()"]);
+});
+simple_solution_test!(remove_element, "../../../solutions/0027-remove-element/rust.rs", {
+    let mut nums = vec![3,2,2,3]; assert_eq!(Solution::remove_element(&mut nums, 3), 2); nums.truncate(2); nums.sort(); assert_eq!(nums, vec![2,2]);
+});
+simple_solution_test!(find_first_and_last_position_of_element_in_sorted_array, "../../../solutions/0034-find-first-and-last-position-of-element-in-sorted-array/rust.rs", {
+    assert_eq!(Solution::search_range(vec![5,7,7,8,8,10], 8), vec![3,4]); assert_eq!(Solution::search_range(vec![5,7,7,8,8,10], 6), vec![-1,-1]);
+});
+simple_solution_test!(combination_sum_ii, "../../../solutions/0040-combination-sum-ii/rust.rs", {
+    let mut got: Vec<String> = Solution::combination_sum2(vec![10,1,2,7,6,1,5], 8).into_iter().map(|x| x.iter().map(i32::to_string).collect::<Vec<_>>().join(",")).collect(); got.sort(); assert_eq!(got, vec!["1,1,6","1,2,5","1,7","2,6"]);
+});
+simple_solution_test!(jump_game, "../../../solutions/0055-jump-game/rust.rs", {
+    assert!(Solution::can_jump(vec![2,3,1,1,4])); assert!(!Solution::can_jump(vec![3,2,1,0,4]));
+});
+simple_solution_test!(length_of_last_word, "../../../solutions/0058-length-of-last-word/rust.rs", {
+    assert_eq!(Solution::length_of_last_word("Hello World".into()), 5); assert_eq!(Solution::length_of_last_word("   fly me   to   the moon  ".into()), 4);
+});
+simple_solution_test!(word_search, "../../../solutions/0079-word-search/rust.rs", {
+    let board = vec![vec!['A','B','C','E'],vec!['S','F','C','S'],vec!['A','D','E','E']]; assert!(Solution::exist(board.clone(), "ABCCED".into())); assert!(!Solution::exist(board, "ABCB".into()));
+});
+simple_solution_test!(merge_sorted_array, "../../../solutions/0088-merge-sorted-array/rust.rs", {
+    let mut nums = vec![1,2,3,0,0,0]; Solution::merge(&mut nums, 3, vec![2,5,6], 3); assert_eq!(nums, vec![1,2,2,3,5,6]);
+});
+mod symmetric_tree {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0101-symmetric-tree/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() { let root = node(1, node(2,node(3,None,None),node(4,None,None)), node(2,node(4,None,None),node(3,None,None))); assert!(Solution::is_symmetric(root)); }
+}
+mod balanced_binary_tree {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0110-balanced-binary-tree/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() { assert!(Solution::is_balanced(node(3,node(9,None,None),node(20,node(15,None,None),node(7,None,None))))); assert!(!Solution::is_balanced(node(1,node(2,node(3,None,None),None),None))); }
+}
+simple_solution_test!(longest_consecutive_sequence, "../../../solutions/0128-longest-consecutive-sequence/rust.rs", {
+    assert_eq!(Solution::longest_consecutive(vec![100,4,200,1,3,2]), 4); assert_eq!(Solution::longest_consecutive(vec![]), 0);
+});
+simple_solution_test!(maximum_product_subarray, "../../../solutions/0152-maximum-product-subarray/rust.rs", {
+    assert_eq!(Solution::max_product(vec![2,3,-2,4]), 6); assert_eq!(Solution::max_product(vec![-2,0,-1]), 0);
+});
+simple_solution_test!(happy_number, "../../../solutions/0202-happy-number/rust.rs", {
+    assert!(Solution::is_happy(19)); assert!(!Solution::is_happy(2));
+});
+simple_solution_test!(kth_largest_element_in_an_array, "../../../solutions/0215-kth-largest-element-in-an-array/rust.rs", {
+    assert_eq!(Solution::find_kth_largest(vec![3,2,1,5,6,4], 2), 5);
+});
+mod kth_smallest_element_in_a_bst {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0230-kth-smallest-element-in-a-bst/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() { let root = node(3,node(1,None,node(2,None,None)),node(4,None,None)); assert_eq!(Solution::kth_smallest(root, 1), 1); }
+}
+simple_solution_test!(counting_bits, "../../../solutions/0338-counting-bits/rust.rs", {
+    assert_eq!(Solution::count_bits(5), vec![0,1,1,2,1,2]);
+});
+simple_solution_test!(decode_string, "../../../solutions/0394-decode-string/rust.rs", {
+    assert_eq!(Solution::decode_string("3[a2[c]]".into()), "accaccacc"); assert_eq!(Solution::decode_string("2[abc]3[cd]ef".into()), "abcabccdcdcdef");
+});
+simple_solution_test!(partition_equal_subset_sum, "../../../solutions/0416-partition-equal-subset-sum/rust.rs", {
+    assert!(Solution::can_partition(vec![1,5,11,5])); assert!(!Solution::can_partition(vec![1,2,3,5]));
+});

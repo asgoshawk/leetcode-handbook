@@ -277,3 +277,30 @@ test('Additional backtracking, matrix, and prefix problems work', async () => {
   { const minSubArrayLen = await load('0209-minimum-size-subarray-sum/javascript.js', 'minSubArrayLen'); assert.equal(minSubArrayLen(7, [2,3,1,2,4,3]), 2); assert.equal(minSubArrayLen(100, [1,2,3]), 0); }
   { const subarraySum = await load('0560-subarray-sum-equals-k/javascript.js', 'subarraySum'); assert.equal(subarraySum([1,1,1], 2), 2); assert.equal(subarraySum([1,2,3], 3), 2); }
 });
+
+
+test('Additional easy and pointer problems work', async () => {
+  { const longestCommonPrefix = await load('0014-longest-common-prefix/javascript.js', 'longestCommonPrefix'); assert.equal(longestCommonPrefix(['flower','flow','flight']), 'fl'); assert.equal(longestCommonPrefix(['dog','racecar','car']), ''); }
+  { const removeNthFromEnd = await load('0019-remove-nth-node-from-end-of-list/javascript.js', 'removeNthFromEnd'); assert.deepEqual(listValues(removeNthFromEnd(list([1,2,3,4,5]), 2)), [1,2,3,5]); }
+  { const generateParenthesis = await load('0022-generate-parentheses/javascript.js', 'generateParenthesis'); assert.deepEqual(plain(generateParenthesis(3)).sort(), ['((()))','(()())','(())()','()(())','()()()']); }
+  { const removeElement = await load('0027-remove-element/javascript.js', 'removeElement'); const nums = [3,2,2,3]; assert.equal(removeElement(nums, 3), 2); assert.deepEqual(nums.slice(0,2).sort(), [2,2]); }
+  { const searchRange = await load('0034-find-first-and-last-position-of-element-in-sorted-array/javascript.js', 'searchRange'); assert.deepEqual(plain(searchRange([5,7,7,8,8,10], 8)), [3,4]); assert.deepEqual(plain(searchRange([5,7,7,8,8,10], 6)), [-1,-1]); }
+  { const combinationSum2 = await load('0040-combination-sum-ii/javascript.js', 'combinationSum2'); assert.deepEqual(plain(combinationSum2([10,1,2,7,6,1,5], 8)).map(x=>x.join(',')).sort(), ['1,1,6','1,2,5','1,7','2,6']); }
+  { const canJump = await load('0055-jump-game/javascript.js', 'canJump'); assert.equal(canJump([2,3,1,1,4]), true); assert.equal(canJump([3,2,1,0,4]), false); }
+  { const lengthOfLastWord = await load('0058-length-of-last-word/javascript.js', 'lengthOfLastWord'); assert.equal(lengthOfLastWord('Hello World'), 5); assert.equal(lengthOfLastWord('   fly me   to   the moon  '), 4); }
+  { const exist = await load('0079-word-search/javascript.js', 'exist'); const board = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']]; assert.equal(exist(board.map(r=>[...r]), 'ABCCED'), true); assert.equal(exist(board.map(r=>[...r]), 'ABCB'), false); }
+  { const merge = await load('0088-merge-sorted-array/javascript.js', 'merge'); const a = [1,2,3,0,0,0]; assert.deepEqual(plain(merge(a,3,[2,5,6],3)), [1,2,2,3,5,6]); }
+});
+
+test('Additional search, tree, and dynamic programming problems work', async () => {
+  { const isSymmetric = await load('0101-symmetric-tree/javascript.js', 'isSymmetric'); const root = {val:1,left:{val:2,left:{val:3},right:{val:4}},right:{val:2,left:{val:4},right:{val:3}}}; assert.equal(isSymmetric(root), true); }
+  { const isBalanced = await load('0110-balanced-binary-tree/javascript.js', 'isBalanced'); assert.equal(isBalanced({val:3,left:{val:9},right:{val:20,left:{val:15},right:{val:7}}}), true); assert.equal(isBalanced({val:1,left:{val:2,left:{val:3}}}), false); }
+  { const longestConsecutive = await load('0128-longest-consecutive-sequence/javascript.js', 'longestConsecutive'); assert.equal(longestConsecutive([100,4,200,1,3,2]), 4); assert.equal(longestConsecutive([]), 0); }
+  { const maxProduct = await load('0152-maximum-product-subarray/javascript.js', 'maxProduct'); assert.equal(maxProduct([2,3,-2,4]), 6); assert.equal(maxProduct([-2,0,-1]), 0); }
+  { const isHappy = await load('0202-happy-number/javascript.js', 'isHappy'); assert.equal(isHappy(19), true); assert.equal(isHappy(2), false); }
+  { const findKthLargest = await load('0215-kth-largest-element-in-an-array/javascript.js', 'findKthLargest'); assert.equal(findKthLargest([3,2,1,5,6,4], 2), 5); }
+  { const kthSmallest = await load('0230-kth-smallest-element-in-a-bst/javascript.js', 'kthSmallest'); const root = {val:3,left:{val:1,right:{val:2}},right:{val:4}}; assert.equal(kthSmallest(root, 1), 1); }
+  { const countBits = await load('0338-counting-bits/javascript.js', 'countBits'); assert.deepEqual(plain(countBits(5)), [0,1,1,2,1,2]); }
+  { const decodeString = await load('0394-decode-string/javascript.js', 'decodeString'); assert.equal(decodeString('3[a2[c]]'), 'accaccacc'); assert.equal(decodeString('2[abc]3[cd]ef'), 'abcabccdcdcdef'); }
+  { const canPartition = await load('0416-partition-equal-subset-sum/javascript.js', 'canPartition'); assert.equal(canPartition([1,5,11,5]), true); assert.equal(canPartition([1,2,3,5]), false); }
+});

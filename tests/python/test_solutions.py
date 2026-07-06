@@ -231,6 +231,65 @@ class SolutionTests(unittest.TestCase):
         self.assertEqual(s.subarraySum([1,1,1], 2), 2)
         self.assertEqual(s.subarraySum([1,2,3], 3), 2)
 
+    def test_additional_fourth_twenty_problem_batch(self):
+        def values(head):
+            result = []
+            while head:
+                result.append(head.val)
+                head = head.next
+            return result
+        s = load("0014-longest-common-prefix/python.py").Solution()
+        self.assertEqual(s.longestCommonPrefix(['flower','flow','flight']), 'fl')
+        self.assertEqual(s.longestCommonPrefix(['dog','racecar','car']), '')
+        m = load("0019-remove-nth-node-from-end-of-list/python.py"); m.ListNode = ListNode
+        self.assertEqual(values(m.Solution().removeNthFromEnd(ListNode(1,ListNode(2,ListNode(3,ListNode(4,ListNode(5))))), 2)), [1,2,3,5])
+        self.assertEqual(sorted(load("0022-generate-parentheses/python.py").Solution().generateParenthesis(3)), ['((()))','(()())','(())()','()(())','()()()'])
+        nums = [3,2,2,3]
+        self.assertEqual(load("0027-remove-element/python.py").Solution().removeElement(nums, 3), 2)
+        self.assertEqual(sorted(nums[:2]), [2,2])
+        s = load("0034-find-first-and-last-position-of-element-in-sorted-array/python.py").Solution()
+        self.assertEqual(s.searchRange([5,7,7,8,8,10], 8), [3,4])
+        self.assertEqual(s.searchRange([5,7,7,8,8,10], 6), [-1,-1])
+        got = load("0040-combination-sum-ii/python.py").Solution().combinationSum2([10,1,2,7,6,1,5], 8)
+        self.assertEqual(sorted(','.join(map(str, x)) for x in got), ['1,1,6','1,2,5','1,7','2,6'])
+        s = load("0055-jump-game/python.py").Solution()
+        self.assertTrue(s.canJump([2,3,1,1,4]))
+        self.assertFalse(s.canJump([3,2,1,0,4]))
+        s = load("0058-length-of-last-word/python.py").Solution()
+        self.assertEqual(s.lengthOfLastWord('Hello World'), 5)
+        self.assertEqual(s.lengthOfLastWord('   fly me   to   the moon  '), 4)
+        s = load("0079-word-search/python.py").Solution()
+        board = [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']]
+        self.assertTrue(s.exist([row[:] for row in board], 'ABCCED'))
+        self.assertFalse(s.exist([row[:] for row in board], 'ABCB'))
+        nums = [1,2,3,0,0,0]
+        load("0088-merge-sorted-array/python.py").Solution().merge(nums, 3, [2,5,6], 3)
+        self.assertEqual(nums, [1,2,2,3,5,6])
+        root = TreeNode(1, TreeNode(2, TreeNode(3), TreeNode(4)), TreeNode(2, TreeNode(4), TreeNode(3)))
+        self.assertTrue(load("0101-symmetric-tree/python.py").Solution().isSymmetric(root))
+        s = load("0110-balanced-binary-tree/python.py").Solution()
+        self.assertTrue(s.isBalanced(TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))))
+        self.assertFalse(s.isBalanced(TreeNode(1, TreeNode(2, TreeNode(3)))))
+        s = load("0128-longest-consecutive-sequence/python.py").Solution()
+        self.assertEqual(s.longestConsecutive([100,4,200,1,3,2]), 4)
+        self.assertEqual(s.longestConsecutive([]), 0)
+        s = load("0152-maximum-product-subarray/python.py").Solution()
+        self.assertEqual(s.maxProduct([2,3,-2,4]), 6)
+        self.assertEqual(s.maxProduct([-2,0,-1]), 0)
+        s = load("0202-happy-number/python.py").Solution()
+        self.assertTrue(s.isHappy(19))
+        self.assertFalse(s.isHappy(2))
+        self.assertEqual(load("0215-kth-largest-element-in-an-array/python.py").Solution().findKthLargest([3,2,1,5,6,4], 2), 5)
+        root = TreeNode(3, TreeNode(1, None, TreeNode(2)), TreeNode(4))
+        self.assertEqual(load("0230-kth-smallest-element-in-a-bst/python.py").Solution().kthSmallest(root, 1), 1)
+        self.assertEqual(load("0338-counting-bits/python.py").Solution().countBits(5), [0,1,1,2,1,2])
+        s = load("0394-decode-string/python.py").Solution()
+        self.assertEqual(s.decodeString('3[a2[c]]'), 'accaccacc')
+        self.assertEqual(s.decodeString('2[abc]3[cd]ef'), 'abcabccdcdcdef')
+        s = load("0416-partition-equal-subset-sum/python.py").Solution()
+        self.assertTrue(s.canPartition([1,5,11,5]))
+        self.assertFalse(s.canPartition([1,2,3,5]))
+
 
 if __name__ == "__main__":
     unittest.main()

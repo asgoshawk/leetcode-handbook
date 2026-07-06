@@ -1,0 +1,62 @@
+---
+title: 19. Remove Nth Node From End of List
+description: 用長度或快慢指標定位倒數第 n 個節點。
+problemNumber: 19
+difficulty: Medium
+topics: [Linked List, Two Pointers]
+leetcodeUrl: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+order: 60
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0019-remove-nth-node-from-end-of-list/javascript.js?raw';
+import pyCode from '../../../../solutions/0019-remove-nth-node-from-end-of-list/python.py?raw';
+import rsCode from '../../../../solutions/0019-remove-nth-node-from-end-of-list/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Linked List","Two Pointers"]} url="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" />
+
+## 題目敘述
+
+給定單向鏈結串列 `head` 與整數 `n`，移除倒數第 `n` 個節點並回傳新的頭節點。
+
+```text
+輸入：head = [1,2,3,4,5], n = 2
+輸出：[1,2,3,5]
+```
+
+### 限制
+
+- 串列節點數至少為 1。
+- `1 <= n <= 串列長度`。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+倒數第 `n` 個節點等於從前面數第 `len - n` 個節點。先取得長度，再走到前一個節點即可刪除；快慢指標版本則用距離差維持同樣關係。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$；Rust 版本為了簡化所有權測試重建串列，使用 $O(n)$ 暫存。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

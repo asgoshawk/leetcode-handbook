@@ -1,0 +1,65 @@
+---
+title: 14. Longest Common Prefix
+description: 逐步縮短候選前綴，直到符合所有字串。
+problemNumber: 14
+difficulty: Easy
+topics: [String, Trie]
+leetcodeUrl: https://leetcode.com/problems/longest-common-prefix/
+order: 59
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0014-longest-common-prefix/javascript.js?raw';
+import pyCode from '../../../../solutions/0014-longest-common-prefix/python.py?raw';
+import rsCode from '../../../../solutions/0014-longest-common-prefix/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["String","Trie"]} url="https://leetcode.com/problems/longest-common-prefix/" />
+
+## 題目敘述
+
+給定字串陣列 `strs`，找出所有字串共同擁有的最長前綴；若沒有共同前綴，回傳空字串。
+
+```text
+輸入：strs = ["flower","flow","flight"]
+輸出："fl"
+
+輸入：strs = ["dog","racecar","car"]
+輸出：""
+```
+
+### 限制
+
+- `1 <= strs.length <= 200`
+- `0 <= strs[i].length <= 200`。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+先假設第一個字串是共同前綴，再逐一檢查其他字串。只要目前字串不以候選前綴開頭，就移除候選前綴最後一個字元。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(S)$，`S` 是所有字元總數。
+- 額外空間：$O(1)$，不含輸出。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。
