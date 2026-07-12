@@ -1,0 +1,61 @@
+---
+title: 279. Perfect Squares
+description: 把每個平方數當成可重複使用的 coin 做 DP。
+problemNumber: 279
+difficulty: Medium
+topics: [Math, Dynamic Programming, Breadth-First Search]
+leetcodeUrl: https://leetcode.com/problems/perfect-squares/
+order: 93
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0279-perfect-squares/javascript.js?raw';
+import pyCode from '../../../../solutions/0279-perfect-squares/python.py?raw';
+import rsCode from '../../../../solutions/0279-perfect-squares/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Math","Dynamic Programming","Breadth-First Search"]} url="https://leetcode.com/problems/perfect-squares/" />
+
+## 題目敘述
+
+給定正整數 `n`，回傳和為 `n` 的完全平方數最少數量。完全平方數是某個整數的平方，例如 `1`、`4`、`9`。
+
+```text
+輸入：n = 12
+輸出：3
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+`dp[x]` 表示湊出 `x` 的最少平方數量。對每個 `x` 嘗試所有不超過 `x` 的平方數，取 `dp[x - square] + 1` 的最小值。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n\sqrt{n})$。
+- 額外空間：$O(n)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Perfect Squares](https://leetcode.com/problems/perfect-squares/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

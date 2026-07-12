@@ -1,0 +1,61 @@
+---
+title: 199. Binary Tree Right Side View
+description: BFS 每層最後一個節點即為右視圖。
+problemNumber: 199
+difficulty: Medium
+topics: [Tree, Depth-First Search, Breadth-First Search, Binary Tree]
+leetcodeUrl: https://leetcode.com/problems/binary-tree-right-side-view/
+order: 90
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0199-binary-tree-right-side-view/javascript.js?raw';
+import pyCode from '../../../../solutions/0199-binary-tree-right-side-view/python.py?raw';
+import rsCode from '../../../../solutions/0199-binary-tree-right-side-view/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Tree","Depth-First Search","Breadth-First Search","Binary Tree"]} url="https://leetcode.com/problems/binary-tree-right-side-view/" />
+
+## 題目敘述
+
+給定 binary tree 的根節點，想像從右側觀察它，回傳每一層可見的節點值。
+
+```text
+輸入：root = [1,2,3,null,5,null,4]
+輸出：[1,3,4]
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+層序走訪時，每層最右邊的節點會最後被處理。記錄每層最後一個節點值，即可得到 right side view。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(w)$，`w` 是最大寬度。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

@@ -304,3 +304,30 @@ test('Additional search, tree, and dynamic programming problems work', async () 
   { const decodeString = await load('0394-decode-string/javascript.js', 'decodeString'); assert.equal(decodeString('3[a2[c]]'), 'accaccacc'); assert.equal(decodeString('2[abc]3[cd]ef'), 'abcabccdcdcdef'); }
   { const canPartition = await load('0416-partition-equal-subset-sum/javascript.js', 'canPartition'); assert.equal(canPartition([1,5,11,5]), true); assert.equal(canPartition([1,2,3,5]), false); }
 });
+
+
+test('Additional linked-list, matrix, and tree problems work', async () => {
+  { const swapPairs = await load('0024-swap-nodes-in-pairs/javascript.js', 'swapPairs'); assert.deepEqual(listValues(swapPairs(list([1,2,3,4]))), [2,1,4,3]); }
+  { const isValidSudoku = await load('0036-valid-sudoku/javascript.js', 'isValidSudoku'); const board = [['5','3','.','.','7','.','.','.','.'],['6','.','.','1','9','5','.','.','.'],['.','9','8','.','.','.','.','6','.'],['8','.','.','.','6','.','.','.','3'],['4','.','.','8','.','3','.','.','1'],['7','.','.','.','2','.','.','.','6'],['.','6','.','.','.','.','2','8','.'],['.','.','.','4','1','9','.','.','5'],['.','.','.','.','8','.','.','7','9']]; assert.equal(isValidSudoku(board), true); }
+  { const jump = await load('0045-jump-game-ii/javascript.js', 'jump'); assert.equal(jump([2,3,1,1,4]), 2); assert.equal(jump([2,3,0,1,4]), 2); }
+  { const rotate = await load('0048-rotate-image/javascript.js', 'rotate'); const matrix = [[1,2,3],[4,5,6],[7,8,9]]; rotate(matrix); assert.deepEqual(matrix, [[7,4,1],[8,5,2],[9,6,3]]); }
+  { const searchMatrix = await load('0074-search-a-2d-matrix/javascript.js', 'searchMatrix'); assert.equal(searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3), true); assert.equal(searchMatrix([[1,3,5]], 2), false); }
+  { const deleteDuplicates = await load('0083-remove-duplicates-from-sorted-list/javascript.js', 'deleteDuplicates'); assert.deepEqual(listValues(deleteDuplicates(list([1,1,2,3,3]))), [1,2,3]); }
+  { const numDecodings = await load('0091-decode-ways/javascript.js', 'numDecodings'); assert.equal(numDecodings('226'), 3); assert.equal(numDecodings('06'), 0); }
+  { const zigzagLevelOrder = await load('0103-binary-tree-zigzag-level-order-traversal/javascript.js', 'zigzagLevelOrder'); const root = {val:3,left:{val:9},right:{val:20,left:{val:15},right:{val:7}}}; assert.deepEqual(plain(zigzagLevelOrder(root)), [[3],[20,9],[15,7]]); }
+  { const flatten = await load('0114-flatten-binary-tree-to-linked-list/javascript.js', 'flatten'); const root = {val:1,left:{val:2,left:{val:3},right:{val:4}},right:{val:5,right:{val:6}}}; flatten(root); const values = []; for (let node = root; node; node = node.right) { values.push(node.val); assert.equal(node.left ?? null, null); } assert.deepEqual(values, [1,2,3,4,5,6]); }
+  { const rightSideView = await load('0199-binary-tree-right-side-view/javascript.js', 'rightSideView'); const root = {val:1,left:{val:2,right:{val:5}},right:{val:3,right:{val:4}}}; assert.deepEqual(plain(rightSideView(root)), [1,3,4]); }
+});
+
+test('Additional easy string, bit, and DP problems work', async () => {
+  { const removeElements = await load('0203-remove-linked-list-elements/javascript.js', 'removeElements'); assert.deepEqual(listValues(removeElements(list([1,2,6,3,4,5,6]), 6)), [1,2,3,4,5]); }
+  { const isPalindrome = await load('0234-palindrome-linked-list/javascript.js', 'isPalindrome'); assert.equal(isPalindrome(list([1,2,2,1])), true); assert.equal(isPalindrome(list([1,2])), false); }
+  { const reverseBits = await load('0190-reverse-bits/javascript.js', 'reverseBits'); assert.equal(reverseBits(43261596), 964176192); }
+  { const titleToNumber = await load('0171-excel-sheet-column-number/javascript.js', 'titleToNumber'); assert.equal(titleToNumber('A'), 1); assert.equal(titleToNumber('ZY'), 701); }
+  { const numSquares = await load('0279-perfect-squares/javascript.js', 'numSquares'); assert.equal(numSquares(12), 3); assert.equal(numSquares(13), 2); }
+  { const reverseString = await load('0344-reverse-string/javascript.js', 'reverseString'); const s = ['h','e','l','l','o']; reverseString(s); assert.deepEqual(s, ['o','l','l','e','h']); }
+  { const canConstruct = await load('0383-ransom-note/javascript.js', 'canConstruct'); assert.equal(canConstruct('aa', 'aab'), true); assert.equal(canConstruct('aa', 'ab'), false); }
+  { const firstUniqChar = await load('0387-first-unique-character-in-a-string/javascript.js', 'firstUniqChar'); assert.equal(firstUniqChar('leetcode'), 0); assert.equal(firstUniqChar('aabb'), -1); }
+  { const isSubsequence = await load('0392-is-subsequence/javascript.js', 'isSubsequence'); assert.equal(isSubsequence('abc', 'ahbgdc'), true); assert.equal(isSubsequence('axc', 'ahbgdc'), false); }
+  { const fib = await load('0509-fibonacci-number/javascript.js', 'fib'); assert.equal(fib(4), 3); assert.equal(fib(10), 55); }
+});

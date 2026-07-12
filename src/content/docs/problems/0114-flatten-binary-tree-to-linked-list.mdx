@@ -1,0 +1,61 @@
+---
+title: 114. Flatten Binary Tree to Linked List
+description: 把左子樹接到右側，再把原右子樹接到左子樹最右端。
+problemNumber: 114
+difficulty: Medium
+topics: [Linked List, Stack, Tree, Depth-First Search]
+leetcodeUrl: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+order: 87
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0114-flatten-binary-tree-to-linked-list/javascript.js?raw';
+import pyCode from '../../../../solutions/0114-flatten-binary-tree-to-linked-list/python.py?raw';
+import rsCode from '../../../../solutions/0114-flatten-binary-tree-to-linked-list/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Linked List","Stack","Tree","Depth-First Search"]} url="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/" />
+
+## 題目敘述
+
+給定 binary tree 的根節點，原地將它攤平成 linked list。攤平後每個節點的左子節點都應為 `null`，右子節點順序需符合 preorder traversal。
+
+```text
+輸入：root = [1,2,5,3,4,null,6]
+輸出：[1,null,2,null,3,null,4,null,5,null,6]
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+對每個有左子樹的節點，找到左子樹最右側節點，將原右子樹接到它的右邊，再把左子樹移到右邊並清空左指標。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

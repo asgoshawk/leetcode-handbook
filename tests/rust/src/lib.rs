@@ -497,3 +497,105 @@ simple_solution_test!(decode_string, "../../../solutions/0394-decode-string/rust
 simple_solution_test!(partition_equal_subset_sum, "../../../solutions/0416-partition-equal-subset-sum/rust.rs", {
     assert!(Solution::can_partition(vec![1,5,11,5])); assert!(!Solution::can_partition(vec![1,2,3,5]));
 });
+
+
+// Fifth generated problem batch.
+mod swap_nodes_in_pairs {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0024-swap-nodes-in-pairs/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert_eq!(Solution::swap_pairs(list(&[1,2,3,4])), list(&[2,1,4,3])); }
+}
+simple_solution_test!(valid_sudoku, "../../../solutions/0036-valid-sudoku/rust.rs", {
+    let board = vec![vec!['5','3','.','.','7','.','.','.','.'],vec!['6','.','.','1','9','5','.','.','.'],vec!['.','9','8','.','.','.','.','6','.'],vec!['8','.','.','.','6','.','.','.','3'],vec!['4','.','.','8','.','3','.','.','1'],vec!['7','.','.','.','2','.','.','.','6'],vec!['.','6','.','.','.','.','2','8','.'],vec!['.','.','.','4','1','9','.','.','5'],vec!['.','.','.','.','8','.','.','7','9']];
+    assert!(Solution::is_valid_sudoku(board));
+});
+simple_solution_test!(jump_game_ii, "../../../solutions/0045-jump-game-ii/rust.rs", {
+    assert_eq!(Solution::jump(vec![2,3,1,1,4]), 2); assert_eq!(Solution::jump(vec![2,3,0,1,4]), 2);
+});
+simple_solution_test!(rotate_image, "../../../solutions/0048-rotate-image/rust.rs", {
+    let mut matrix = vec![vec![1,2,3],vec![4,5,6],vec![7,8,9]]; Solution::rotate(&mut matrix); assert_eq!(matrix, vec![vec![7,4,1],vec![8,5,2],vec![9,6,3]]);
+});
+simple_solution_test!(search_a_2d_matrix, "../../../solutions/0074-search-a-2d-matrix/rust.rs", {
+    assert!(Solution::search_matrix(vec![vec![1,3,5,7],vec![10,11,16,20],vec![23,30,34,60]], 3)); assert!(!Solution::search_matrix(vec![vec![1,3,5]], 2));
+});
+mod remove_duplicates_from_sorted_list {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0083-remove-duplicates-from-sorted-list/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert_eq!(Solution::delete_duplicates(list(&[1,1,2,3,3])), list(&[1,2,3])); }
+}
+simple_solution_test!(decode_ways, "../../../solutions/0091-decode-ways/rust.rs", {
+    assert_eq!(Solution::num_decodings("226".into()), 3); assert_eq!(Solution::num_decodings("06".into()), 0);
+});
+mod binary_tree_zigzag_level_order_traversal {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0103-binary-tree-zigzag-level-order-traversal/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() { let root = node(3,node(9,None,None),node(20,node(15,None,None),node(7,None,None))); assert_eq!(Solution::zigzag_level_order(root), vec![vec![3],vec![20,9],vec![15,7]]); }
+}
+mod flatten_binary_tree_to_linked_list {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0114-flatten-binary-tree-to-linked-list/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() {
+        let mut root = node(1,node(2,node(3,None,None),node(4,None,None)),node(5,None,node(6,None,None)));
+        Solution::flatten(&mut root);
+        let mut values = Vec::new();
+        let mut current = root;
+        while let Some(node) = current { let node_ref = node.borrow(); assert!(node_ref.left.is_none()); values.push(node_ref.val); current = node_ref.right.clone(); }
+        assert_eq!(values, vec![1,2,3,4,5,6]);
+    }
+}
+simple_solution_test!(reverse_bits, "../../../solutions/0190-reverse-bits/rust.rs", {
+    assert_eq!(Solution::reverse_bits(43261596), 964176192);
+});
+simple_solution_test!(excel_sheet_column_number, "../../../solutions/0171-excel-sheet-column-number/rust.rs", {
+    assert_eq!(Solution::title_to_number("A".into()), 1); assert_eq!(Solution::title_to_number("ZY".into()), 701);
+});
+mod binary_tree_right_side_view {
+    use std::{cell::RefCell, rc::Rc};
+    #[derive(Debug, PartialEq, Eq)] pub struct TreeNode { pub val: i32, pub left: Option<Rc<RefCell<TreeNode>>>, pub right: Option<Rc<RefCell<TreeNode>>> }
+    pub struct Solution;
+    include!("../../../solutions/0199-binary-tree-right-side-view/rust.rs");
+    fn node(val: i32, left: Option<Rc<RefCell<TreeNode>>>, right: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> { Some(Rc::new(RefCell::new(TreeNode { val, left, right }))) }
+    #[test] fn verifies_examples() { let root = node(1,node(2,None,node(5,None,None)),node(3,None,node(4,None,None))); assert_eq!(Solution::right_side_view(root), vec![1,3,4]); }
+}
+mod remove_linked_list_elements {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0203-remove-linked-list-elements/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert_eq!(Solution::remove_elements(list(&[1,2,6,3,4,5,6]), 6), list(&[1,2,3,4,5])); }
+}
+mod palindrome_linked_list {
+    #[derive(PartialEq, Eq, Clone, Debug)] pub struct ListNode { pub val: i32, pub next: Option<Box<ListNode>> }
+    pub struct Solution;
+    include!("../../../solutions/0234-palindrome-linked-list/rust.rs");
+    fn list(values: &[i32]) -> Option<Box<ListNode>> { values.iter().rev().fold(None, |next, &val| Some(Box::new(ListNode { val, next }))) }
+    #[test] fn verifies_examples() { assert!(Solution::is_palindrome(list(&[1,2,2,1]))); assert!(!Solution::is_palindrome(list(&[1,2]))); }
+}
+simple_solution_test!(perfect_squares, "../../../solutions/0279-perfect-squares/rust.rs", {
+    assert_eq!(Solution::num_squares(12), 3); assert_eq!(Solution::num_squares(13), 2);
+});
+simple_solution_test!(reverse_string, "../../../solutions/0344-reverse-string/rust.rs", {
+    let mut chars = vec!['h','e','l','l','o']; Solution::reverse_string(&mut chars); assert_eq!(chars, vec!['o','l','l','e','h']);
+});
+simple_solution_test!(ransom_note, "../../../solutions/0383-ransom-note/rust.rs", {
+    assert!(Solution::can_construct("aa".into(), "aab".into())); assert!(!Solution::can_construct("aa".into(), "ab".into()));
+});
+simple_solution_test!(first_unique_character_in_a_string, "../../../solutions/0387-first-unique-character-in-a-string/rust.rs", {
+    assert_eq!(Solution::first_uniq_char("leetcode".into()), 0); assert_eq!(Solution::first_uniq_char("aabb".into()), -1);
+});
+simple_solution_test!(is_subsequence, "../../../solutions/0392-is-subsequence/rust.rs", {
+    assert!(Solution::is_subsequence("abc".into(), "ahbgdc".into())); assert!(!Solution::is_subsequence("axc".into(), "ahbgdc".into()));
+});
+simple_solution_test!(fibonacci_number, "../../../solutions/0509-fibonacci-number/rust.rs", {
+    assert_eq!(Solution::fib(4), 3); assert_eq!(Solution::fib(10), 55);
+});

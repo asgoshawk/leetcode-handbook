@@ -1,0 +1,61 @@
+---
+title: 392. Is Subsequence
+description: 雙指標依序匹配 subsequence。
+problemNumber: 392
+difficulty: Easy
+topics: [Two Pointers, String, Dynamic Programming]
+leetcodeUrl: https://leetcode.com/problems/is-subsequence/
+order: 97
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0392-is-subsequence/javascript.js?raw';
+import pyCode from '../../../../solutions/0392-is-subsequence/python.py?raw';
+import rsCode from '../../../../solutions/0392-is-subsequence/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["Two Pointers","String","Dynamic Programming"]} url="https://leetcode.com/problems/is-subsequence/" />
+
+## 題目敘述
+
+給定字串 `s` 與 `t`，判斷 `s` 是否為 `t` 的 subsequence。subsequence 可以刪除部分字元但不能改變剩餘字元順序。
+
+```text
+輸入：s = "abc", t = "ahbgdc"
+輸出：true
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+用指標 `i` 指向 `s` 下一個要匹配的字元，掃過 `t`。只要遇到相同字元就推進 `i`，最後若 `i == s.length` 代表全部匹配。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n + m)$。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Is Subsequence](https://leetcode.com/problems/is-subsequence/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

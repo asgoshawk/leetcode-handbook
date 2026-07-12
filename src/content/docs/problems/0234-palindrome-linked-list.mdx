@@ -1,0 +1,61 @@
+---
+title: 234. Palindrome Linked List
+description: 用快慢指標找到後半段並比較反轉結果。
+problemNumber: 234
+difficulty: Easy
+topics: [Linked List, Two Pointers, Stack, Recursion]
+leetcodeUrl: https://leetcode.com/problems/palindrome-linked-list/
+order: 92
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0234-palindrome-linked-list/javascript.js?raw';
+import pyCode from '../../../../solutions/0234-palindrome-linked-list/python.py?raw';
+import rsCode from '../../../../solutions/0234-palindrome-linked-list/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["Linked List","Two Pointers","Stack","Recursion"]} url="https://leetcode.com/problems/palindrome-linked-list/" />
+
+## 題目敘述
+
+給定 singly linked list 的頭節點，判斷節點值由前往後與由後往前是否相同。
+
+```text
+輸入：head = [1,2,2,1]
+輸出：true
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+可先把值收集成陣列，再以雙指標比較兩端。若要達到 $O(1)$ 額外空間，則可反轉後半段 linked list 後比較。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(n)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

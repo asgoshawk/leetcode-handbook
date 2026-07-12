@@ -1,0 +1,61 @@
+---
+title: 387. First Unique Character in a String
+description: 先計數再找第一個出現一次的 index。
+problemNumber: 387
+difficulty: Easy
+topics: [Hash Table, String, Queue, Counting]
+leetcodeUrl: https://leetcode.com/problems/first-unique-character-in-a-string/
+order: 96
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0387-first-unique-character-in-a-string/javascript.js?raw';
+import pyCode from '../../../../solutions/0387-first-unique-character-in-a-string/python.py?raw';
+import rsCode from '../../../../solutions/0387-first-unique-character-in-a-string/rust.rs?raw';
+
+<ProblemMeta difficulty="Easy" topics={["Hash Table","String","Queue","Counting"]} url="https://leetcode.com/problems/first-unique-character-in-a-string/" />
+
+## 題目敘述
+
+給定字串 `s`，找出第一個不重複字元的 index；若不存在，回傳 `-1`。
+
+```text
+輸入：s = "leetcode"
+輸出：0
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+第一輪統計每個字元出現次數，第二輪依原順序找出 count 為 1 的第一個位置。保留原順序是關鍵。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(n)$。
+- 額外空間：$O(1)$，字母種類固定。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。

@@ -291,5 +291,69 @@ class SolutionTests(unittest.TestCase):
         self.assertFalse(s.canPartition([1,2,3,5]))
 
 
+    def test_additional_fifth_twenty_problem_batch(self):
+        def values(head):
+            result = []
+            while head:
+                result.append(head.val)
+                head = head.next
+            return result
+
+        m = load("0024-swap-nodes-in-pairs/python.py"); m.ListNode = ListNode
+        self.assertEqual(values(m.Solution().swapPairs(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))))), [2,1,4,3])
+        board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
+        self.assertTrue(load("0036-valid-sudoku/python.py").Solution().isValidSudoku(board))
+        self.assertEqual(load("0045-jump-game-ii/python.py").Solution().jump([2,3,1,1,4]), 2)
+        matrix = [[1,2,3],[4,5,6],[7,8,9]]
+        load("0048-rotate-image/python.py").Solution().rotate(matrix)
+        self.assertEqual(matrix, [[7,4,1],[8,5,2],[9,6,3]])
+        s = load("0074-search-a-2d-matrix/python.py").Solution()
+        self.assertTrue(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3))
+        self.assertFalse(s.searchMatrix([[1,3,5]], 2))
+        m = load("0083-remove-duplicates-from-sorted-list/python.py")
+        self.assertEqual(values(m.Solution().deleteDuplicates(ListNode(1, ListNode(1, ListNode(2, ListNode(3, ListNode(3))))))), [1,2,3])
+        s = load("0091-decode-ways/python.py").Solution()
+        self.assertEqual(s.numDecodings("226"), 3)
+        self.assertEqual(s.numDecodings("06"), 0)
+        root = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
+        self.assertEqual(load("0103-binary-tree-zigzag-level-order-traversal/python.py").Solution().zigzagLevelOrder(root), [[3],[20,9],[15,7]])
+        root = TreeNode(1, TreeNode(2, TreeNode(3), TreeNode(4)), TreeNode(5, None, TreeNode(6)))
+        load("0114-flatten-binary-tree-to-linked-list/python.py").Solution().flatten(root)
+        flattened = []
+        while root:
+            flattened.append(root.val)
+            self.assertIsNone(root.left)
+            root = root.right
+        self.assertEqual(flattened, [1,2,3,4,5,6])
+        root = TreeNode(1, TreeNode(2, None, TreeNode(5)), TreeNode(3, None, TreeNode(4)))
+        self.assertEqual(load("0199-binary-tree-right-side-view/python.py").Solution().rightSideView(root), [1,3,4])
+        m = load("0203-remove-linked-list-elements/python.py"); m.ListNode = ListNode
+        self.assertEqual(values(m.Solution().removeElements(ListNode(1,ListNode(2,ListNode(6,ListNode(3,ListNode(4,ListNode(5,ListNode(6))))))), 6)), [1,2,3,4,5])
+        self.assertTrue(load("0234-palindrome-linked-list/python.py").Solution().isPalindrome(ListNode(1,ListNode(2,ListNode(2,ListNode(1))))))
+        self.assertFalse(load("0234-palindrome-linked-list/python.py").Solution().isPalindrome(ListNode(1,ListNode(2))))
+        self.assertEqual(load("0190-reverse-bits/python.py").Solution().reverseBits(43261596), 964176192)
+        s = load("0171-excel-sheet-column-number/python.py").Solution()
+        self.assertEqual(s.titleToNumber("A"), 1)
+        self.assertEqual(s.titleToNumber("ZY"), 701)
+        s = load("0279-perfect-squares/python.py").Solution()
+        self.assertEqual(s.numSquares(12), 3)
+        self.assertEqual(s.numSquares(13), 2)
+        chars = ["h","e","l","l","o"]
+        load("0344-reverse-string/python.py").Solution().reverseString(chars)
+        self.assertEqual(chars, ["o","l","l","e","h"])
+        s = load("0383-ransom-note/python.py").Solution()
+        self.assertTrue(s.canConstruct("aa", "aab"))
+        self.assertFalse(s.canConstruct("aa", "ab"))
+        s = load("0387-first-unique-character-in-a-string/python.py").Solution()
+        self.assertEqual(s.firstUniqChar("leetcode"), 0)
+        self.assertEqual(s.firstUniqChar("aabb"), -1)
+        s = load("0392-is-subsequence/python.py").Solution()
+        self.assertTrue(s.isSubsequence("abc", "ahbgdc"))
+        self.assertFalse(s.isSubsequence("axc", "ahbgdc"))
+        s = load("0509-fibonacci-number/python.py").Solution()
+        self.assertEqual(s.fib(4), 3)
+        self.assertEqual(s.fib(10), 55)
+
+
 if __name__ == "__main__":
     unittest.main()

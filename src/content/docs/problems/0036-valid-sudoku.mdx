@@ -1,0 +1,61 @@
+---
+title: 36. Valid Sudoku
+description: 用集合檢查列、欄與 3x3 宮格是否重複。
+problemNumber: 36
+difficulty: Medium
+topics: [Array, Hash Table, Matrix]
+leetcodeUrl: https://leetcode.com/problems/valid-sudoku/
+order: 80
+---
+
+import { Aside, Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import ProblemMeta from '../../../components/ProblemMeta.astro';
+import jsCode from '../../../../solutions/0036-valid-sudoku/javascript.js?raw';
+import pyCode from '../../../../solutions/0036-valid-sudoku/python.py?raw';
+import rsCode from '../../../../solutions/0036-valid-sudoku/rust.rs?raw';
+
+<ProblemMeta difficulty="Medium" topics={["Array","Hash Table","Matrix"]} url="https://leetcode.com/problems/valid-sudoku/" />
+
+## 題目敘述
+
+給定 9 x 9 Sudoku 棋盤，判斷已填入的數字是否符合規則。空格以 `.` 表示，只需要檢查目前盤面是否有效，不需要判斷是否可解。
+
+```text
+輸入：board = 9 x 9 棋盤
+輸出：true
+```
+
+### 限制
+
+- 請以官方題目頁列出的最新限制為準。
+
+<Aside type="note" title="原題與翻譯說明">
+  本文完整保留解題所需條件，但敘述與範例說明由本站自行改寫；若平台日後調整題目，請以官方連結為準。
+</Aside>
+
+## 核心觀念
+
+每個數字同時屬於一列、一欄與一個 3 x 3 宮格。把 `(row, value)`、`(col, value)`、`(box, value)` 視為 key，只要任何 key 重複就是無效。
+
+### 不變量與正確性
+
+每一步都維護演算法狀態的定義，並只根據目前元素與已保存資訊更新。當狀態轉移保留所有仍可能成為答案的候選，且排除的候選已可證明不可能更好或不合法時，走訪結束後留下的狀態就是正確答案。
+
+## 複雜度
+
+- 時間：$O(1)$，棋盤大小固定。
+- 額外空間：$O(1)$。
+
+## 三語解答
+
+<Tabs syncKey="solution-language">
+  <TabItem label="JavaScript"><Code code={jsCode} lang="js" title="javascript.js" /></TabItem>
+  <TabItem label="Python"><Code code={pyCode} lang="python" title="python.py" /></TabItem>
+  <TabItem label="Rust"><Code code={rsCode} lang="rust" title="rust.rs" /></TabItem>
+</Tabs>
+
+## 參考資料
+
+- [LeetCode：Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)：官方原題、限制與 Topics。
+- [CP-Algorithms](https://cp-algorithms.com/)：常見資料結構與演算法觀念整理。
+- [MIT OpenCourseWare 6.006](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/)：演算法分析與不變量推導。
