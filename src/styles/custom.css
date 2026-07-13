@@ -185,6 +185,21 @@ article.card:hover {
   background: var(--ui-card-hover-bg);
 }
 
+.problem-marker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: -0.75rem 2rem;
+}
+
+.marked-problem-card .problem-marker {
+  margin-block: 0;
+}
+
+.marked-problem-card[hidden] {
+  display: none !important;
+}
+
 .pagination-links a {
   min-height: 7.25rem;
   padding: 1.1rem 1.25rem;

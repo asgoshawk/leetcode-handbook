@@ -1,0 +1,12 @@
+---
+title: 已閱覽題目
+description: 查看目前瀏覽器中已標記為已閱覽的題目。
+sidebar:
+  order: 3
+---
+
+import MarkedProblems from '../../components/MarkedProblems.astro';
+
+這裡列出你在本機瀏覽器標記為「已閱覽」的題目。這份紀錄使用 LocalStorage 儲存，只會保存在目前的瀏覽器與裝置。
+
+<MarkedProblems kind="viewed" />

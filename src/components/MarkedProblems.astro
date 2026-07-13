@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import ProblemMarker from './ProblemMarker.astro';
+
+interface Props {
+  kind: 'viewed' | 'favorites';
+}
+
+const { kind } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const problems = (await getCollection('docs'))
+  .filter((entry) => entry.id.startsWith('problems/') && entry.data.problemNumber)
+  .map((entry) => {
+    const slug = entry.id.replace(/^problems\//, '');
+    return {
+      id: slug,
+      title: entry.data.title,
+      description: entry.data.description,
+      number: entry.data.problemNumber ?? 0,
+      difficulty: entry.data.difficulty ?? 'Easy',
+      topics: entry.data.topics ?? [],
+      href: `${base}problems/${slug}/`,
+    };
+  })
+  .sort((a, b) => a.number - b.number);
+
+const emptyText = kind === 'viewed'
+  ? '尚未標記任何已閱覽題目。回到題目頁勾選「已閱覽」後，這裡會自動列出。'
+  : '尚未標記任何喜好題目。回到題目頁勾選「喜好」後，這裡會自動列出。';
+---
+
+<section class="not-content marked-problems" data-marked-problems data-mark-kind={kind}>
+  <div class="mb-5 flex flex-wrap items-center gap-3">
+    <span class="badge badge-primary badge-soft text-sm" data-marked-count>0 題</span>
+    <span class="text-sm text-base-content/70">資料只儲存在目前瀏覽器的 LocalStorage，不會同步到伺服器。</span>
+  </div>
+
+  <p class="rounded-box border border-base-300 bg-base-200/70 p-5 text-base-content/75" data-empty-state>{emptyText}</p>
+
+  <div class="grid gap-4" data-marked-list>
+    {problems.map((problem) => (
+      <article class="marked-problem-card rounded-box border border-base-300 bg-base-200/70 p-5 shadow-sm transition hover:border-primary/50" data-problem-card data-problem-id={problem.id} hidden>
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div class="min-w-0">
+            <a class="link link-primary text-lg font-bold" href={problem.href}>{problem.title}</a>
+            <p class="mt-2 text-sm text-base-content/75">{problem.description}</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class:list={['badge', 'badge-soft', 'font-semibold', problem.difficulty === 'Easy' ? 'badge-success' : problem.difficulty === 'Medium' ? 'badge-warning' : 'badge-error']}>{problem.difficulty}</span>
+              {problem.topics.map((topic) => <span class="badge badge-soft font-semibold">{topic}</span>)}
+            </div>
+          </div>
+          <div class="shrink-0">
+            <ProblemMarker problemId={problem.id} />
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  type MarkKind = 'viewed' | 'favorites';
+
+  function getProblemMarksApi() {
+    return (window as typeof window & {
+      __leetcodeHandbookProblemMarks?: {
+        read: (kind: MarkKind) => Set<string>;
+        sync: () => void;
+      };
+    }).__leetcodeHandbookProblemMarks;
+  }
+
+  function syncMarkedProblemLists() {
+    const api = getProblemMarksApi();
+    if (!api) return;
+
+    document.querySelectorAll<HTMLElement>('[data-marked-problems]').forEach((section) => {
+      const kind = section.dataset.markKind as MarkKind;
+      const marked = api.read(kind);
+      const cards = [...section.querySelectorAll<HTMLElement>('[data-problem-card]')];
+      let count = 0;
+
+      cards.forEach((card) => {
+        const id = card.dataset.problemId;
+        const visible = Boolean(id && marked.has(id));
+        card.hidden = !visible;
+        if (visible) count += 1;
+      });
+
+      const countElement = section.querySelector<HTMLElement>('[data-marked-count]');
+      const emptyState = section.querySelector<HTMLElement>('[data-empty-state]');
+      if (countElement) countElement.textContent = `${count} 題`;
+      if (emptyState) emptyState.hidden = count > 0;
+    });
+
+    api.sync();
+  }
+
+  window.addEventListener('storage', syncMarkedProblemLists);
+  window.addEventListener('leetcode-handbook:marks-changed', syncMarkedProblemLists);
+  syncMarkedProblemLists();
+</script>

@@ -35,6 +35,8 @@ export default defineConfig({
         { label: '開始使用', items: [
           { label: '手冊首頁', slug: 'index' },
           { label: '學習路線', slug: 'learning-path' },
+          { label: '已閱覽題目', slug: 'viewed' },
+          { label: '喜好題目', slug: 'favorites' },
           { label: '如何新增題解', slug: 'contributing' },
         ] },
         { label: '題解', items: [

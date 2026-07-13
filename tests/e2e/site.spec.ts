@@ -147,3 +147,33 @@ test('theme selector switches Starlight and daisyUI tokens together', async ({ p
     text: '#e6e9ef',
   });
 });
+
+test('problem marks persist in LocalStorage and appear on marked pages', async ({ page }) => {
+  await page.goto('/leetcode-handbook/problems/0001-two-sum/');
+
+  await page.getByLabel('已閱覽').check();
+  await page.getByLabel('喜好').check();
+
+  await expect.poll(() =>
+    page.evaluate(() => ({
+      viewed: JSON.parse(localStorage.getItem('leetcode-handbook:viewed:v1') ?? '[]'),
+      favorites: JSON.parse(localStorage.getItem('leetcode-handbook:favorites:v1') ?? '[]'),
+    })),
+  ).toEqual({
+    viewed: ['0001-two-sum'],
+    favorites: ['0001-two-sum'],
+  });
+
+  await page.goto('/leetcode-handbook/viewed/');
+  await expect(page.getByRole('heading', { name: '已閱覽題目', level: 1 })).toBeVisible();
+  await expect(page.locator('article[data-problem-id="0001-two-sum"]:visible').getByRole('link', { name: '1. Two Sum' })).toBeVisible();
+  await expect(page.getByText('1 題')).toBeVisible();
+
+  await page.goto('/leetcode-handbook/favorites/');
+  await expect(page.getByRole('heading', { name: '喜好題目', level: 1 })).toBeVisible();
+  const favoriteCard = page.locator('article[data-problem-id="0001-two-sum"]:visible');
+  await expect(favoriteCard.getByRole('link', { name: '1. Two Sum' })).toBeVisible();
+  await favoriteCard.getByLabel('喜好').uncheck();
+  await expect(page.locator('article[data-problem-id="0001-two-sum"]:visible')).toHaveCount(0);
+  await expect(page.getByText('尚未標記任何喜好題目')).toBeVisible();
+});

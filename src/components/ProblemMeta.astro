@@ -1,4 +1,6 @@
 ---
+import ProblemMarker from './ProblemMarker.astro';
+
 interface Props {
   difficulty: 'Easy' | 'Medium' | 'Hard';
   topics: string[];
@@ -21,3 +23,5 @@ const difficultyClass = {
   </ul>
   <a class="link link-primary link-hover ms-0 mt-1 text-sm font-semibold sm:ms-auto sm:mt-0" href={url} target="_blank" rel="noreferrer">在 LeetCode 開啟原題 <span aria-hidden="true">↗</span></a>
 </div>
+
+<ProblemMarker />

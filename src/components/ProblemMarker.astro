@@ -1,0 +1,89 @@
+---
+interface Props {
+  problemId?: string;
+}
+
+const fallbackId = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
+const problemId = Astro.props.problemId ?? fallbackId;
+---
+
+<div class="problem-marker not-content" data-problem-marker data-problem-id={problemId} aria-label="個人標記">
+  <label class="label cursor-pointer justify-start gap-3 rounded-box border border-base-300 bg-base-200/70 px-4 py-3 transition hover:border-primary/50">
+    <input class="checkbox checkbox-primary" type="checkbox" data-mark-kind="viewed" />
+    <span class="label-text font-semibold">已閱覽</span>
+  </label>
+  <label class="label cursor-pointer justify-start gap-3 rounded-box border border-base-300 bg-base-200/70 px-4 py-3 transition hover:border-primary/50">
+    <input class="checkbox checkbox-secondary" type="checkbox" data-mark-kind="favorites" />
+    <span class="label-text font-semibold">喜好</span>
+  </label>
+</div>
+
+<script>
+  type MarkKind = 'viewed' | 'favorites';
+
+  const globalKey = '__leetcodeHandbookProblemMarks';
+  const keys: Record<MarkKind, string> = {
+    viewed: 'leetcode-handbook:viewed:v1',
+    favorites: 'leetcode-handbook:favorites:v1',
+  };
+
+  function read(kind: MarkKind): Set<string> {
+    try {
+      const value = localStorage.getItem(keys[kind]);
+      const parsed = value ? JSON.parse(value) : [];
+      return new Set(Array.isArray(parsed) ? parsed.filter((item) => typeof item === 'string') : []);
+    } catch {
+      return new Set();
+    }
+  }
+
+  function write(kind: MarkKind, values: Set<string>) {
+    localStorage.setItem(keys[kind], JSON.stringify([...values].sort()));
+  }
+
+  function syncProblemMarkers() {
+    const viewed = read('viewed');
+    const favorites = read('favorites');
+    document.querySelectorAll<HTMLElement>('[data-problem-marker]').forEach((marker) => {
+      const id = marker.dataset.problemId;
+      if (!id) return;
+      marker.querySelectorAll<HTMLInputElement>('input[data-mark-kind]').forEach((input) => {
+        const kind = input.dataset.markKind as MarkKind;
+        input.checked = kind === 'viewed' ? viewed.has(id) : favorites.has(id);
+      });
+    });
+  }
+
+  function toggleProblemMark(id: string, kind: MarkKind, checked: boolean) {
+    const values = read(kind);
+    if (checked) values.add(id);
+    else values.delete(id);
+    write(kind, values);
+    window.dispatchEvent(new CustomEvent('leetcode-handbook:marks-changed'));
+  }
+
+  if (!(globalKey in window)) {
+    Object.assign(window, {
+      [globalKey]: {
+        read,
+        sync: syncProblemMarkers,
+      },
+    });
+
+    document.addEventListener('change', (event) => {
+      const input = event.target;
+      if (!(input instanceof HTMLInputElement)) return;
+      const kind = input.dataset.markKind as MarkKind | undefined;
+      if (kind !== 'viewed' && kind !== 'favorites') return;
+      const marker = input.closest<HTMLElement>('[data-problem-marker]');
+      const id = marker?.dataset.problemId;
+      if (!id) return;
+      toggleProblemMark(id, kind, input.checked);
+    });
+
+    window.addEventListener('storage', syncProblemMarkers);
+    window.addEventListener('leetcode-handbook:marks-changed', syncProblemMarkers);
+  }
+
+  syncProblemMarkers();
+</script>
