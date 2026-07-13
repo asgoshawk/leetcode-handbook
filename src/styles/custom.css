@@ -185,11 +185,25 @@ article.card:hover {
   background: var(--ui-card-hover-bg);
 }
 
+.problem-meta-panel {
+  display: grid;
+  gap: 0.9rem;
+  margin-block: 1.25rem 2.25rem;
+}
+
+.problem-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .problem-marker {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-block: -0.75rem 2rem;
+  align-items: center;
+  margin-block: 0;
 }
 
 .marked-problem-card .problem-marker {

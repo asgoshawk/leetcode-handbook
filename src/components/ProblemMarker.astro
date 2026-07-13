@@ -8,11 +8,11 @@ const problemId = Astro.props.problemId ?? fallbackId;
 ---
 
 <div class="problem-marker not-content" data-problem-marker data-problem-id={problemId} aria-label="個人標記">
-  <label class="label cursor-pointer justify-start gap-3 rounded-box border border-base-300 bg-base-200/70 px-4 py-3 transition hover:border-primary/50">
+  <label class="label cursor-pointer justify-start gap-3 rounded-box border border-base-300 bg-base-200/70 px-3 py-2.5 transition hover:border-primary/50">
     <input class="checkbox checkbox-primary" type="checkbox" data-mark-kind="viewed" />
     <span class="label-text font-semibold">已閱覽</span>
   </label>
-  <label class="label cursor-pointer justify-start gap-3 rounded-box border border-base-300 bg-base-200/70 px-4 py-3 transition hover:border-primary/50">
+  <label class="label cursor-pointer justify-start gap-3 rounded-box border border-base-300 bg-base-200/70 px-3 py-2.5 transition hover:border-primary/50">
     <input class="checkbox checkbox-secondary" type="checkbox" data-mark-kind="favorites" />
     <span class="label-text font-semibold">喜好</span>
   </label>

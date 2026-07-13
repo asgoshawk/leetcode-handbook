@@ -177,3 +177,30 @@ test('problem marks persist in LocalStorage and appear on marked pages', async (
   await expect(page.locator('article[data-problem-id="0001-two-sum"]:visible')).toHaveCount(0);
   await expect(page.getByText('尚未標記任何喜好題目')).toBeVisible();
 });
+
+test('problem metadata and marker controls do not overlap', async ({ page }) => {
+  await page.goto('/leetcode-handbook/problems/0014-longest-common-prefix/');
+
+  const layout = await page.evaluate(() => {
+    const meta = document.querySelector('[aria-label="題目資訊"]');
+    const marker = document.querySelector('[data-problem-marker]');
+    if (!(meta instanceof HTMLElement) || !(marker instanceof HTMLElement)) {
+      throw new Error('Problem metadata or marker is missing');
+    }
+
+    const metaRow = meta.querySelector('.problem-meta-row');
+    if (!(metaRow instanceof HTMLElement)) {
+      throw new Error('Problem metadata row is missing');
+    }
+
+    const metaRect = metaRow.getBoundingClientRect();
+    const markerRect = marker.getBoundingClientRect();
+    return {
+      gap: markerRect.top - metaRect.bottom,
+      markerTop: markerRect.top,
+      metaBottom: metaRect.bottom,
+    };
+  });
+
+  expect(layout.gap).toBeGreaterThanOrEqual(8);
+});
